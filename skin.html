@@ -412,7 +412,7 @@
 				<s_sidebar_element>
 				<!-- 최근 포스트 모듈 -->
 				<div id="recentPost">
-					<h3>최근에 올라온 글 </h3>
+					<h3 id="recentEntries">최근에 올라온 글 </h3>
 					<ul>
 						<s_rctps_rep>
 						<li>
@@ -427,8 +427,8 @@
 				<s_sidebar_element>
 				<!-- 최근 댓글 모듈 -->
 				<div id="recentComment">
-					<h3>최근에 달린 댓글</h3>
-					<ul id="recentComments">
+					<h3 id="recentComments">최근에 달린 댓글</h3>
+					<ul>
 						<s_rctrp_rep>
 						<li>
 							<a href="[##_rctrp_rep_link_##]">[##_rctrp_rep_desc_##].</a>
@@ -527,6 +527,17 @@
 				</div>
 				</s_sidebar_element>
 				</s_sidebar>
+				
+				<div id="shortkey">
+					<h3>단축키</h3>
+					<ul>
+						<li>A: 이전 글</li>
+						<li>S: 다음 글</li>
+						<li>Z: 최근에 올라온 글</li>
+						<li>X: 최근에 달린 댓글</li>
+						<li>C: 최근에 받은 트랙백</li>
+					</ul>
+				</div>
 			</div><!-- sidebar -->
 			<div class="clear"></div>
 			<hr />
