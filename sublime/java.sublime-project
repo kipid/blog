@@ -1,0 +1,25 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "C:\\Users\\Kang-Soo Lee\\Documents\\DaumCloud\\JAVA\\sources"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "IT\\java"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "C:\\Program Files\\Java\\jdk1.8.0_05\\bin"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "C:\\Users\\Kang-Soo Lee\\Documents\\DaumCloud\\Sublime Text Build 3059 x64\\Data\\Packages\\User"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "IT\\Vert.x"
+		}
+	]
+}

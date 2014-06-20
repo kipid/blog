@@ -1,0 +1,999 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"str",
+				"str"
+			],
+			[
+				"eqq",
+				"eqq"
+			],
+			[
+				"eq",
+				"eq"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"pa",
+				"padding-top"
+			],
+			[
+				"d",
+				"div	Tag"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 173.0,
+		"selected_items":
+		[
+			[
+				"s s html",
+				"Set Syntax: HTML"
+			],
+			[
+				"s s javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"s s js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"p c re",
+				"Package Control: Remove Package"
+			],
+			[
+				"s s css",
+				"Set Syntax: CSS"
+			],
+			[
+				"s s javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"set sy h",
+				"Set Syntax: HTML"
+			],
+			[
+				"ss c",
+				"Set Syntax: C"
+			],
+			[
+				"syn c",
+				"Set Syntax: C"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Enable Package"
+			],
+			[
+				"pack in",
+				"Package Control: Install Package"
+			],
+			[
+				"pa in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 464.0
+	},
+	"console":
+	{
+		"height": 252.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/style.css",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/tEdition.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK All in one.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/docuK/responsible-web.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/works-to-do.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-prepare-2.2.js",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-postProcess-2.2.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/ResponsiveWeb/Responsive-Web",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/js/Regular Expression, and replace method in javascript.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/Sound/responsibility.mp3",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Physics/Relativity/Relativity.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/경제 지표/WEOApr2014all.txt",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/NP/News Peppermint - style.css",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/NP/News Peppermint - skin.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/skin.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK short copiable version.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/프로그래밍 언어들 rendered to docuK.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/Renderer0-to-docuK.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Lists.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/프로그래밍 언어들.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/정치인들/2014 총리후보, 문창극 vs 안대희 프로필 비교.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/정치인들/박원순 vs 정몽준 프로필 비교.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/SNS/Facebook-comment-test.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/경제 지표/GDP/정권변화.txt",
+		"/C/Users/Kang-Soo Lee/Desktop/prettyprint test.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/SNS/Facebook-comment-test",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Find and Replace.vi",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/docuK/font test.htm",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/2013 국정원 대선개입/NIS-cheating.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-2.2.css",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Physics/StringTheory/Skepticism-about-String-theory.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/HTML/study/Tesla No DeLorean as 619% Jump Makes Hottest Auto Stock - Bloomberg_files/node_id.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/ToHTML 2013-01/newcommand.vi",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Physics/StringTheory/String_theory.svg",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/Sound/stride.mp3",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/See the results.vi",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/svg test.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/sublimeText.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Syntax/Syntax Highlighter (google code prettify).htm",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Canvas 2012-12/font&format unbundle.vi",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/Sound/folly.mp3",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Syntax/Syntax Highlighter (alexgorbatchev).htm",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/Sound/sympathy.mp3",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/prettyCode/prettify.css",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/Unicode VIs/CodePage.ctl",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Canvas 2012-12/center of domains.c",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/css3 examples.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/NP/Renderer-to-docuK.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/prettyCode/run_prettify.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Syntax/google-code-prettify/src/run_prettify.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Syntax/google-code-prettify/js-modules/run_prettify.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Syntax/google-code-prettify/js-modules/externs.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Syntax/google-code-prettify/src/prettify.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Syntax/google-code-prettify/js-modules/numberLines.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Syntax/google-code-prettify/js-modules/combinePrefixPatterns.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Syntax/google-code-prettify/js-modules/recombineTagsAndDecorations.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/HTML/study/css jQuery stacking divs - Masonry.htm",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/js/javascript-namespace.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/NP/Renderer0-to-docuK.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Sublime Text Build 3059 x64/Data/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Sublime Text Build 3059 x64/Data/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/README.md",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/backup/docuK 2014-06-18/docuK-2.2.css",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/backup/docuK 2014-06-18/docuK-prepare-2.2.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/backup/docuK 2014-06-18/docuK-postProcess-2.2.js",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-2.2.css~ver2.2",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-2.2.css~HEAD",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/.git/ORIG_HEAD",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/경제 지표/WEOApr2014selected.txt",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/HTML/잡다/'블랙아웃'과 '전력경보 단계' 나 차단 후 - 네이버 블로그_files/www-embed-player-vflxhcyRf.js",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/NP/interview.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/NP/GDP.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/NP/경기 침체에 관한 뉴스가 실제 경제에 미치는 영향은.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-min-2.2.css",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/2.1/docuK.js",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-min.js",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/News Peppermint - style.css",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/News Peppermint - skin.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK.css",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-postProcess.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/News Peppermint interview.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/News Peppermint.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-prepare.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/2013 국정원 대선개입/국정원 댓글알바 사건.xlsx",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/2013 국정원 대선개입/경찰 4실 녹취록.hwp",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/2013 국정원 대선개입/경찰 3실 녹취록.hwp",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/역사/국사 정리.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-min.css",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/docuK/equations-in-html.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/HTML/study/css3 - CarnationGroup - digital.creative.curious._files/ScriptResource(1).axd",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Physics/Unit/SI, cgs단위 및 물리상수.pptx",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Physics/Entropy/Entropy.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/js examples/tuupola-jquery_lazyload-2cfbdb5/jquery.scrollstop.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/js examples/tuupola-jquery_lazyload-2cfbdb5/jquery.lazyload.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/docuK/Delayed Loading.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/경제란 무엇인가/1-두 명만으로 구성된 사회에서의 경제성장.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/backup/skin (default).html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Physics/Angular-Momentum.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Vert.x/vert.x-2.1/api-docs/java/api/allclasses-noframe.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/Unicode VIs/ANSI to UTF8.vi",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/경제란 무엇인가/경제란 무엇인가 (그닥).hwp",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2013-09-14 Daum/test/2.c",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2011-01 노트/명세서.HLT",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/일본어/일어필수800-2 ANSI.txt",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/backup/style (default).css",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/docuK/interactive graph and chart in HTML.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IDEAS.pptx",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/역사/정도전 관련 역사 정리.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/js/Learning Javascript.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/HTML/study/Re code.htm",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/Sound/struggle.mp3",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Physics/양자역학 책 소개.xlsx",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/음악/Personal selection of music.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/Sound/reform.mp3",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Recommend 2013-12/Personalized Recommendation.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/인구/population.xlsx",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/HTML/잡다/'블랙아웃'과 '전력경보 단계' 나 차단 후 - 네이버 블로그_files/PostBottomCommon_utf8-152413.js",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Layout/backup/docuK HTML format 2.1.html",
+		"/C/Users/Kang-Soo Lee/Documents/GitHub/docuK/docuK-docu short.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/정치인들/문재인(文在寅) vs 박근혜(朴槿惠) 프로필 비교.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Machine Learning/Machine Learning.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/사회/국세청 자료/2011 국세통계연보/14. 기타/14-2-1. 과세전적부심사청구 처리 실적.xls",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/Machine Learning/MachineLearning/materials/aimlcs229/transcripts/MachineLearning-Lecture01.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/Physics/Multiverse.html",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/영어/기초단어[01].xls",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/HTML/study/css3 - CarnationGroup - digital.creative.curious._files/marton_czebe_80x80.ashx",
+		"/C/Users/Kang-Soo Lee/Documents/DaumCloud/Blog/IT/2012-06-14 Memorizer/영어/my_words ANSI.txt"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 111.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"[##_blog_link_##]",
+			"disable Query",
+			"docuK.find(\".inRef\")",
+			"kipid.bubbleRefs",
+			"==undefined",
+			"secContents",
+			") {",
+			"subsubsecKH4",
+			"subsubsecIH4",
+			"subsecIH3",
+			"subsecs.eq(j)",
+			"secs.eq(i)",
+			"secI",
+			" auto",
+			"0",
+			"in:0.5e",
+			"margin:0.5e",
+			":0.5em\"",
+			"\n",
+			"class=\"p\"",
+			"center",
+			"방명록",
+			"195em",
+			"disqus",
+			"</div>",
+			"</h3>",
+			"<div class=\"subsec\"><h3>",
+			"문창극",
+			">",
+			"<",
+			">",
+			"<",
+			"->",
+			"<!--",
+			">",
+			"<",
+			">",
+			"<",
+			"light",
+			"width=\"400\" height=\"565\"",
+			"width=\"100\" height=\"14\"",
+			"files/attach/",
+			"20140619/5381357/3600251095/3738308332/90a9ce66b59bd17748a72503867c2c01.png",
+			"3738308332/90a9ce66b59bd17748a72503867c2c01.png",
+			"width=\"100\" height=\"14\"/>",
+			"width=\"1000\" height=\"1413\"",
+			"div",
+			"height=\"650\"",
+			"=\"700\"/>",
+			"1000",
+			"width=\"1000\" height=\"1413\"",
+			"style=\"border: none\"",
+			"style=\"border: none; max-width:400px\"",
+			"style=\"border: none\"",
+			".",
+			"sec-Refs",
+			"no-sec-N",
+			"att",
+			"attr",
+			"id=",
+			"postIdRegEx",
+			"no-sec-N",
+			"docuK",
+			"2",
+			"quote",
+			">",
+			"<",
+			"NanumGothicCoding",
+			"AppleGothic",
+			"NanumGothicCoding",
+			"Verdana",
+			"NanumGothicCoding",
+			"arial",
+			"NanumGothicCoding",
+			"serif",
+			"NanumGothicCoding",
+			"Gulim",
+			"NanumGothicCoding",
+			"dotum",
+			";\n			",
+			"class=\"code\"",
+			"pretty",
+			" ",
+			"code-docuK-HTML",
+			"button",
+			"2em",
+			".5em",
+			"lis",
+			"contents.eq(i)",
+			"cL",
+			"button",
+			"opt_whenDone",
+			"false",
+			"IN_GLOBAL_SCOPE",
+			"prettyPrint",
+			"prettyPrint()",
+			"pre",
+			"prettyPrint()",
+			"include",
+			"pretty",
+			"add",
+			":",
+			"21",
+			"7",
+			"5",
+			"ld(2n)",
+			"d(2n),",
+			"amp;",
+			"NP.tistory CDN",
+			"kipid.tistory CDN",
+			"NP.tistory CDN",
+			"DN",
+			"NP.tistory CDN",
+			"NP.tistory",
+			"NP.tistory CDN",
+			"NP.tistory CND",
+			"kipid.tistory CDN",
+			"/",
+			"it",
+			"rendered",
+			"specially",
+			"and",
+			"specially",
+			"pre",
+			"val()",
+			"textarea",
+			"pre",
+			"textarea"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 33.0
+	},
+	"input":
+	{
+		"height": 44.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 253.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "blog.sublime-project",
+	"replace":
+	{
+		"height": 76.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"respo",
+				"Blog\\IT\\ResponsiveWeb\\Responsive-Web"
+			],
+			[
+				"responsi",
+				"Blog\\IT\\docuK\\responsible-web.html"
+			],
+			[
+				"worktodo.html",
+				"Blog\\works-to-do.html"
+			],
+			[
+				"lists",
+				"Blog\\Lists.html"
+			],
+			[
+				"프로그래밍",
+				"Blog\\IT\\프로그래밍 언어들.html"
+			],
+			[
+				"정몽준",
+				"Blog\\사회\\정치인들\\박원순 vs 정몽준 프로필 비교.html"
+			],
+			[
+				"문창극",
+				"Blog\\사회\\정치인들\\2014 총리후보, 문창극 vs 안대희 프로필 비교.html"
+			],
+			[
+				"facohtml",
+				"Blog\\IT\\SNS\\Facebook-comment-test.html"
+			],
+			[
+				"facebook",
+				"Blog\\IT\\SNS\\Facebook-comment-test"
+			],
+			[
+				"nis",
+				"Blog\\사회\\2013 국정원 대선개입\\NIS-cheating.html"
+			],
+			[
+				"stringtheo",
+				"Blog\\Physics\\StringTheory\\Skepticism-about-String-theory.html"
+			],
+			[
+				"fonttest",
+				"Blog\\IT\\docuK\\font test.htm"
+			],
+			[
+				"syntax",
+				"Blog\\IT\\Syntax\\Syntax Highlighter (google code prettify).htm"
+			],
+			[
+				"js-module",
+				"Blog\\IT\\Syntax\\google-code-prettify\\js-modules\\externs.js"
+			],
+			[
+				"문",
+				"Blog\\사회\\정치인들\\2014 총리후보, 문창극 vs 안대희 프로필 비교.html"
+			],
+			[
+				"weo",
+				"Blog\\사회\\경제 지표\\WEOApr2014all.txt"
+			],
+			[
+				"국정원",
+				"Blog\\사회\\2013 국정원 대선개입\\NIS-cheating.html"
+			],
+			[
+				"regu",
+				"Blog\\IT\\js\\Regular Expression, and replace method in javascript.html"
+			],
+			[
+				"equ",
+				"Blog\\IT\\docuK\\equations-in-html.html"
+			],
+			[
+				"delayed",
+				"Blog\\IT\\docuK\\Delayed Loading.html"
+			],
+			[
+				"문창",
+				"Blog\\사회\\정치인들\\2014 총리후보, 문창극 vs 안대희 프로필 비교.html"
+			],
+			[
+				"경제란",
+				"Blog\\사회\\경제란 무엇인가\\1-두 명만으로 구성된 사회에서의 경제성장.html"
+			],
+			[
+				"interacti",
+				"Blog\\IT\\docuK\\interactive graph and chart in HTML.html"
+			],
+			[
+				"javaname",
+				"Blog\\IT\\js\\javascript-namespace.html"
+			],
+			[
+				"learnjava",
+				"Blog\\IT\\js\\Learning Javascript.html"
+			],
+			[
+				"역사",
+				"Blog\\사회\\역사\\국사 정리.html"
+			],
+			[
+				"personalmusic",
+				"Blog\\음악\\Personal selection of music.html"
+			],
+			[
+				"docukhtml",
+				"docuK\\docuK All in one.html"
+			],
+			[
+				"docuk.js",
+				"docuK\\docuK.js"
+			],
+			[
+				"docukcopi",
+				"docuK\\docuK short copiable version.html"
+			],
+			[
+				"interactive",
+				"Blog\\IT\\docuK\\interactive graph and chart in HTML.html"
+			],
+			[
+				"equationin",
+				"Blog\\IT\\docuK\\equations-in-html.html"
+			],
+			[
+				"entropy",
+				"Blog\\Physics\\Entropy\\Entropy.html"
+			],
+			[
+				"machine",
+				"Blog\\IT\\Machine Learning\\Machine Learning.html"
+			],
+			[
+				"기계",
+				"Blog\\사회\\국세청 자료\\2011 국세통계연보\\14. 기타\\14-2-1. 과세전적부심사청구 처리 실적.xls"
+			],
+			[
+				"machinelear",
+				"Blog\\IT\\Machine Learning\\MachineLearning\\materials\\aimlcs229\\transcripts\\MachineLearning-Lecture01.html"
+			],
+			[
+				"sublimet",
+				"Blog\\IT\\sublimeText.html"
+			],
+			[
+				"안대희",
+				"Blog\\사회\\정치인들\\2014 총리후보, 문창극 vs 안대희 프로필 비교.html"
+			],
+			[
+				"월드컵",
+				"Blog\\음악\\2014 브라질 월드컵 (Brazil World Cup).html"
+			],
+			[
+				"inter",
+				"Blog\\IT\\docuK\\interactive graph and chart in HTML.html"
+			],
+			[
+				"지표",
+				"Blog\\사회\\경제 지표\\WEO 지표들 설명.txt"
+			],
+			[
+				"works",
+				"Blog\\works-to-do.html"
+			],
+			[
+				"oficial",
+				"Blog\\사회\\재산 통계\\government-official's-property.html"
+			],
+			[
+				"officia",
+				"Blog\\사회\\재산 통계\\government-official's-property.html"
+			],
+			[
+				"박",
+				"Blog\\사회\\정치인들\\박원순 vs 정몽준 프로필 비교.html"
+			],
+			[
+				"persolreco",
+				"Blog\\IT\\Recommend 2013-12\\Personalized Recommendation.html"
+			],
+			[
+				"howrich",
+				"Blog\\사회\\재산 통계\\how-rich.htm"
+			],
+			[
+				"personali",
+				"Blog\\IT\\Recommend 2013-12\\Personalized Recommendation.html"
+			],
+			[
+				"regularex",
+				"Blog\\IT\\js\\Regular Expression, and replace method in javascript.html"
+			],
+			[
+				"세월호",
+				"Blog\\사회\\2014-04 세월호 침몰사고\\세월호 침몰사고.html"
+			],
+			[
+				"physi",
+				"Blog\\Physics\\Quotes\\Physicist-Quotations.html"
+			],
+			[
+				"박원순",
+				"Blog\\사회\\정치인들\\박원순 vs 정몽준 프로필 비교.html"
+			],
+			[
+				"문재인",
+				"Blog\\사회\\정치인들\\문재인(文在寅) vs 박근혜(朴槿惠) 프로필 비교.html"
+			],
+			[
+				"docudocu",
+				"docuK\\docuK-docu short.html"
+			],
+			[
+				"지구는",
+				"Blog\\사회\\인구\\지구는 어느정도의 인구수까지 수용가능 할까.html"
+			],
+			[
+				"get",
+				"Blog\\IT\\docuK\\Getting Data from Google Spreadsheet.html"
+			],
+			[
+				"sublimetext",
+				"Blog\\IT\\sublimeText.html"
+			],
+			[
+				"learn",
+				"Blog\\IT\\js\\Learning Javascript.html"
+			],
+			[
+				"learnjavasc",
+				"Blog\\IT\\js\\Learning Javascript.html"
+			],
+			[
+				"equations",
+				"Blog\\IT\\docuK\\equations-in-html.html"
+			],
+			[
+				"sicgshtml",
+				"Blog\\Physics\\Unit\\SI-cgs-unit-and-physical-constants.html"
+			],
+			[
+				"relativityspe",
+				"Blog\\Physics\\Relativity\\Special-Relativity.html"
+			],
+			[
+				"relativityhtml",
+				"Blog\\Physics\\Relativity\\Relativity.html"
+			],
+			[
+				"lagrangeenhtml",
+				"Blog\\Physics\\Lagrange\\Lagrange-en.html"
+			],
+			[
+				"lagrangehtml",
+				"Blog\\Physics\\Lagrange\\Lagrange.html"
+			],
+			[
+				"tensor",
+				"Blog\\Physics\\Tensor\\tensor.html"
+			],
+			[
+				"linearhtml",
+				"Blog\\Physics\\LinearAlgebra\\Linear-Algebra.html"
+			],
+			[
+				"tensorhtml",
+				"Blog\\Physics\\Tensor\\tensor.html"
+			],
+			[
+				"docuk",
+				"Layout\\docuK HTML format 2.1.html"
+			],
+			[
+				"tensorht",
+				"Physics\\Tensor\\tensor 3.html"
+			],
+			[
+				"tensor.html",
+				"Physics\\Tensor\\tensor.html"
+			],
+			[
+				"equi",
+				"IT\\docuK\\equations-in-html.html"
+			],
+			[
+				"equa",
+				"IT\\docuK\\equations-in-html.html"
+			],
+			[
+				"vertxhelp",
+				"IT\\Vert.x\\vertx help.txt"
+			],
+			[
+				"levertx",
+				"IT\\Vert.x\\Learning Vert.x.html"
+			],
+			[
+				"vertserver",
+				"IT\\Vert.x\\server.js"
+			],
+			[
+				"인구",
+				"사회\\인구\\지구는 어느정도의 인구수까지 수용가능 할까.html"
+			],
+			[
+				"graphhtml",
+				"IT\\docuK\\interactive graph and chart in HTML.html"
+			],
+			[
+				"skin",
+				"Layout\\skin.html"
+			],
+			[
+				"tensor2",
+				"Physics\\Tensor\\tensor 2.html"
+			],
+			[
+				"cite",
+				"IT\\docuK\\cite-and-refs.html"
+			],
+			[
+				"port",
+				"IT\\Portfolio\\이강수_Portfolio.html"
+			],
+			[
+				"세월",
+				"사회\\2014-04 세월호 침몰사고\\세월호 침몰사고.html"
+			],
+			[
+				"개인화",
+				"IT\\Recommend 2013-12\\개인화 된 추천 시스템.html"
+			],
+			[
+				"style",
+				"Layout\\style.css"
+			],
+			[
+				"htmlformat",
+				"IT\\ToHTML 2013-01\\example\\HTML format 2.html"
+			],
+			[
+				"hash",
+				"IT\\Hash\\Hash-table.html"
+			],
+			[
+				"정의란",
+				"사회\\정의란 무엇인가\\01.html"
+			],
+			[
+				"css3",
+				"IT\\css3 animation examples.txt"
+			],
+			[
+				"font",
+				"IT\\docuK\\font test.htm"
+			],
+			[
+				"의료",
+				"사회\\의료보험\\의료 파업 관련.html"
+			],
+			[
+				"lag",
+				"Physics\\Lagrange\\Lagrange-en.html"
+			],
+			[
+				"lagrange",
+				"Physics\\Lagrange\\Lagrange.html"
+			],
+			[
+				"bbc",
+				"Physics\\Quantum\\BBC 다큐멘터리 ATOM.htm"
+			],
+			[
+				"format",
+				"IT\\ToHTML 2013-01\\example\\HTML format 2.html"
+			],
+			[
+				"docukformat",
+				"IT\\docuK\\Improving-web-performance.html"
+			],
+			[
+				".css",
+				"Layout\\style.css"
+			],
+			[
+				"particle",
+				"Layout\\Black-Holes-as-Elementary-Particles.html"
+			],
+			[
+				"network",
+				"IT\\HTML\\study\\inquisitive - Daum 영어사전_files\\wordbook.js"
+			],
+			[
+				"equation",
+				"IT\\docuK\\equations-in-html.html"
+			],
+			[
+				"재산통계p",
+				"사회\\재산 통계\\government-official's-property.html"
+			],
+			[
+				"memorizer.html",
+				"IT\\2012-06-14 Memorizer\\Memorizer.html"
+			],
+			[
+				"이강수",
+				"IT\\2013-09-14 Daum\\이강수.tex"
+			],
+			[
+				"skep",
+				"Physics\\StringTheory\\Skepticism-about-String-theory.html"
+			],
+			[
+				"it미래",
+				"사회\\한국 IT의 미래.html"
+			],
+			[
+				"latexhtml",
+				"IT\\LaTeX 2013-01\\introducing-LaTeX-and-Guides.html"
+			],
+			[
+				"의료보험",
+				"사회\\의료보험\\의료 파업 관련.html"
+			],
+			[
+				"recommen",
+				"IT\\Recommend 2013-12\\개인화 된 추천 시스템.html"
+			],
+			[
+				"lagen",
+				"Physics\\Lagrange\\Lagrange-en.html"
+			],
+			[
+				"lagrangeht",
+				"Physics\\Lagrange\\Lagrange.html"
+			],
+			[
+				"peseom",
+				"음악\\Personal selection of music.html"
+			],
+			[
+				"emi",
+				"음악\\Eminem-Lose-Yourself.html"
+			],
+			[
+				"wheisth",
+				"음악\\The-Black-Eyed-Peas-Where-is-the-love.html"
+			],
+			[
+				"pesm",
+				"음악\\Personal selection of music.html"
+			],
+			[
+				"lagraht",
+				"Physics\\Lagrange\\Lagrange.html"
+			],
+			[
+				"relativity.ht",
+				"Physics\\Relativity\\Relativity.html"
+			],
+			[
+				"linear",
+				"Physics\\LinearAlgebra\\Linear-Algebra.html"
+			],
+			[
+				"문재",
+				"사회\\문재인(文在寅) vs 박근혜(朴槿惠) 프로필 비교.html"
+			],
+			[
+				"blackho",
+				"Layout\\Black-Holes-as-Elementary-Particles.html"
+			],
+			[
+				"kfc",
+				"사회\\김어준의 KFC#1, 2014-03-14.html"
+			],
+			[
+				"온",
+				"IT\\2012-06-14 Memorizer\\영어\\영어단어-1800(1).xls"
+			],
+			[
+				"string",
+				"Physics\\StringTheory\\Skepticism-about-String-theory.html"
+			],
+			[
+				"lag.ht",
+				"Physics\\Lagrange\\Lagrange.html"
+			],
+			[
+				"lagr.h",
+				"Physics\\Lagrange\\Lagrange.html"
+			],
+			[
+				"res",
+				"IT\\responsible-web.html"
+			],
+			[
+				"contain",
+				"IT\\HTML\\Equation container test.htm"
+			],
+			[
+				"한국",
+				"사회\\한국 IT의 미래.html"
+			],
+			[
+				"htmlformat2",
+				"IT\\ToHTML 2013-01\\example\\HTML format 2.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 221.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

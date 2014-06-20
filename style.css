@@ -1,0 +1,306 @@
+@charset "utf-8";
+body {margin:0; padding:0; font-size:8px; line-height:1.6; font-family:'Malgun Gothic','맑은 고딕',나눔고딕,NanumGothic,Tahoma,Sans-serif; background:rgb(0,0,0)}
+* {word-wrap:break-word; overflow-wrap:break-word}
+
+/* wrapContainer */
+#container {max-width:1100px; margin:34px auto 0; background:#fff; border:0.5em rgb(100,100,100) solid; border-right-width:0; border-left-width:0}
+#header {}
+#wrapContent {font-size:1.6em; position:relative}
+#content {}
+#sidebar {background-color:#f8f8f8; padding:0.5em; margin:0.5em 0}
+
+/* ***** Header ***** */
+#header .blogTitle {font-size:4em; font-weight:bold; text-align:center; padding:0.6em 0 0.8em; border-top:0.6em solid rgb(55,55,109); background-color:rgb(15,15,15)}
+#header a {color:rgb(214, 119, 119)}
+
+#header .blogMenu {background:#0F2B3A; margin:0.25em 0; padding:0.7em 0; text-align:center; font-size:2em; border-bottom:0.7em solid rgb(134, 43, 43)}
+#header .blogMenu .middleWrapBlogMenu {}
+#header .blogMenu ul {list-style:none; margin:0; padding:0}
+#header .blogMenu li {display:inline-block; margin:0.1em 0.7em}
+#header .blogMenu li a {color:#fff; font-weight:bold}
+
+a {text-decoration:none}
+a:link {color:rgb(0, 150, 187)}
+a:visited {color:rgb(0, 101, 126)}
+a:hover {text-decoration:underline}
+a:active {}
+
+/* Paging - Current page */
+.selected {font-weight:bold; color:#f30}
+.no-more-prev {padding-left:0.6em; color:#999}
+.no-more-next {padding-right:0.6em; color:#999}
+
+/* Category - image button */
+.ib {cursor:pointer}
+/* Category - tree cell */
+.branch3 {cursor:pointer}
+/* Category - count */
+.c_cnt {color:#f30}
+.cal_month {font:0.95em Verdana, Helvetica, Arial, Gulim, sans-serif; height:18px}
+.cal_week1 {font:0.95em Dotum, Arial, sans-serif; height:18px; font-weight:normal}
+.cal_week2 {font:0.95em Dotum, Arial, sans-serif}
+.cal_week {}
+.cal_current_week {}
+.cal_day {font:0.95em Verdana, Helvetica, Arial, Gulim, sans-serif; color:#666; text-align:center}
+.cal_day_sunday {}
+.cal_day_sunday a {}
+.cal_day1 {color:#ccc}
+.cal_day2 {color:#ccc}
+.cal_day3 {color:#666}
+.cal_day4 {color:#666; text-decoration:underline; font-weight:bold}
+a.cal_click:link {color:#333; font-weight:bold}
+a.cal_click:visited {color:#333; font-weight:bold}
+a.cal_click:hover {color:#f30; font-weight:bold}
+
+.rp_general {}
+.rp_admin span.name {background:url(images/iconAdmin.gif) left center no-repeat; padding-left:20px; display:inline-block}
+.rp_secret {color:#f30}
+
+.guest_general {}
+.guest_admin p.ctrlGuest,
+.guest_admin p.ctrlGuestRe {background:url(images/iconAdmin.gif) no-repeat; padding-left:20px}
+
+.hiddenComment {background:url(images/iconSecret.gif) no-repeat; padding-left:20px; font-weight:normal}
+.cap1 {color:#999; text-align:center; padding:4px 0; margin:0}
+.imageblock {cursor:pointer}
+.left {}
+.center {}
+.right {}
+.clear {clear:both}
+.dual {background-color:#fff; margin-bottom:5px}
+.triple {background-color:#fff; margin-bottom:5px}
+.moreless_fold {background:url(images/icon_view_more.gif) top left no-repeat; padding-left:20px; color:#000}
+.moreless_top {background:url(images/icon_stop_view.gif) top left no-repeat; padding-left:20px; color:#000}
+.moreless_body {}
+.moreless_bottom {background:url(images/icon_stop_view.gif) top right no-repeat; padding-right:20px; color:#999; text-align:right}
+.key1 {cursor:pointer; border-bottom:1px dotted #ccc}
+
+hr {display:none}
+img {border:0}
+h1, h2, h3, h4, ol, ul {margin:0; padding:0}
+h1 {font-size:1.6em}
+h2 {font-size:1.4em}
+h3 {font-size:1.2em}
+h4 {font-size:1em}
+input, textarea {}
+input {}
+table {}
+
+/* ***** content ***** */
+#content .nonEntry h3 {border-bottom:0.1em solid #ccc; margin-bottom:0.5em; padding:0.5em; color:#333}
+
+#content .entryNotice, #content .entryProtected, #content .entry {}
+
+#searchList ol, #searchRplist ol {list-style:none; padding:0.5em; margin:0}
+#searchList li, #searchRplist li {border-bottom:0.1em solid #eee; padding:0.5em 0; }
+#searchList .date, #searchRplist .date {font-size:1em; margin-right:1em}
+#searchList .cnt {font-size:0.75em; color:#f60}
+#searchRplist .name {font:0.95em Dotum, Arial, sans-serif; color:#999; padding-left:1em}
+
+#localog .spot {padding-left:0.5em; margin-bottom:0.3em}
+#localog .info {padding-left:0.5em; margin-bottom:0.3em}
+#localog a {color:#617f8a; text-decoration:none}
+
+#taglog ul {text-align:justify; padding:.5em}
+#taglog li {display:inline-block; padding:.2em .5em; background:url(images/bullet_dot.gif) 0 .85em no-repeat}
+#taglog li .cloud1 {color:#699; font-weight:bold}
+#taglog li .cloud2 {color:#84bbdd; font-weight:bold}
+#taglog li .cloud3 {color:#333}
+#taglog li .cloud4 {color:#999}
+#taglog li .cloud5 {color:#999}
+
+#guestWrite {padding:0.8em; background-color:#f5f5f5; border:0.1em solid #ddd}
+#guestWrite p {clear:both; padding:0; margin:0}
+#guestWrite p.writerInfo label {width:6em; float:left; padding-bottom:0.2em}
+#guestWrite p.writerInfo input {float:left; width:15em; border:0.1em solid #d1d3d4; vertical-align:middle; font:1em 맑은 고딕; padding:0.2em}
+#guestWrite textarea {width:97%; min-height:8em;height:auto;padding:0.2em; border:0.1em solid #d1d3d4; font:1em 맑은 고딕}
+#guestWrite .homepage {width:97% !important; color:#999}
+#guestWrite input.submit {background:url(images/btn_visitor_write.gif) no-repeat center center; width:79px; height:29px; display:block; margin:0.5em auto 0; text-indent:-1000em; border:none; cursor:pointer}
+#guestWrite .secretWrap {clear:both; padding:15px 0 5px}
+#guestWrite .checkbox {border:none; padding:0; margin:0; width:25px}
+#guestList {}
+#guestList ol, #guestList ul {list-style:none}
+#guestList .guest_admin, #guestList .guest_general, #guestList .guest_secret {padding-top:0.8em}
+#guestList p.ctrlGuest, #guestList p.ctrlGuestRe {border-bottom:0.1em dotted #ccc; padding-bottom:0.3em; margin:0}
+#guestList p.ctrlGuestRe {}
+#guestList ol li {border:0.5em solid #eee; padding:0 1em; margin:0.5em 0}
+#guestList li ul li {background-color:#e2ece3; border:none}
+#guestList li .name {float:left; color:#333; font-weight:bold; padding-right:1em}
+#guestList li span.name img {vertical-align:middle}
+#guestList li .name a {color:#333; font-weight:bold}
+#guestList li .date {font:0.85em Verdana, Helvetica, Arial, Gulim, sans-serif; color:#999; padding-right:1em}
+#guestList .desc {margin:0.5em 0 1em}
+#guestList .reDesc {padding:0.5em 0 1em; margin:0}
+
+#guestList .control a.modify {background:url(images/btn_b_editndel.gif) no-repeat; width:52px; height:15px; display:inline-block; vertical-align:bottom}
+#guestList .control a.modify span, #guestList .control a.write span {display:none}
+#guestList .control a.write {background:url(images/btn_b_reply.gif) no-repeat; width:39px; height:15px; display:inline-block; vertical-align:bottom}
+
+/* entry */
+.entryNotice h2, .entryProtected h2, .entry h2 {font-size:1.4em}
+.titleWrap {border-bottom:0.1em solid #b6b6b6; padding:0.4em 1em}
+.titleWrap h2 a {color:#FB4622}
+.titleWrap .category {margin-right:1em}
+.titleWrap .category, .titleWrap .category a {color:#999}
+.titleWrap .date {color:#c2c2c2}
+
+.entryProtected .protectedContentWrap {border:1px solid #ececec; padding:30px}
+.entryProtected .protectedForm {background-color:#f9f9f9; padding:15px 0; text-align:center; margin-top:30px}
+.entryProtected .protectedForm input.pass {border:1px solid #ddd; vertical-align:middle}
+.entryProtected label {vertical-align:middle}
+.entryProtected p.text {width:220px; background:url(images/img_protect.gif) no-repeat left top ; padding-left:50px; margin:0 auto}
+.entryProtected input {width:200px}
+.entryProtected .submit {border:none; width:41px; height:21px; background:url(images/btn_pass_confirm.gif) no-repeat; text-indent:-1000em; display:inline; vertical-align:middle}
+
+.admin {padding:0.2em 0.5em}
+
+.article {}
+.article a:link {text-decoration:none}
+.article a:visited {text-decoration:none}
+.article a:hover {text-decoration:underline}
+.article a:active {text-decoration:none}
+.article dt {text-decoration:underline}
+.article dd {margin-left:20px; padding-bottom:10px}
+.article blockquote {background:url(images/icon_quotation.gif) top left no-repeat; padding-left:25px; margin:10px 20px}
+
+.author {text-align:right; padding:2em 0}
+.author .text {font:0.85em Verdana, Arial, Helvetica, sans-serif; color:#999}
+
+.tagTrail {color:#999; padding:0 0 0 2.5em; background:url(images/icon_tag.gif) left 0.5em no-repeat; clear:both; border-bottom:0.1em solid #d1d3d4; margin-bottom:1em}
+.tagTrail a {color:#999}
+.tagText {display:none}
+
+.actionTrail {padding:0.5em 1em; clear:both}
+.actionTrail .cnt {color:#f60}
+
+.trackback {}
+.trackback a {color:#000}
+.trackback h3 {font-size:0.9em; color:#333; border-bottom:1px solid #f5f5f5; margin:0 0 7px; border:1px solid #e7e8e9; background-color:#f9f9f9; padding:7px 15px}
+.trackback h3 span {font:11px verdana; color:#999; cursor:pointer}
+.trackback h4 {font:1em dotum; color:#999; margin:0}
+.trackback h4 a {color:#000; letter-spacing:-1px}
+.trackback ol {margin:0; padding:0; list-style:none}
+.trackback li {border-top:1px dotted #dedede; padding:15px}
+.trackback .date {font:0.85em Verdana, Helvetica, Arial, Gulim, sans-serif; color:#999}
+.trackback p {font:0.95em Dotum, Arial, sans-serif; color:#999; margin:3px 0 0 0; padding:0; letter-spacing:-1px}
+
+.trackback a.delete {background:url(images/iconDelete.gif) left top no-repeat; padding-left:8px; text-decoration:none}
+.trackback a.delete span {display:none}
+
+.comment {border:1px solid #e7e8e9; background-color:#f9f9f9; padding:5px 15px 15px; margin-bottom:4px}
+.comment p {clear:both; margin:3px 0 0 0; padding:0}
+
+.comment h3 {display:none}
+.comment ol,
+.comment ul {margin:0; padding:0; list-style:none}
+.comment .date {float:left; display:inline-block; font-size:1em; color:#999; padding-right:15px}
+.comment .name {float:left; color:#333; font-size:1em; font-weight:bold; padding-right:15px}
+.comment .name a {color:#333; font-weight:bold}
+.comment .control {float:left; padding-top:0.5em; display:inline-block}
+
+.comment ol li {padding:10px 5px 10px 0; border-bottom:1px dotted #ccc}
+.comment li ul li {padding:10px 10px 5px 25px; background:url("images/iconReComment.gif") no-repeat 0 6px; border:none}
+.comment .control a {text-decoration:none}
+.comment .control a.address {background:url(images/btn_b_address.gif) no-repeat; padding-bottom:2px; width:35px; height:15px; display:block; float:left}
+.comment .control a.address span {display:none}
+.comment .control a.modify {background:url(images/btn_b_editndel.gif) no-repeat; padding-bottom:2px; width:52px; height:15px; display:block; float:left}
+.comment .control a.modify span {display:none}
+.comment .control a.write {background:url(images/btn_b_reply.gif) no-repeat; padding-bottom:2px; width:39px; height:15px; display:block; float:left}
+.comment .control a.write span {display:none}
+
+.commentWrite {padding:20px 0 0}
+.commentWrite p.writerInfo label {width:6em; float:left; /* font:0.85em verdana; */ /* padding-top:2px; */ /* vertical-align:middle; */  }
+.commentWrite p.writerInfo input {float:left; width:10em; border:0.1em solid #d1d3d4; font:1em '맑은 고딕'; padding:0.2em}
+.commentWrite textarea {width:97%; padding:0.2em; font:1em '맑은 고딕'; border:1px solid #d1d3d4}
+.commentWrite .homepage {width:97% !important; color:#999}
+.commentWrite input.submit {background:url(images/btn_reply_input.gif) no-repeat; width:76px; height:29px; display:block; margin:5px auto 0; text-indent:-1000em; border:none; cursor:pointer}
+.commentWrite .secretWrap {clear:both; padding:0 0 5px; margin-top:10px}
+.commentWrite .checkbox {border:none; padding:0;	margin:0; width:25px}
+
+#paging {padding:1em; text-align:center; font-size:1em}
+#paging .numbox {/* font:0.95em verdana; */ padding:0 1.5em}
+#paging .num span {border:0.1em solid #eee; padding:0.1em 0.3em; margin:0.2em}
+#paging .num span.selected {background-color:#ffefe5; border-color:#ff6b00; color:#333}
+#paging a {text-decoration:none}
+#paging #prevPage {background:url(images/btn_page_pre.gif) left center no-repeat; padding-left:1em}
+#paging #nextPage {background:url(images/btn_page_next.gif) right center no-repeat; padding-right:1em}
+
+/* ***** sidebar ***** */
+#sidebar ul {padding:0.3em 0; margin:0; list-style:none}
+#sidebar li {background:url(images/bullet_dot.gif) 0 .59em no-repeat; padding-left:0.8em}
+#sidebar li a {}
+#sidebar h3 {font-size:1em; font-weight:bold; color:#333; padding:1em 0 0.3em; border-bottom:0.2em solid #d3d3d3}
+#sidebar .cnt {font:0.85em Tahoma, Helvetica, Arial, Gulim, sans-serif; color:#f60}
+#sidebar .date {font:0.85em Verdana, Helvetica, Arial, Gulim, sans-serif; color:#94a0a5}
+#sidebar .name {font:0.9em Dotum, Arial, sans-serif; color:#94a0a5}
+
+#profile {background-color:#fff; max-width:17em; margin:0.3em auto; border:0.15em solid rgb(211, 211, 211); box-shadow:0 0 0.5em rgb(131, 58, 17); border-radius:0.5em}
+#profile #blogImage {/* display:inline-block; */ margin:auto; padding:15px 0; text-align:center}
+#blogImage img {width:150px; border:0.1em solid rgb(0,0,0)}
+#blogDesc {color:#ADADAD; font-size:0.9em; padding:0.8em; text-align:justify}
+#blogDesc p {margin:0; padding:0}
+.userID {color:#999}
+
+#notice {margin:1px}
+#notice li {}
+#notice a {background:url(images/icon_sidebar_notice.gif) 0 0 no-repeat; padding:1px 0 5px 30px}
+
+#adminMenu {background:#f0f0f0; padding:0.5em 1em 0.1em; margin:1em 0; text-align:center}
+#adminMenu ul {}
+#adminMenu li {display:inline-block; padding:0; margin:0}
+
+#searchBox {margin:1em 0; text-align:center}
+#searchBox input {width:75%; font:1em '맑은 고딕'; padding:0.2em; vertical-align:middle}
+#searchBox .submit {background:url(images/btn_search.gif) no-repeat; width:32px; height:24px; text-indent:-5000px; border:0; cursor:pointer; vertical-align:middle}
+
+#category li {background:none}
+#category li ul li {background:url(images/bul.gif) 0 6px no-repeat; padding-left:10px}
+#category li ul li ul li {background:none; border-left:1px dotted #ccc; padding-left:6px; margin-left:2px}
+#category li ul li ul li a {color:#999}
+#text_0 {font-size:16px}
+
+#tagbox ul {text-align:justify}
+#tagbox li {display:inline-block; padding:0 0.5em}
+#tagbox li .cloud1 {font-weight:bold; font-size:1em; color:#366}
+#tagbox li .cloud2 {font-weight:bold; font-size:1em; color:#6e8a86}
+#tagbox li .cloud3 {font-weight:bold; font-size:1em; color:#333}
+#tagbox li .cloud4 {font-size:1em; color:#333}
+#tagbox li .cloud5 {font-size:1em; color:#333}
+#tagbox a:hover {text-decoration:none}
+
+#recentComment {}
+#recentComment .info_wrap {margin-bottom:3px; color:#999; display:block}
+
+#recentTrackback {}
+#recentTrackback .info_wrap {margin-bottom:3px; color:#999; display:block}
+
+#archive li {}
+#calendar td {font-family:verdana}
+
+#counter {font:0.85em Verdana, Helvetica, Arial, Gulim, sans-serif; padding:10px 15px; margin-top:20px; border:1px solid #dedede; background-color:#eee; color:#999; line-height:1.5}
+#counter dl, #counter dt, #counter dd {padding:0; margin:0}
+#counter dt {float:left; width:80px}
+#counter dd.total {font-weight:bold; color:#333}
+
+#adTistory {text-align:center; margin-top:20px}
+#adTistory .tistoryJoin a {font:11px dotum; letter-spacing:-1px; color:#999}
+#btnRSS {margin-top:20px; text-align:center}
+
+/* ***** footer ***** */
+#footer {text-align:center; padding:0.5em; font-weight:bold; font-size:1.4em; color:rgb(160,60,60)}
+#footer .footMenu {}
+#footer a {color:rgb(203,203,255)}
+
+@media all and (min-width:321px){
+	body {font-size:9px}
+}
+@media all and (min-width:401px){
+	body {font-size:10px; background:url("images/pattern-24.gif") repeat left top}
+	#footer a {color:rgb(53, 53, 92)}
+}
+@media all and (min-width:801px) {
+	#container {padding:0.5em; border-right-width:0.5em; border-left-width:0.5em}
+	#wrapContent {min-height:200em}
+	#content {margin-right:21.5em}
+	#sidebar {position:absolute; margin:0; top:0; right:0; bottom:0; width:20em}
+}
