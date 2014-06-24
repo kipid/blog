@@ -300,7 +300,7 @@ table {}
 }
 @media all and (min-width:801px) {
 	#container {padding:0.5em; border-right-width:0.5em; border-left-width:0.5em}
-	#wrapContent {min-height:210em}
+	#wrapContent {min-height:170em}
 	#content {margin-right:21.5em}
 	#sidebar {position:absolute; margin:0; top:0; right:0; bottom:0; width:20em}
 }
