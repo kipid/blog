@@ -16,7 +16,7 @@ body {margin:0; padding:0; font-size:8px; line-height:1.6; font-family:'Malgun G
 #header .blogMenu {background:#0F2B3A; margin:0.25em 0; padding:0.7em 0; text-align:center; font-size:2em; border-bottom:0.7em solid rgb(134, 43, 43)}
 #header .blogMenu .middleWrapBlogMenu {}
 #header .blogMenu ul {list-style:none; margin:0; padding:0}
-#header .blogMenu li {display:inline-block; margin:0.1em 0.7em}
+#header .blogMenu li {display:inline-block; margin:0.2em 1em}
 #header .blogMenu li a {color:#fff; font-weight:bold}
 
 a {text-decoration:none}
