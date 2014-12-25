@@ -141,8 +141,8 @@ table {}
 .titleWrap {border-bottom:0.1em solid #b6b6b6; padding:0.4em 1em}
 .titleWrap h2 a {color:#FB4622}
 .titleWrap .category {margin-right:1em}
-.titleWrap .category, .titleWrap .category a {color:#999}
-.titleWrap .date {color:#c2c2c2}
+.titleWrap .category, .titleWrap .category a {color:#212221}
+.titleWrap .date {color:#100E0E}
 
 .entryProtected .protectedContentWrap {border:1px solid #ececec; padding:30px}
 .entryProtected .protectedForm {background-color:#f9f9f9; padding:15px 0; text-align:center; margin-top:30px}
