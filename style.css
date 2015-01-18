@@ -163,7 +163,8 @@ table {}
 .article dd {margin-left:20px; padding-bottom:10px}
 .article blockquote {background:url(images/icon_quotation.gif) top left no-repeat; padding-left:25px; margin:10px 20px}
 
-.author {text-align:right; padding:2em 0}
+.entry-ccl {padding-right:4px}
+.author {text-align:right; padding:.2em}
 .author .text {font:0.85em Verdana, Arial, Helvetica, sans-serif; color:#999}
 
 .tagTrail {color:#999; padding:0 0 0 2.5em; background:url(images/icon_tag.gif) left 0.5em no-repeat; clear:both; border-bottom:0.1em solid #d1d3d4; margin-bottom:1em}
@@ -302,5 +303,5 @@ table {}
 	#container {padding:0.5em; border-right-width:0.5em; border-left-width:0.5em}
 	#wrapContent {min-height:175em}
 	#content {margin-right:21.5em}
-	#sidebar {position:absolute; margin:0; top:0; right:0; bottom:0; width:20em; border-left:4px solid white}
+	#sidebar {position:absolute; margin:0; top:0; right:0; bottom:0; width:20.2em; border-left:5px solid white}
 }
