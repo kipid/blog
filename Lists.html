@@ -13,11 +13,80 @@
 </style>
 </codeprint><!-- docuK-style -->
 
+<style>
+#fuzzy-search-container {
+	position:fixed; left:0; top:0;
+	z-index:100;
+	font:inherit;
+	width:30em; max-width:100%;
+	height:auto;
+	text-align:left;
+}
+#fuzzy-search {
+	height:2em; max-height:5em; overflow-y:auto;
+	font:inherit; font-size:1.3em; color:black;
+	width:100%;
+	padding:.1em 2em 0 .2em;
+	border:2px gray solid;
+	background:white;
+}
+#fuzzy-search-list {
+	height:auto; min-height:3em; max-height:15em; overflow-y:auto;
+	border:2px gray solid;
+	background:rgb(20,20,20);
+}
+#fuzzy-search-list .list-item {
+	background:black; color:white;
+	padding:.2em .5em .4em;
+}
+#fuzzy-search-list .list-item:nth-child(2n) {
+	background:rgb(40,40,40);
+}
+#fuzzy-search-list .list-item .cat {font-size:.9em;}
+#fuzzy-search-list .list-item .highlighted {
+	font-size:.5em; color:rgb(150,150,150);
+}
+#fuzzy-search-list .list-item .highlighted .bold {
+	color:rgb(170,250,170);
+}
+#fuzzy-search-container .exit {
+	z-index:100;
+	position:absolute; display:inline-block;
+	right:0; top:0;
+	width:1.8em; height:1.8em; line-height:1.0;
+	text-align:center;
+	/*border-radius:.4em;*/
+	cursor:pointer;
+	border:2px rgb(80, 80, 80) solid;
+	background-color:rgb(30,30,30); color:white;
+}
+#fuzzy-search-container .exit>svg {
+	width:100%; height:100%;
+	font-size:1.8em; line-height:1.0;
+}
+
+@media all and (min-height:500px){
+	#fuzzy-search-list {max-height:430px;}
+}
+</style>
+
 <meta name="description" content="List of posts in kipid's blog" />
 <codeprint class="SEE">
 # Lists
 
-블로그 글들 리스트를 정리해 놓은 것입니다. 제목뒤 날짜는 보통 처음 글을 올린 날짜입니다. (올려놓고 꾸준히 업데이트하는 글들이 많아서...) 공들여 작성한 글은 <a id="highlight" href="#highlight" class="emph">highlight</a> 함.
+<script></script>
+
+<div id="fuzzy-search-container">
+	<div id="fuzzy-search" contenteditable="true"></div>
+	<div id="fuzzy-search-list"></div>
+	<div class="exit" onclick="kipid.HideBR(this)"><svg><g style="stroke:white;stroke-width:23%"><line x1="20%" y1="20%" x2="80%" y2="80%"></line><line x1="80%" y1="20%" x2="20%" y2="80%"></line></g>✖</svg></div>
+</div>
+
+<div class="cmt">
+Fuzzy search 구현해놓음 : <button id="out-focus" onclick='$("#fuzzy-search-container").show(); $("#fuzzy-search").focus();'>Fuzzy search</button> 버튼이나 <code>G</code> 키를 누르면 검색창 뜹니다. <code>ESC</code> 나 오른쪽 위 'x' 를 누르면 검색창이 닫힙니다. Fuzzy (흐릿한, 뿌연) search 가 어떤식으로 동작하는지는 쓰시면서 확인해 보시길... (뭐 장황한 설명보단 사용해 보시면서 느끼고, 익히시는게 더 이해가 잘 될듯 합니다. 음.. 한글 초성검색도 구현해놔야 하나;;;)
+</div>
+
+블로그 <cite class="ref-kipid"></cite> 글들 리스트를 정리해 놓은 것입니다. 제목뒤 날짜는 보통 처음 글을 올린 날짜입니다. (올려놓고 꾸준히 업데이트하는 글들이 많아서...) 공들여 작성한 글은 <a id="highlight" href="#highlight" class="emph">highlight</a> 함.
 
 단축키 (T: Table of Contents, F: Forward Section, D: Previous Section) 도 활용해 보시길.
 
@@ -113,7 +182,6 @@
 <li><a class="emph" href="http://kipid.tistory.com/entry/SI-cgs-unit-and-physical-constants">SI, cgs 단위계(unit) 및 물리상수(physical constants)</a>, 2014-02-17</li>
 <li><a class="emph" href="http://kipid.tistory.com/entry/Entropy">엔트로피(Entropy) 개념에 대한 이해</a>, 2014-01-24</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -124,7 +192,6 @@
 <li><a class="emph" href="http://kipid.tistory.com/entry/Linear-Algebra">선형 대수학 간단한 정리들 (Linear Algebra)</a>, 2014-03-18</li>
 <li><a href="http://kipid.tistory.com/entry/Dirac-delta-function">디락 델타 함수 (Dirac delta function)</a>, 2014-02-13</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -136,7 +203,6 @@
 <li><a href="http://kipid.tistory.com/entry/Time-as-an-emergent-phenomenon">Time as an emergent phenomenon</a>, 2014-02-14</li>
 <li><a href="http://kipid.tistory.com/entry/Multiverse">다중 우주론 (Multiverse)</a>, 2014-02-10</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -147,7 +213,6 @@
 <li><a href="http://kipid.tistory.com/entry/BICEP2-evidence-of-Inflation-and-Gravitational-wave">BICEP2: 중력파와 급팽창 이론(인플레이션, inflation theory)의 직접적인 증거</a>, 2014-04-07</li>
 <li><a class="emph" href="http://kipid.tistory.com/entry/Black-Hole-Mystery-Wrapped-in-Firewall-Paradox">방화벽 역설(Firewall paradox)로 인한 블랙홀 미스테리</a>, 2014-02-10</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -157,7 +222,6 @@
 <li><a class="emph" href="http://kipid.tistory.com/entry/Physicist-Quotations">물리학자들의 명언(名言)들 (Physicist Quotations)</a>, 2014-03-04</li>
 <li><a href="http://kipid.tistory.com/entry/Skepticism-about-String-theory">초끈이론 회의론 (Skepticism about String theory)</a>, 2014-02-10</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -183,7 +247,6 @@
 <li><a href="http://kipid.tistory.com/entry/HTML-%EC%97%90%EC%84%9C-%EB%8F%99%EC%98%81%EC%83%81-%EC%97%B0%EC%86%8D-%EC%9E%AC%EC%83%9D%ED%95%98%EA%B8%B0-playlist-shuffle-replay">HTML 에서 동영상 연속 재생하기 (playlist, shuffle, replay)</a>, 2015-01-07</li>
 <li><a href="http://kipid.tistory.com/entry/Sharing-URI-through-SNS">SNS 내보내기/공유하기 (Sharing a URI link through SNS)</a>, 2015-01-16</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -196,12 +259,11 @@
 <li><a href="http://kipid.tistory.com/entry/Learning-AJAX">Learning AJAX</a>, 2014-06-02</li>
 
 <li><a class="emph" href="http://kipid.tistory.com/entry/Javascript-namespace-or-encapsulation">Javascript namespace or encapsulation</a>, 2014-06-03</li>
-<li><a href="http://kipid.tistory.com/entry/Regular-Expression-and-match-replace-method-in-javascript">Regular Expression (정규 표현식), and match/replace method in javascript</a>, 2014-05-03</li>
+<li><a href="http://kipid.tistory.com/entry/Regular-Expression-and-match-replace-method-in-javascript-and-java">Regular Expression (정규 표현식), and match/replace method in JavaScript and JAVA</a>, 2014-05-03</li>
 <li><a href="http://kipid.tistory.com/entry/Encode-Unescape-and-Decode-Escape-URI-Component">Encode/Unescape and Decode/Escape URI Component</a>, 2015-01-04</li>
 <li><a href="http://kipid.tistory.com/entry/Number-and-Bit-operations-in-JAVA-and-Javascript">Number and Bit operations in JAVA and Javascript</a>, 2014-12-21</li>
 <li><a class="emph" href="http://kipid.tistory.com/entry/HTTP-Cookie-in-Web-HTML-Javascript-and-Server">HTTP Cookie in Web / HTML / Javascript and Server</a>, 2014-08-31</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -214,7 +276,6 @@
 <li><a href="http://kipid.tistory.com/entry/Cloud-Server-Services-eg-Amazon-Web-Services">Cloud Server Services (eg. Amazon Web Services)</a>, 2015-01-03</li>
 <li><a href="http://kipid.tistory.com/entry/Email-by-JAVA">Email by JAVA (자바 프로그램을 이용해 이메일 보내기)</a>, 2015-01-15</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -232,7 +293,6 @@
 <li><a href="http://kipid.tistory.com/entry/Facebook-comment-test">댓글 플러그인 | 위젯 (SNS comment plug-in | widget)</a>, 2014-01-17</li>
 <li><a href="http://kipid.tistory.com/entry/Font-test">여러가지 글꼴 테스트 (Font test)</a>, 2014-01-20</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -245,7 +305,6 @@
 <li><a href="http://kipid.tistory.com/entry/Hash-Table-and-Hash-function">Hash Table and Hash function</a>, 2014-02-10</li>
 <li><a class="emph" href="http://kipid.tistory.com/entry/Studying-SQL-Structured-Query-Language">SQL (Structured Query Language) 을 배워보자</a>, 2014-03-06</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -257,7 +316,6 @@
 <li><a href="http://kipid.tistory.com/entry/Programming-Languages">여러가지 프로그래밍 언어들</a>, 2014-01-24</li>
 <li><a href="http://kipid.tistory.com/entry/%ED%95%9C%EA%B5%AD-IT%EC%9D%98-%EB%AF%B8%EB%9E%98">한국 IT의 미래</a>, 2014-03-24</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -270,7 +328,6 @@
 <li><a class="emph" href="http://kipid.tistory.com/entry/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-%ED%97%8C%EB%B2%95-%EC%A0%84%EB%AC%B8">대한민국 헌법 전문</a>, 2014-03-06</li>
 <li><a href="http://kipid.tistory.com/entry/%EC%A0%95%EB%8F%84%EC%A0%84-%EA%B4%80%EB%A0%A8-%EC%97%AD%EC%82%AC-%EC%A0%95%EB%A6%AC">정도전 관련 역사 정리</a>, 2014-06-14</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -286,7 +343,6 @@
 <li><a href="http://kipid.tistory.com/entry/%EC%8A%A4%EB%A7%88%ED%8A%B8-%EC%A7%80%EA%B0%91-Smart-wallet-Apple-pay-Google-wallet-%EB%93%B1-%EC%9D%80-%EC%96%B4%EB%8A%90-%EB%B0%A9%ED%96%A5%EC%9C%BC%EB%A1%9C-%EB%B0%9C%EC%A0%84%ED%95%A0%EA%B9%8C">스마트 지갑 (Smart wallet: Apple pay, Google wallet 등) 은 어느 방향으로 발전할까?</a>, 2014-11-11</li>
 <li><a href="http://kipid.tistory.com/entry/%EC%9D%98%EB%A3%8C-%ED%8C%8C%EC%97%85-%EA%B4%80%EB%A0%A8">의료 파업 및 의료 영리화, 원격진료. 외부에서 본 개인의견</a>, 2014-03-22</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -299,7 +355,6 @@
 <li><a href="http://kipid.tistory.com/entry/%EB%8F%99%EC%84%B1%EC%95%A0-LGBT-%EA%B4%80%EB%A0%A8-%EA%B0%9C%EC%9D%B8%EC%9D%98%EA%B2%AC">동성애, LGBT 관련 개인의견</a>, 2014-12-05</li>
 <li><a href="http://kipid.tistory.com/entry/%EC%86%8C%EC%8B%9C%EC%98%A4%ED%8C%A8%EC%8A%A4-Sociopaths-%EC%99%80%EB%8A%94-%EC%95%84%EC%98%88-%EC%83%81%EC%A2%85%ED%95%98%EC%A7%80-%EC%95%8A%EB%8A%94-%EA%B2%83%EC%9D%B4-%EC%A2%8B%EB%8B%A4">소시오패스 (Sociopaths) 와는 아예 상종하지 않는 것이 좋다.</a>, 2014-12-11</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -314,7 +369,6 @@
 <li><a href="http://kipid.tistory.com/entry/201406-%EC%A0%95%EB%B6%80%EA%B0%9C%EA%B0%81-%EC%9E%A5%EA%B4%80-%EB%B0%8F-%EA%B0%81-%ED%9B%84%EB%B3%B4%EB%93%A4-%ED%94%84%EB%A1%9C%ED%95%84-%EB%AA%A8%EC%9D%8C">2014-06 정부개각, 장관 및 각 후보들 프로필 모음</a>, 2014-06-23</li>
 <li><a href="http://kipid.tistory.com/entry/2014-%EC%B4%9D%EB%A6%AC%ED%9B%84%EB%B3%B4-%EB%AC%B8%EC%B0%BD%EA%B7%B9-vs-%EC%95%88%EB%8C%80%ED%9D%AC-%ED%94%84%EB%A1%9C%ED%95%84-%EB%B9%84%EA%B5%90">2014 총리후보, 문창극(文昌克) vs 안대희(安大熙) 프로필 비교</a>, 2014-06-14</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -327,7 +381,6 @@
 <li><a href="http://kipid.tistory.com/entry/NIS-cheating">2012~2013 대한민국 국가정보원 (국정원, NIS) 여론 조작 사건</a>, 2014-02-11</li>
 <li><a class="emph" href="http://kipid.tistory.com/entry/criminal-investigation-NIS-cheating">국정원 대선개입 수사 - 서울경찰청 사이버 범죄수사대 디지털 증거분석실 CCTV 녹취록</a>, 2014-06-22</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -342,7 +395,6 @@
 <li><a class="emph" href="http://kipid.tistory.com/entry/Personal-selection-of-Dances-Performances">Personal selection of Dances/Performances</a>, 2014-11-26</li>
 <li><a href="http://kipid.tistory.com/entry/%EB%AC%B4%ED%95%9C%EB%8F%84%EC%A0%84-%EC%9E%90%EC%9C%A0%EB%A1%9C-%EA%B0%80%EC%9A%94%EC%A0%9C-2013-11-02">무한도전 자유로 가요제 (2013-11-02)</a>, 2014-02-15</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -353,7 +405,6 @@
 <li><a href="http://kipid.tistory.com/entry/2014-Sochi-Olympic-Figure-skating">2014 소치 올림픽 - 피겨 스케이팅 (2014 Sochi Olympic - Figure skating)</a>, 2014-02-22</li>
 <li><a href="http://kipid.tistory.com/entry/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-2014-%EB%8F%99%EA%B3%84%EC%98%AC%EB%A6%BC%ED%94%BD-%EA%B5%AD%EA%B0%80%EB%8C%80%ED%91%9C%EC%84%A0%EC%88%98%EB%8B%A8-%ED%8A%B8%EC%9C%84%ED%84%B0-%EB%AA%A8%EC%9D%8C">대한민국 2014 동계올림픽 국가대표선수단 트위터 모음</a>, 2014-02-19</li>
 </ul>
-<div class="p"></div>
 
 
 
@@ -365,14 +416,13 @@
 <li><a href="http://kipid.tistory.com/entry/%EC%88%98%EB%A9%B4%EC%9D%98-%EA%B3%BC%ED%95%99-Science-of-Sleeping">수면의 과학 (Science of Sleeping)</a>, 2014-12-28 (미완)</li>
 <li><a href="http://kipid.tistory.com/entry/Benjamin-Button-Letters-to-his-daughter">Benjamin Button - Letters to his daughter</a>, 2014-02-15</li>
 </ul>
-<div class="p"></div>
 
 
 
 ## RRA
 
 <ol class="refs">
-<li><a href="http://kipid.tistory.com/entry/Lists">kipid's blog in tistory</a></li>
+<li id="ref-kipid"><a href="http://kipid.tistory.com/entry/Lists">kipid's blog in tistory</a></li>
 </ol>
 </codeprint><!-- docuK-docu -->
 
@@ -397,3 +447,146 @@ MathJax.Hub.Config({
 <!-- From kipid.tistory CDN -->
 <script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js"></script>
 </codeprint><!-- docuK-script -->
+
+<script>
+(function(kipid, $, undefined){
+	var $list=$(".docuK li");
+	kipid.liList=[];
+	for (var i=0;i<$list.length;i++) {
+		var $listI=$list.eq(i);
+		var $sec=$listI.parents(".docuK>.sec");
+		var txt="";
+		var html="";
+		if ($sec.exists()) {
+			var cat=$sec.find("h2:first-child .head-txt").text();
+			var $subsec=$listI.parents(".subsec");
+			if ($subsec.exists()) {
+				cat+="\n&nbsp; -- "+$subsec.find("h3:first-child .head-txt").text();
+				var $subsubsec=$listI.parents(".subsubsec");
+				if ($subsubsec.exists()) {
+					cat+="\n&nbsp; &nbsp; -- "+$subsubsec.find("h4:first-child .head-txt").text();
+				}
+			}
+			txt=cat.replace(/\n&nbsp;/g,"").replace(/\n&nbsp; &nbsp;/g,"")+"\n";
+			html='<div class="cat">'+cat.replace(/\n/g, "<br>")+'</div>';
+		}
+		txt+="* "+$listI.text();
+		html+='<div class="li">* '+$listI.html()+'</div>';
+		kipid.liList.push({"txt":txt, "html":html});
+	}
+	RegExp.quote=function(str) {
+		return (str+'').replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&").replace(/\s/g, "\\s");
+	};
+	kipid.arrayFuzzyRegExs=function(fuzzyStr) {
+		var res=[];
+		fuzzyStr=fuzzyStr.replace(/[\n\t]/g, "");
+		for (var i=0;i<fuzzyStr.length;i++) {
+			res.push( new RegExp(RegExp.quote(fuzzyStr.charAt(i)), "ig") );
+		}
+		return res;
+	};
+	kipid.highlightStrFromIndices=function(str, indices) {
+		var res="";
+		var i=0;
+		res+=str.substring(0,indices[i].start);
+		for (i=0;i+1<indices.length;i++) {
+			res+='<span class="bold">'+str.substring(indices[i].start,indices[i].end)+'</span>'+str.substring(indices[i].end,indices[i+1].start);
+		}
+		res+='<span class="bold">'+str.substring(indices[i].start,indices[i].end)+'</span>'+str.substring(indices[i].end);
+		return res;
+	};
+	kipid.fuzzySearch=function(fuzzyStr, list) {
+		var listSelected=[];
+		var regExs=kipid.arrayFuzzyRegExs(fuzzyStr);
+		for (var i=0;i<list.length;i++) {
+			if (regExs.length>0) {
+				var txt=list[i]["txt"];
+				regExs[0].lastIndex=0;
+				var exec=regExs[0].exec(txt);
+				var matched=(exec!==null);
+				var indices=[];
+				if (matched) {
+					indices.push({start:exec.index, end:regExs[0].lastIndex});
+				}
+				for (var j=1;matched&&(j<regExs.length);j++) {
+					regExs[j].lastIndex=regExs[j-1].lastIndex;
+					exec=regExs[j].exec(txt);
+					matched=(exec!==null);
+					if (matched) {
+						indices.push({start:exec.index, end:regExs[j].lastIndex});
+					}
+				}
+				if (matched) {
+					listSelected.push(list[i]);
+					listSelected[listSelected.length-1]["highlighted"]=kipid.highlightStrFromIndices(txt, indices);
+				}
+			} else {
+				listSelected=list;
+			}
+		}
+		return listSelected;
+	};
+	/////////////////////////////////////////////////
+	// Old version.
+	/////////////////////////////////////////////////
+	// kipid.regExFuzzySearch=function(str) {
+	// 	var strRegEx=".*";
+	// 	str=str.replace(/[\n\t]/g, "");
+	// 	for (var i=0;i<str.length;i++) {
+	// 		strRegEx+=RegExp.quote(str.charAt(i))+".*";
+	// 	}
+	// 	return new RegExp(strRegEx, "i");
+	// };
+	// kipid.fuzzySearch=function(fuzzyStr, list) {
+	// 	var listSelected=[];
+	// 	var regex=kipid.regExFuzzySearch(fuzzyStr);
+	// 	for (var i=0;i<list.length;i++) {
+	// 		if (regex.test(list[i]["txt"])) {
+	// 			listSelected.push(list[i]);
+	// 		}
+	// 	}
+	// 	return listSelected;
+	// };
+	
+	$("#fuzzy-search").on("keydown", function(e) {
+		e.stopPropagation();
+		if (e.keyCode==27) { // ESC = 27, or Ctrl+P (e.ctrlKey&&e.keyCode==80)
+			e.preventDefault();
+			$("#out-focus").focus();
+			$("#fuzzy-search-container").hide();
+		}
+	});
+	kipid.fsLastTxt="a";
+	$("#fuzzy-search").on("keyup", function(e) {
+		var $this=$(this);
+		var fsTxt=$this.text();
+		if (kipid.fsLastTxt!==fsTxt) {
+			if (fsTxt.indexOf(kipid.fsLastTxt)===0) {
+				kipid.fsList=kipid.fuzzySearch(fsTxt, kipid.fsList);
+			} else {
+				kipid.fsList=kipid.fuzzySearch(fsTxt, kipid.liList);
+			}
+			var str="";
+			for (var i=0;i<kipid.fsList.length;i++) {
+				str+='<div class="list-item">'
+						+kipid.fsList[i]["html"]
+						+((kipid.fsList[i]["highlighted"]!==undefined)?
+						'<div class="highlighted">'+kipid.fsList[i]["highlighted"]+'</div>':'')
+					+'</div>';
+			}
+			$("#fuzzy-search-list").html(str);
+			kipid.fsLastTxt=fsTxt;
+		}
+	});
+	
+	$("#fuzzy-search").trigger("keyup");
+	$("#fuzzy-search-container").hide();
+	$(window).on("keydown", function(e) {
+		if (e.keyCode==71) { // G = 71
+			e.preventDefault();
+			$("#fuzzy-search-container").show();
+			$("#fuzzy-search").focus();
+		}
+	});
+})(window.kipid||{}, jQuery);
+</script>
