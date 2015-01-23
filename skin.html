@@ -436,9 +436,9 @@
 				
 				<s_sidebar_element>
 				<!-- 최근 댓글 모듈 -->
-				<div id="recentComments">
+				<div id="recentComment">
 					<h3>최근에 달린 댓글</h3>
-					<ul>
+					<ul id="recentComments">
 						<s_rctrp_rep>
 						<li>
 							<a href="[##_rctrp_rep_link_##]">[##_rctrp_rep_desc_##].</a>
@@ -557,5 +557,27 @@
 		</div>
 	</div>
 </s_t3>
+<script>
+window.kipid=window.kipid||{};
+if (kipid.processShortKey===undefined) {
+	kipid.processShortKey=function(event) {
+		if (event.altKey||event.ctrlKey||event.metaKey) return;
+		switch (event.target.nodeName) {
+			case "INPUT": case "SELECT": case "TEXTAREA": return;
+		}
+		switch (event.keyCode) {
+			case 76: //L = 76
+				window.location="/entry/Lists";
+				break;
+			case 88: //X
+				window.location="#recentComment";
+				break;
+			default:
+				if (window['processShortcut']!==undefined) processShortcut(event);
+		}
+	}
+	document.onkeydown=kipid.processShortKey;
+}
+</script>
 </body>
 </html>
