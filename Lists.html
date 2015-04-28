@@ -65,7 +65,7 @@
 	font-size:1.8em; line-height:1.0;
 }
 
-@media all and (min-height:500px){
+@media all and (min-height:500px) {
 	#fuzzy-search-list {max-height:430px;}
 }
 </style>
@@ -113,6 +113,7 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 ##[.no-sec-N#sec-Newest] Newest posts
 
 <ul>
+<li id="testing">&lt;span class="emph"&gt;Testing&lt;/span&gt;</li>
 <li><a href="http://kipid.tistory.com/entry/2014-2015-%EC%B4%9D%EB%A6%AC%ED%9B%84%EB%B3%B4-%EC%9D%B4%EC%99%84%EA%B5%AC-%EB%AC%B8%EC%B0%BD%EA%B7%B9-%EC%95%88%EB%8C%80%ED%9D%AC-%ED%94%84%EB%A1%9C%ED%95%84-%EB%B9%84%EA%B5%90">2014~2015 총리후보, 이완구(李完九), 문창극(文昌克), 안대희(安大熙) 프로필 비교</a>, 2014-06-14</li>
 <li><a href="http://kipid.tistory.com/entry/Vertical-center-align-by-CSS-in-HTML">Vertical center align by CSS in HTML</a>, 2015-02-05</li>
 <li><a href="http://kipid.tistory.com/entry/Java-Serializable-Object-to-Byte-Array-or-SQL-BLOB">Java Serializable Object to Byte Array (byte[] or SQL BLOB)</a>, 2015-02-05</li>
@@ -455,9 +456,9 @@ MathJax.Hub.Config({
 </codeprint><!-- docuK-script -->
 
 <script>
-(function(kipid, $, undefined){
+(function(kipid, $, undefined) {
 	var $list=$(".docuK li");
-	kipid.liList=[];
+	kipid.fsFullList=[];
 	for (var i=0;i<$list.length;i++) {
 		var $listI=$list.eq(i);
 		var $sec=$listI.parents(".docuK>.sec");
@@ -478,7 +479,7 @@ MathJax.Hub.Config({
 		}
 		txt+="* "+$listI.text();
 		html+='<div class="li">* '+$listI.html()+'</div>';
-		kipid.liList.push({"txt":txt, "html":html});
+		kipid.fsFullList.push({"txt":txt, "html":html});
 	}
 	RegExp.quote=function(str) {
 		return (str+'').replace(/[.?*+^$[\]\\(){}|-]/g, "\\$&").replace(/\s/g, "\\s");
@@ -494,11 +495,11 @@ MathJax.Hub.Config({
 	kipid.highlightStrFromIndices=function(str, indices) {
 		var res="";
 		var i=0;
-		res+=str.substring(0,indices[i].start);
+		res+=kipid.escapeHTML(str.substring(0,indices[i].start));
 		for (i=0;i+1<indices.length;i++) {
-			res+='<span class="bold">'+str.substring(indices[i].start,indices[i].end)+'</span>'+str.substring(indices[i].end,indices[i+1].start);
+			res+='<span class="bold">'+kipid.escapeHTML(str.substring(indices[i].start,indices[i].end))+'</span>'+kipid.escapeHTML(str.substring(indices[i].end,indices[i+1].start));
 		}
-		res+='<span class="bold">'+str.substring(indices[i].start,indices[i].end)+'</span>'+str.substring(indices[i].end);
+		res+='<span class="bold">'+kipid.escapeHTML(str.substring(indices[i].start,indices[i].end))+'</span>'+kipid.escapeHTML(str.substring(indices[i].end));
 		return res;
 	};
 	kipid.fuzzySearch=function(fuzzyStr, list) {
@@ -523,11 +524,12 @@ MathJax.Hub.Config({
 					}
 				}
 				if (matched) {
+					list[i]["highlighted"]=kipid.highlightStrFromIndices(txt, indices);
 					listSelected.push(list[i]);
-					listSelected[listSelected.length-1]["highlighted"]=kipid.highlightStrFromIndices(txt, indices);
 				}
 			} else {
-				listSelected=list;
+				delete list[i]["highlighted"];
+				listSelected.push(list[i]);
 			}
 		}
 		return listSelected;
@@ -564,13 +566,12 @@ MathJax.Hub.Config({
 	});
 	kipid.fsLastTxt="a";
 	$("#fuzzy-search").on("keyup", function(e) {
-		var $this=$(this);
-		var fsTxt=$this.text();
+		var fsTxt=$(this).text();
 		if (kipid.fsLastTxt!==fsTxt) {
 			if (fsTxt.indexOf(kipid.fsLastTxt)===0) {
 				kipid.fsList=kipid.fuzzySearch(fsTxt, kipid.fsList);
 			} else {
-				kipid.fsList=kipid.fuzzySearch(fsTxt, kipid.liList);
+				kipid.fsList=kipid.fuzzySearch(fsTxt, kipid.fsFullList);
 			}
 			var str="";
 			for (var i=0;i<kipid.fsList.length;i++) {
