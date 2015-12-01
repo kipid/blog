@@ -44,10 +44,12 @@
 	background:rgb(40,40,40);
 }
 #fuzzy-search-list .list-item.selected {border:.15em solid rgb(210,150,150)}
-#fuzzy-search-list .list-item .list-index {display:none}
 #fuzzy-search-list .list-item .cat {font-size:.9em;}
 #fuzzy-search-list .list-item .highlighted {
 	font-size:.5em; color:rgb(150,150,150);
+}
+#fuzzy-search-list .list-item .maxMatchScore {
+	font-weight:bold; color:rgb(150,250,250);
 }
 #fuzzy-search-list .list-item .highlighted .bold {
 	color:rgb(170,250,170);
@@ -118,6 +120,7 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 ## PH
 
 <ul>
+	<li>2015-12-01 : Fuzzy search update. Match Score 적용.</li>
 	<li>2015-06-28 : Fuzzy search update. 초성검색 및 한영 자동전환 검색.</li>
 </ul>
 
@@ -126,6 +129,11 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 ##[.no-sec-N#sec-Newest] Newest posts
 
 <ul>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/CSS-Specificity-or-Priority-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84">CSS Specificity or Priority (우선순위)</a>, 2015-07-23</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Proof-of-Geometrization-and-Poincar%C3%A9-conjectures-by-Grigori-Perelman">Proof of Geometrization and Poincaré conjectures, by Grigori Perelman</a>, 2015-07-18</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%9B%80%EC%A7%81%EC%9D%B4%EB%8A%94-%EC%82%AC%EC%A7%84-gif-%EB%A7%8C%EB%93%A4%EA%B8%B0-GifCamexe">움직이는 사진 gif 만들기 (GifCam.exe)</a>, 2015-07-15</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%A7%80%EA%B5%AC-%EA%B8%B0%ED%9B%84%EC%A0%95%EB%B3%B4-%EA%B8%B0%EC%98%A8-%EB%B0%94%EB%9E%8C-%ED%95%B4%EB%A5%98-%EA%B4%80%EB%A0%A8">지구 기후정보 (기온, 바람, 해류) 관련</a>, 2015-07-13</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B6%80%EB%8F%99%EC%82%B0-%EA%B4%80%EB%A0%A8-%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C-%EB%B0%A9%EB%B2%95">부동산 관련 정보조회 방법</a>, 2015-07-12</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/URI-rendering-test">URI rendering test</a>, 2015-07-10</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/2015-%EB%AC%B4%ED%95%9C%EB%8F%84%EC%A0%84-%EA%B0%80%EC%9A%94%EC%A0%9C">2015 무한도전 가요제</a>, 2015-07-07</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%ED%8E%98%EC%9D%B4%EC%8A%A4%EB%B6%81-%ED%8D%BC%EC%98%A4%EA%B8%B0-Embeding-facebook-post">페이스북 포스트 퍼오기 (Embeding facebook post)</a>, 2015-07-01</li>
@@ -207,6 +215,7 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/Method-of-Lagrange-multipliers">Method of Lagrange multipliers (English)</a>, 2014-03-21; and <a target="_blank" class="emph" href="http://kipid.tistory.com/entry/Optimization-with-the-Method-of-Lagrange-multipliers">최적화, 라그랑지 승수법 (Optimization with the Method of Lagrange multipliers)</a>, 2014-03-18; 앞쪽의 영어버전이 더 자세히 작성되어 있음.</li>
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/Linear-Algebra">선형 대수학 간단한 정리들 (Linear Algebra)</a>, 2014-03-18</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Dirac-delta-function">디락 델타 함수 (Dirac delta function)</a>, 2014-02-13</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Proof-of-Geometrization-and-Poincar%C3%A9-conjectures-by-Grigori-Perelman">Proof of Geometrization and Poincaré conjectures, by Grigori Perelman</a>, 2015-07-18</li>
 </ul>
 
 
@@ -248,6 +257,15 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EA%B1%B4%EA%B0%95%ED%95%98%EA%B2%8C-%EA%B3%BC%ED%95%99%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%8B%A4%EC%9D%B4%EC%96%B4%ED%8A%B8-%ED%95%98%EA%B8%B0">건강하게 과학적으로 다이어트 하기</a>, 2015-05-21</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%88%98%EB%A9%B4%EC%9D%98-%EA%B3%BC%ED%95%99-Science-of-Sleeping">수면의 과학 (Science of Sleeping)</a>, 2014-12-28 (미완)</li>
 </ul>
+
+
+
+### 지구과학
+
+<ul>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%A7%80%EA%B5%AC-%EA%B8%B0%ED%9B%84%EC%A0%95%EB%B3%B4-%EA%B8%B0%EC%98%A8-%EB%B0%94%EB%9E%8C-%ED%95%B4%EB%A5%98-%EA%B4%80%EB%A0%A8">지구 기후정보 (기온, 바람, 해류) 관련</a>, 2015-07-13</li>
+</ul>
+
 
 
 ##[.no-sec-N#sec-IT] [IT/Programming] Category
@@ -313,6 +331,7 @@ window.history replaceState() and pushState()</li>
 #### Etc. (CSS, graph, widget, web performance)
 
 <ul>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/CSS-Specificity-or-Priority-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84">CSS Specificity or Priority (우선순위)</a>, 2015-07-23</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Vertical-center-align-by-CSS-in-HTML">Vertical center align by CSS in HTML</a>, 2015-02-05</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Customized-styling-of-scroll-bars-in-HTML">Customized styling of scroll bars in HTML</a>, 2014-05-26</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/CSS3-examples">CSS3 examples</a>, 2014-04-25</li>
@@ -357,6 +376,7 @@ window.history replaceState() and pushState()</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%ED%95%9C%EA%B5%AD-IT%EC%9D%98-%EB%AF%B8%EB%9E%98">한국 IT의 미래</a>, 2014-03-24</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Youtube-Download">Youtube Download</a>, 2015-05-14</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Customize-Your-Air-AWAIR">Customize Your Air (AWAIR)</a>, 2015-05-31</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%9B%80%EC%A7%81%EC%9D%B4%EB%8A%94-%EC%82%AC%EC%A7%84-gif-%EB%A7%8C%EB%93%A4%EA%B8%B0-GifCamexe">움직이는 사진 gif 만들기 (GifCam.exe)</a>, 2015-07-15</li>
 </ul>
 
 
@@ -380,6 +400,7 @@ window.history replaceState() and pushState()</li>
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/how-rich-are-you">당신은 상위 몇 % 입니까? (고위직 재산 통계 2013)</a>, 2014-01-21</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/government-officials-property">고위공직자 및 국회의원 정기 재산 신고 사항 (2011~2014)</a>, 2014-03-29</li>
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/%EC%A7%80%EA%B5%AC%EB%8A%94-%EC%96%B4%EB%8A%90%EC%A0%95%EB%8F%84%EC%9D%98-%EC%9D%B8%EA%B5%AC%EC%88%98%EA%B9%8C%EC%A7%80-%EC%88%98%EC%9A%A9%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C">지구는 어느정도의 인구수까지 수용가능할까?</a>, 2014-04-12</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B6%80%EB%8F%99%EC%82%B0-%EA%B4%80%EB%A0%A8-%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C-%EB%B0%A9%EB%B2%95">부동산 관련 정보조회 방법</a>, 2015-07-12</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B6%80%EB%8F%99%EC%82%B0-%EC%A0%95%EC%B1%85-%EA%B0%80%EA%B2%A9-%EC%96%B4%EB%94%94%EB%A1%9C-%EA%B0%80%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C">부동산 정책, 가격 어디로 가고 있을까?</a>, 2015-01-07</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%8B%9C%EB%8C%80%EA%B3%B5%EA%B0%90-%EA%B7%B8%EB%93%A4%EA%B3%BC-%ED%86%B5%ED%95%98%EB%8A%94-%EA%B8%B8-%EC%B2%AD%EB%85%84-%EB%B9%88%EA%B3%A4">시대공감 -  청년 빈곤. 그들과 통하는 길.</a>, 2014-12-29</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%8B%9C%EA%B8%89-%EC%9D%BC%EA%B8%89-%EC%9B%94%EA%B8%89-%EC%97%B0%EB%B4%89-%EC%9E%90%EB%8F%99-%ED%99%98%EC%82%B0%EA%B8%B0%EA%B3%84%EC%82%B0%EA%B8%B0">시급, 일급, 월급, 연봉 자동 환산기/계산기</a>, 2015-06-28</li>
@@ -504,7 +525,8 @@ $fuzzy_search=$("#fuzzy-search");
 $fuzzy_search_list=$("#fuzzy-search-list");
 
 ////////////////////////////////////////////////////
-// Hangul (Korean) split and map to English (copied from recoeve - user-page.html)
+// Hangul (Korean) split and map to English
+// KE : Korean Expanded
 ////////////////////////////////////////////////////
 eve.jamoKE = ["ㄱ", "ㄱㄱ", "ㄱㅅ", "ㄴ", "ㄴㅈ", "ㄴㅎ", "ㄷ", "ㄷㄷ", "ㄹ", "ㄹㄱ", "ㄹㅁ", "ㄹㅂ", "ㄹㅅ", "ㄹㅌ", "ㄹㅍ", "ㄹㅎ", "ㅁ", "ㅂ", "ㅂㅂ", "ㅂㅅ", "ㅅ", "ㅅㅅ", "ㅇ", "ㅈ", "ㅈㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅗㅏ", "ㅗㅐ", "ㅗㅣ", "ㅛ", "ㅜ", "ㅜㅓ", "ㅜㅔ", "ㅜㅣ", "ㅠ", "ㅡ", "ㅡㅣ", "ㅣ"];
 eve.jamo = ["ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄸ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅃ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ", "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ", "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ", "ㅣ"];
@@ -525,35 +547,35 @@ eve.rJong = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", 
 
 eve.splitHangul=function(str) {
 	var res=[];
+	res.originalStr=str;
+	res.splitted3="";
+	res.splitted="";
 	var cho, jung, jong;
 	for (var i=0;i<str.length;i++) {
 		var c=str.charAt(i)
 		var n=str.charCodeAt(i);
 		if (n>=0x3131&&n<=0x3163) {
 			n-=0x3131;
-			res.push({
-				"char":c, "n":n
-				, "splitted":eve.jamoKE[n]
-			});
+			res[i]={"char":c, "splitted3":c, "splitted":kipid.jamoKE[n]};
 		} else if (n>=0xAC00&&n<=0xD7A3) {
 			n-=0xAC00;
 			jong=n%28;
 			jung=( (n-jong)/28 )%21;
 			cho=( ((n-jong)/28)-jung )/21;
-			res.push({
-				"char":c, "n":[cho,jung,jong]
-				, "splitted3":eve.rCho[cho]+eve.rJung[jung]+eve.rJong[jong]
-				, "splitted":eve.rChoKE[cho]+eve.rJungKE[jung]+eve.rJongKE[jong]
-			});
+			res[i]={"char":c
+				, "splitted3":kipid.rCho[cho]+kipid.rJung[jung]+kipid.rJong[jong]
+				, "splitted":kipid.rChoKE[cho]+kipid.rJungKE[jung]+kipid.rJongKE[jong]};
 		} else {
-			res.push({"char":c, "splitted":c});
+			res[i]={"char":c, "splitted3":c, "splitted":c};
 		}
+		res.splitted3+=res[i].splitted3;
+		res.splitted+=res[i].splitted;
 	}
 	return res;
 };
 
 ////////////////////////////////////////////////////
-// Fuzzy search (copied from recoeve - user-page.html and edited at 2015-06-28)
+// Fuzzy search
 ////////////////////////////////////////////////////
 var $list=$(".docuK li");
 eve.fsFullList=[];
@@ -572,17 +594,12 @@ for (var i=0;i<$list.length;i++) {
 				cat+="\n&nbsp; &nbsp; -- "+$subsubsec.find("h4:first-child .head-txt").text();
 			}
 		}
-		txt=cat.replace(/\n&nbsp;/g,"").replace(/\n&nbsp; &nbsp;/g,"")+"\n";
+		txt=cat.replace(/\n&nbsp; &nbsp;/g,"").replace(/\n&nbsp;/g,"")+"\n";
 		html='<div class="cat">'+cat.replace(/\n/g, "<br>")+'</div>';
 	}
 	txt+="* "+$listI.text();
 	html+='<div class="li">* '+$listI.html()+'</div>';
-	var txtSplitted=eve.splitHangul(txt);
-	var txt="";
-	for (var k=0;k<txtSplitted.length;k++) {
-		txt+=txtSplitted[k]["splitted"];
-	}
-	eve.fsFullList[i]={"txt":txt, "txtSplitted":txtSplitted, "html":html, "$listI":$listI};
+	eve.fsFullList[i]={i:i, "txt":eve.splitHangul(txt), "html":html, "$listI":$listI};
 }
 RegExp.quote=function(str) {
 	return str.replace(/[.?*+^$[\]\\{}()|-]/g, "\\$&").replace(/\s/g, "[\\s\\S]");
@@ -600,7 +617,7 @@ eve.arrayFuzzyRegExs=function(fuzzyStr) {
 	}
 	return res;
 };
-eve.highlightStrFromIndices=function(str, strSplitted, indices) {
+eve.highlightStrFromIndices=function(strSplitted, indices) {
 	var res="";
 	for (var i=0, j=1, k=0, p1=0, p2=0;j<=indices.length;i=j,j++) {
 		while (j<indices.length&&indices[j-1].end===indices[j].start) {
@@ -641,38 +658,98 @@ eve.highlightStrFromIndices=function(str, strSplitted, indices) {
 	}
 	return res;
 };
-eve.fuzzySearch=function(fuzzyStr, list) {
-	var listSelected=[];
-	var regExs=eve.arrayFuzzyRegExs(fuzzyStr);
+eve.matchScoreFromIndices=function(indices) {
+	var res=0;
+	for (var i=1;i<indices.length;i++) {
+		var diff=indices[i].start-indices[i-1].start;
+		if (diff<5) res+=8*(5-diff);
+	}
+	return res;
+};
+eve.fuzzySearch=function(pattern, subList) {
+	var res=[];
+	res.pattern=pattern;
+	var regExs=eve.arrayFuzzyRegExs(pattern.splitted);
+	var list=[];
+	if (subList===null) {
+		list=eve.fsFullList;
+	} else {
+		var sorted=subList.sorted;
+		for (var i=0;i<sorted.length;i++) {
+			list.push(eve.fsFullList[subList[sorted[i]].i]);
+		}
+	}
 	for (var i=0;i<list.length;i++) {
 		if (regExs.length>0) {
-			var txt=list[i]["txt"];
-			var txtSplitted=list[i]["txtSplitted"];
+			var txt=list[i].txt.splitted;
 			regExs[0].lastIndex=0;
 			var exec=regExs[0].exec(txt);
 			var matched=(exec!==null);
 			var indices=[];
 			if (matched) {
-				indices.push({start:exec.index, end:regExs[0].lastIndex});
+				indices[0]={start:exec.index, end:regExs[0].lastIndex};
 			}
 			for (var j=1;matched&&(j<regExs.length);j++) {
 				regExs[j].lastIndex=regExs[j-1].lastIndex;
 				exec=regExs[j].exec(txt);
 				matched=(exec!==null);
 				if (matched) {
-					indices.push({start:exec.index, end:regExs[j].lastIndex});
+					indices[j]={start:exec.index, end:regExs[j].lastIndex};
 				}
 			}
 			if (matched) {
-				list[i]["highlighted"]=eve.highlightStrFromIndices(txt, txtSplitted, indices);
-				listSelected.push(list[i]);
+				var maxMatchScore=eve.matchScoreFromIndices(indices);
+				var indicesMMS=[]; // indices of max match score
+				for (var p=0;p<indices.length;p++) {
+					indicesMMS[p]=indices[p]; // hard copy of indices
+				}
+				for (var k=indices.length-2;k>=0;) {
+					regExs[k].lastIndex=indices[k].start+1;
+					exec=regExs[k].exec(txt);
+					matched=(exec!==null);
+					if (matched) {
+						indices[k]={start:exec.index, end:regExs[k].lastIndex};
+					}
+					for (var j=k+1;matched&&(j<regExs.length);j++) {
+						regExs[j].lastIndex=regExs[j-1].lastIndex;
+						exec=regExs[j].exec(txt);
+						matched=(exec!==null);
+						if (matched) {
+							indices[j]={start:exec.index, end:regExs[j].lastIndex};
+						}
+					}
+					if (matched) {
+						var matchScore=eve.matchScoreFromIndices(indices);
+						if (matchScore>maxMatchScore) {
+							maxMatchScore=matchScore;
+							for (var p=0;p<indices.length;p++) {
+								indicesMMS[p]=indices[p]; // hard copy of indices
+							}
+						}
+						k=indices.length-2;
+					} else {
+						k--;
+					}
+				}
+				res.push({i:list[i].i, maxMatchScore:maxMatchScore, highlight:eve.highlightStrFromIndices(list[i].txt, indicesMMS)});
 			}
 		} else {
-			delete list[i]["highlighted"];
-			listSelected.push(list[i]);
+			res.push({i:list[i].i, maxMatchScore:0});
 		}
 	}
-	return listSelected;
+	// sorting...
+	var sorted=res.sorted=[];
+	for (var i=0;i<res.length;i++) {
+		sorted[i]=i;
+	}
+	for (var i=1;i<sorted.length;i++) {
+		var temp=sorted[i];
+		var j=i;
+		for (;(j>0) && (res[sorted[j-1]].maxMatchScore<res[temp].maxMatchScore);j--)
+			sorted[j]=sorted[j-1];
+		sorted[j]=temp;
+	}
+	return res;
 };
 
 $fuzzy_search.on("keydown", function(e) {
@@ -719,40 +796,41 @@ $fuzzy_search.on("keydown", function(e) {
 		break;
 	}
 });
-eve.gotoLi=function(elem) {
+eve.gotoLi=function(elem, k) {
 	eve.$fsLis.removeClass("selected");
 	var $elem=$(elem);
 	$elem.addClass("selected");
-	var i=Number($elem.find(".list-index").html());
-	$window.scrollTop(eve.fsList[i]["$listI"].offset().top);
+	$window.scrollTop(eve.fsFullList[k]["$listI"].offset().top);
 };
-eve.fsLastTxt="$!@#";
+eve.fsResult=[];
+eve.fsResult[0]=[];
+eve.fsResult[0]["pattern"]=eve.splitHangul("$!@#");
 $fuzzy_search.on("keyup", function(e) {
-	var fsTxt=$fuzzy_search.text();
-	var fsTxtSplitted=eve.splitHangul(fsTxt);
-	fsTxt="";
-	for (var i=0;i<fsTxtSplitted.length;i++) {
-		fsTxt+=fsTxtSplitted[i]["splitted"];
-	}
-	if (eve.fsLastTxt!==fsTxt) {
-		if (fsTxt.indexOf(eve.fsLastTxt)===0) {
-			eve.fsList=eve.fuzzySearch(fsTxt, eve.fsList);
-		} else {
-			eve.fsList=eve.fuzzySearch(fsTxt, eve.fsFullList);
+	clearTimeout(eve.doFS);
+	eve.doFS=setTimeout(function() {
+		var fsTxt=eve.splitHangul($fuzzy_search.text());
+		if (eve.fsResult[0].pattern.splitted!==fsTxt.splitted) {
+			if (fsTxt.splitted.indexOf(eve.fsResult[0].pattern.splitted)===0) {
+				eve.fsResult[1]=eve.fsResult[0];
+			} else if (eve.fsResult[1] && fsTxt.splitted.indexOf(eve.fsResult[1].pattern.splitted)===0) {
+			} else {
+				eve.fsResult[1]=null;
+			}
+			var res=eve.fsResult[0]=eve.fuzzySearch(fsTxt, eve.fsResult[1]);
+			var sorted=res.sorted;
+			var str="";
+			for (var i=0;i<sorted.length;i++) {
+				var k=res[sorted[i]].i;
+				str+='<div class="list-item" onclick="kipid.gotoLi(this,'+k+')">'
+						+eve.fsFullList[k]["html"]
+						+((res[sorted[i]]["highlight"]!==undefined)?
+						'<div class="highlighted">'+'<span class="maxMatchScore">'+res[sorted[i]].maxMatchScore+'</span> :: '+res[sorted[i]]["highlight"]+'</div>':'')
+					+'</div>';
+			}
+			$fuzzy_search_list.html(str);
+			eve.$fsLis=$fuzzy_search_list.find(".list-item");
 		}
-		var str="";
-		for (var i=0;i<eve.fsList.length;i++) {
-			str+='<div class="list-item" onclick="kipid.gotoLi(this)">'
-					+'<div class="list-index">'+i+'</div>'
-					+eve.fsList[i]["html"]
-					+((eve.fsList[i]["highlighted"]!==undefined)?
-					'<div class="highlighted">'+eve.fsList[i]["highlighted"]+'</div>':'')
-				+'</div>';
-		}
-		$fuzzy_search_list.html(str);
-		eve.$fsLis=$fuzzy_search_list.find(".list-item");
-		eve.fsLastTxt=fsTxt;
-	}
+	}, 200);
 });
 $fuzzy_search.trigger("keyup");
 $window.on("keydown", function(e) {
