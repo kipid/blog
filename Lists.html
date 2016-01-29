@@ -87,14 +87,21 @@
 </div>
 <div id="out-focus" class="none">out focus</div>
 
-<div class="cmt">다시 대부분의 글들을 공개 처리했습니다. (뭐 언젠가는 다시금 비공개로 바꿀수도?)</div>
+<div class="cmt">
+
+다시 모든 글을 다 공개. 일자리는 나눠 갖는게 좋은걸까? 독점하는게 좋은걸까???
+
+Open source 가 좋은걸까? Closed 로 대가를 조금이라도 받고 지식을 주는게 나은걸까??? 우선은 다 open 을 할 예정... 그동안 공개하지 않고 독점하려고 했던 것들까지... 지식은 공유하면 더 발전하긴 하는듯... Open source 가 이런 매력이구만. 그런데 open source 가 문제가 아니고, Source 의 중요한 부분을 잘 설명하는 문서작성이 더 중요한 부분 같기도.
+
+취직이 안되면... 내 가격을 낮춰서라도 어딘가 찾을데는 있겄지. 우선 빠르게 <a target="_blank" href="http://recoeve.net/">recoeve.net</a> 를 완성하고 싶음. 내 가치관과 비슷한 사람들과 우선 더 잘 뭉쳐야겠음.</div>
 
 <div class="cmt">
-Fuzzy search 구현해놓음 : <button onclick='$("#fuzzy-search-container").show(); $("#fuzzy-search").focus();'>Fuzzy search</button> 버튼이나 <code>G</code> 키 (G for Go to anything) 를 누르면 검색창 뜹니다. <code>ESC</code> 나 오른쪽 위 'x' 를 누르면 검색창이 닫힙니다. Fuzzy (흐릿한, 뿌연) search 가 어떤식으로 동작하는지는 쓰시면서 확인해 보시길... (뭐 장황한 설명보단 사용해 보시면서 느끼고, 익히시는게 더 이해가 잘 될듯 합니다. 음.. 한글 초성검색 및 한영 자동변환 검색도 구현해놓음.)
-</div>
 
-###/
-fuzzy 에 더 가까운가를 function 이용해서 정렬할수도 있는듯?
+Fuzzy search 구현해놓음 : <button onclick='$("#fuzzy-search-container").show(); $("#fuzzy-search").focus();'>Fuzzy search</button> 버튼이나 <code>G</code> 키 (G for Go to anything) 를 누르면 검색창 뜹니다. <code>ESC</code> 나 오른쪽 위 'x' 를 누르면 검색창이 닫힙니다. Fuzzy (흐릿한, 뿌연) search 가 어떤식으로 동작하는지는 쓰시면서 확인해 보시길... (뭐 장황한 설명보단 사용해 보시면서 느끼고, 익히시는게 더 이해가 잘 될듯 합니다. 음.. 한글 초성검색 및 한영 자동변환 검색도 구현해놓음.)
+
+Fuzzy search 버튼을 추가로 오른쪽 아래에 fix 시켜 놔야겠다. 스크롤 하다가도 검색할 수 있게.
+
+</div>
 
 ###/
 Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
@@ -107,21 +114,43 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 
 블로그 <cite class="ref-kipid"></cite> 글들 리스트를 정리해 놓은 것입니다. 제목뒤 날짜는 보통 처음 글을 올린 날짜입니다. (올려놓고 꾸준히 업데이트하는 글들이 많아서...) 공들여 작성한 글은 <a href="#highlight" class="emph">highlight</a> 함.
 
-단축키 (T: Table of Contents, F: Forward Section, D: Previous Section) 도 활용해 보시길.
+단축키 (<code>T</code> : Table of Contents, <code>F</code> : Forward Section, <code>D</code> : Previous Section, <code>R</code> : References) 도 활용해 보시길.
 
 <div class="p">
-<a target="_blank" href="http://kipid.tistory.com/entry/Personal-Bookmarks">Personal Bookmarks (괜찮은 사이트들 모음)</a> 는 따로 작성. <a target="_blank" href="http://recoeve.net/">Recoeve.net</a> 알파 테스트 서비스 시작했습니다. 많이 방문해 주시길...ㅋ Recoeve.net 상의 제 페이지는 <a target="_blank" href="http://recoeve.net/user/kipid">kipid on Recoeve.net</a> 입니다.
+<a target="_blank" href="http://kipid.tistory.com/entry/Personal-Bookmarks">Personal Bookmarks (괜찮은 사이트들 모음)</a> 는 따로 작성. <a target="_blank" href="http://recoeve.net/">Recoeve.net</a> 알파 테스트 서비스 시작. Recoeve.net 상의 제 페이지는 <a target="_blank" href="http://recoeve.net/user/kipid">kipid on Recoeve.net</a>
 </div>
 
 카테고리 좀 다시 정리하고 싶다;;; 지금까지 만든 코드들 정리해서 블로그 서비스도 개발해보고 싶긴 한데...
+
+<div class="cmt">
+글 몇개가 list 에서 빠진거 같기도 한데... 뭔 글일까나?
+</div>
 
 
 
 ## PH
 
 <ul>
+	<li>2015-12-23 : 새로 올린 글들도 정리를 해야 하는데...</li>
+	<li>2015-12-19 : 정리정리.</li>
 	<li>2015-12-01 : Fuzzy search update. Match Score 적용.</li>
 	<li>2015-06-28 : Fuzzy search update. 초성검색 및 한영 자동전환 검색.</li>
+</ul>
+
+
+
+##[.no-sec-N#sec-interest] Recent interests
+
+<ul>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%84%B8%EC%9B%94%ED%98%B8-%EC%B9%A8%EB%AA%B0%EC%82%AC%EA%B3%A0">세월호 침몰사고. 다이빙벨 논란. 링크 모음.</a>, 2014-04-22; 사고는 2014년 4월 16일 8시 48분 경 대한민국 전라남도 진도군 조도면 부근 황해 상에서 발생.</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Career-Portfolio-%EC%9D%B4%EA%B0%95%EC%88%98">Career Portfolio - 이강수</a>, 2015-12-18</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%9D%98%EB%A3%8C-%ED%8C%8C%EC%97%85-%EA%B4%80%EB%A0%A8">의료 파업 및 의료 영리화, 원격진료. 외부에서 본 개인의견</a>, 2014-03-22</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/2015-%EB%B0%95%EA%B7%BC%ED%98%9C-%EB%8C%80%ED%86%B5%EB%A0%B9-%EC%8B%A0%EB%85%84-%EA%B8%B0%EC%9E%90%ED%9A%8C%EA%B2%AC-%EC%98%81%EC%83%81">2015 박근혜 대통령 신년 기자회견 영상</a>, 2015-01-12</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%AC%B8%EC%9E%AC%EC%9D%B8%E6%96%87%E5%9C%A8%E5%AF%85-vs-%EB%B0%95%EA%B7%BC%ED%98%9C%E6%9C%B4%E6%A7%BF%E6%83%A0-%ED%94%84%EB%A1%9C%ED%95%84-%EB%B9%84%EA%B5%90">문재인(文在寅) vs 박근혜(朴槿惠) 프로필 비교</a>, 2014-03-17</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B3%B8%EC%9D%B8-%EC%B1%85%EC%9D%84-%ED%86%B5%ED%95%B4-%EB%B0%94%EB%9D%BC%EB%B3%B8-37%EC%84%B8%EC%9D%98-%EB%B0%95%EA%B7%BC%ED%98%9C">본인 책을 통해 바라본 37세의 박근혜</a>, 2014-12-16</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/NIS-cheating">2012~2013 대한민국 국가정보원 (국정원, NIS) 여론 조작 사건</a>, 2014-02-11</li>
+<li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/criminal-investigation-NIS-cheating">국정원 대선개입 수사 - 서울경찰청 사이버 범죄수사대 디지털 증거분석실 CCTV 녹취록</a>, 2014-06-22</li>
+<li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/Entropy">엔트로피(Entropy) 개념에 대한 이해</a>, 2014-01-24</li>
 </ul>
 
 
@@ -129,6 +158,32 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 ##[.no-sec-N#sec-Newest] Newest posts
 
 <ul>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Two-track-stragedy-%EC%96%91-%EB%B0%A9%ED%96%A5-%EC%A0%84%EB%9E%B5">Two track stragedy (양 방향 전략)</a> Many track stragedy 로도 확장이 가능할듯?, 2015-12-24</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%ED%99%94%EC%84%B1%EC%8B%9C-%EC%B6%95%EA%B5%AC%EC%9E%A5-%ED%99%94%EC%84%B1-%EC%A2%85%ED%95%A9-%EA%B2%BD%EA%B8%B0-%ED%83%80%EC%9A%B4-%EC%A3%BC%EB%B3%80-%EB%AA%A8%EC%8A%B5%EB%93%A4">화성시 축구장 (화성 종합 경기 타운) 주변 모습들</a>, 2015-12-23</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Access-from-other-hosts">Access from other hosts</a>, 2015-12-23</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Learning-Play-Framework">Learning Play Framework</a>, 2015-12-23</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%AF%BC%EC%A3%BC%EC%A3%BC%EC%9D%98-%EC%82%AC%ED%9A%8C%EC%97%90%EC%84%9C-%EC%95%A0%EA%B5%AD%EC%8B%AC%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80">민주주의 사회에서 애국심이란 무엇인가?</a>, 2015-12-23</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EA%B1%B0%EC%A7%93%EA%B8%B0%EC%96%B5-%EC%8B%A0%EB%93%9C%EB%A1%AC-False-Memory-Syndrome">거짓기억 신드롬 (False Memory Syndrome)</a>, 2015-12-22</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%ED%98%91%EB%8F%99%EC%9D%98-%EC%A7%84%ED%99%94-Evolution-of-Cooperation">협동의 진화 (Evolution of Cooperation)</a>, 2015-12-22</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%8C%80%EC%B2%9C%EC%82%AC-%EA%B0%80%EB%B8%8C%EB%A6%AC%EC%97%98-Gabriel-Gabriele-Kabriel-and-so-on">대천사 가브리엘 (Gabriel, Gabriele, Kabriel, and so on)</a>, 2015-12-20</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Recoevenet-%EC%84%A4%EB%AA%85%EC%84%9C-Guide-to-Recoevenet">Recoeve.net 설명서 (Guide to Recoeve.net)</a>, 2015-12-19</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B0%94%EB%82%98%EB%82%98-%ED%81%AC%EB%A0%88%EC%9D%B4%EC%A7%80-Popup-Store-with-%ED%95%98%EB%9D%BC%EA%B5%AC">바나나 크레이지 :: Pop-up Store (with 하라구)</a>, 2015-12-19</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EA%B2%B0%EA%B3%BC-%EC%A7%80%EC%83%81%EC%A3%BC%EC%9D%98%EC%9D%98-%EB%A7%A4%EB%A0%A5-%EA%B3%B5%EB%A6%AC%EC%A3%BC%EC%9D%98">결과 지상주의의 매력 (공리주의?)</a>, 2015-12-19</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%96%91%EC%9E%90%EC%97%AD%ED%95%99-conjecture-%EC%B8%A1%EC%A0%95%EB%AC%B8%EC%A0%9C-%EB%8B%A4%EC%A4%91-%EC%9A%B0%EC%A3%BC%EB%A1%A0%EA%B3%BC-%EC%9E%90%EC%9C%A0%EC%9D%98%EC%A7%80%EC%9D%98-%EC%83%81%EA%B4%80%EA%B4%80%EA%B3%84">양자역학 conjecture :: 측정문제. 다중 우주론과 자유의지의 상관관계?</a>, 2015-12-19</li>
+<li><a class="emph" target="_blank" href="http://kipid.tistory.com/entry/%EA%B3%B5%EC%A0%95%ED%95%9C-%EA%B2%BD%EC%A0%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-2-%EC%95%85%EB%A7%88%EC%9D%98-%EB%93%B1%EC%9E%A5-%EC%9D%B4%EC%9E%90-interest-%EA%B0%9C%EB%85%90">공정한 경제란 무엇일까? - 2. 악마의 등장 : 이자 (interest) 개념</a>, 2015-12-19</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Fragmented-network-communities-Islandization-of-informations">Fragmented network/communities (Islandization of informations) :: 끼리끼리만 소통하는 우리 사회</a>, 2015-12-19</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B6%80%EC%B1%84%EC%A3%BC%EB%8F%84-%EC%84%B1%EC%9E%A5%EC%97%90%EC%84%9C-%EC%86%8C%EB%93%9D%EC%A3%BC%EB%8F%84-%EC%84%B1%EC%9E%A5%EC%9C%BC%EB%A1%9C">부채주도 성장에서 소득주도 성장으로</a>, 2015-12-18</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%AF%BC%EC%82%AC-%EC%86%8C%EC%86%A1%EB%B2%95-%EC%A0%84%EB%AC%B8">민사 소송법 전문 (The whole script of Code of Civil Procedure of Korea)</a>, 2015-12-18</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Conjecture-about-the-Unification-between-ElectroMagnetic-Lorentz-force-and-Gravity">Conjecture about the Unification between Electro-Magnetic Lorentz force and Gravity</a>, 아이디어 자체는 2005년쯤? 구체화는 2006 졸업논문때.</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Recoeve-progress">Recoeve progress</a></li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Career-Portfolio-%EC%9D%B4%EA%B0%95%EC%88%98">Career Portfolio - 이강수</a>, 2015-12-18</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B2%95%EB%A0%B9-%ED%98%95%EB%B2%95-%EC%A0%84%EB%AC%B8">법령 - 형법 전문 (The whole script of criminal law of Korea)</a>, 2015-12-16</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Site-statistics-MAU-DAU">Site statistics (MAU, DAU)</a>, 2015-12-16</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98-%ED%8F%89%EA%B7%A0%EC%A0%81%EC%9D%B8-%EC%86%8C%EB%B9%84%EA%B5%AC%EC%A1%B0">사람들의 평균적인 소비구조</a>, 2015-12-15</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Internet-Web-Advertisement">인터넷 광고 시장에 관하여...</a>, 2015-12-15</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/JAVA-SE-8-API-index-with-Fuzzy-Search">JAVA SE 8 - API - index with Fuzzy Search</a>, 2015-12-15</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/The-Richest-People-On-The-Planet">세계 최상위 부자들 (The Richest People On The Planet)</a>, 2015-12-15</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%85%B8%EB%AC%B4%ED%98%84-%EB%8C%80%ED%86%B5%EB%A0%B9%EC%9D%98-%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4-%EA%B7%B8%EB%A6%BC%EC%9E%90-%EB%AC%B8%EC%9E%AC%EC%9D%B8-%EB%B9%84%EC%84%9C%EC%8B%A4%EC%9E%A5">노무현 대통령의 아름다운 그림자, 문재인 비서실장</a>, 2015-12-14</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Development-of-Virtual-Reality">가상 현실 (VR : Virtual Reality) 개발</a>, 2015-12-14</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%95%88%EC%B2%A0%EC%88%98%EC%94%A8-%EA%B8%B0%EB%B6%80%EA%B3%BC%EC%A0%95%EA%B3%BC-%EC%95%88%EB%9E%A9-%EC%A3%BC%EC%A3%BC%EB%93%A4%EC%9D%98-%EA%B1%B0%EB%9E%98%EB%82%B4%EC%97%AD">안철수씨 기부과정과 안랩 주주들의 거래내역</a>, 2015-12-14</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Programmer-Developers-Portfolio">Programmer/Developer's Portfolio (개발자/프로그래머의 포트폴리오)</a>, 2015-12-14</li>
@@ -136,20 +191,6 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%8B%A4%EC%8B%9C%EA%B0%84-HTTP-%EC%96%91%EB%B0%A9%ED%96%A5-%ED%86%B5%EC%8B%A0">실시간 HTTP 양방향 통신 (Web socket, Polling, Long-polling, and so on)</a>, 2015-12-12</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/specific-event-handler-on-HTML-element">Specific event handler on HTML element?</a>, 2015-12-12</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/HTTP-Server-side-Frameworks-Languages">HTTP Server-side Frameworks/Languages 뭘 써야할까?</a>, 2015-12-12</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%9D%8C%EC%84%B1-%EC%9D%B8%EC%8B%9D-Speech-Recognition-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8">음성 인식 (Speech Recognition) 프로그램</a>, 2015-12-09</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/HTML-a-href-tag-with-onclick-return">HTML a href tag with onclick return</a>, 2015-12-06</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/CSS-Specificity-or-Priority-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84">CSS Specificity or Priority (우선순위)</a>, 2015-07-23</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/Proof-of-Geometrization-and-Poincar%C3%A9-conjectures-by-Grigori-Perelman">Proof of Geometrization and Poincaré conjectures, by Grigori Perelman</a>, 2015-07-18</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%9B%80%EC%A7%81%EC%9D%B4%EB%8A%94-%EC%82%AC%EC%A7%84-gif-%EB%A7%8C%EB%93%A4%EA%B8%B0-GifCamexe">움직이는 사진 gif 만들기 (GifCam.exe)</a>, 2015-07-15</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%A7%80%EA%B5%AC-%EA%B8%B0%ED%9B%84%EC%A0%95%EB%B3%B4-%EA%B8%B0%EC%98%A8-%EB%B0%94%EB%9E%8C-%ED%95%B4%EB%A5%98-%EA%B4%80%EB%A0%A8">지구 기후정보 (기온, 바람, 해류) 관련</a>, 2015-07-13</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B6%80%EB%8F%99%EC%82%B0-%EA%B4%80%EB%A0%A8-%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C-%EB%B0%A9%EB%B2%95">부동산 관련 정보조회 방법</a>, 2015-07-12</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/URI-rendering-test">URI rendering test</a>, 2015-07-10</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/2015-%EB%AC%B4%ED%95%9C%EB%8F%84%EC%A0%84-%EA%B0%80%EC%9A%94%EC%A0%9C">2015 무한도전 가요제</a>, 2015-07-07</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/%ED%8E%98%EC%9D%B4%EC%8A%A4%EB%B6%81-%ED%8D%BC%EC%98%A4%EA%B8%B0-Embeding-facebook-post">페이스북 포스트 퍼오기 (Embeding facebook post)</a>, 2015-07-01</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%B9%B4%EB%9D%BC-KARA-Boy-Friend-%EC%83%81%ED%95%B4-%ED%95%A9%EB%8F%99-%EC%BD%98%EC%84%9C%ED%8A%B8-20150629">카라 (KARA) &amp; Boy Friend - 상해 합동 콘서트</a>, 2015-06-29</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%9D%B8%EC%8A%A4%ED%83%80%EA%B7%B8%EB%9E%A8-Instagram-%ED%8D%BC%EC%98%A4%EA%B8%B0">인스타그램 (Instagram) 퍼오는 법</a>, 2015-06-28</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/CSP-Content-Security-Policy-iframe-image-img-video-blocking">CSP (Content Security Policy) : iframe, image (img), video blocking</a>, 2015-06-28</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%8B%9C%EA%B8%89-%EC%9D%BC%EA%B8%89-%EC%9B%94%EA%B8%89-%EC%97%B0%EB%B4%89-%EC%9E%90%EB%8F%99-%ED%99%98%EC%82%B0%EA%B8%B0%EA%B3%84%EC%82%B0%EA%B8%B0">시급, 일급, 월급, 연봉 자동 환산기/계산기 (최저임금)</a>, 2015-06-28</li>
 </ul>
 
 
@@ -162,11 +203,19 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 
 <ul>
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/Introducing-what-we-are-making-Recoevenet">Introducing what we are making : Recoeve.net</a>, 2014-11-21</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Recoeve-progress">Recoeve progress</a></li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Recoeve-net-Feedbacks-Error-reports-and-Suggestions">Recoeve.net : Feedbacks, Error reports, and Suggestions</a>, 2015-04-29</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Recoeve-01">Recoeve Database setup (0.1 version)</a></li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Personalized-recommendation-system">개인화 된 추천 시스템 (Personalized recommendation system)</a></li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/iframe-test-of-Recoevenet">iframe test of Recoeve.net</a>, 2015-05-11</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/URI-rendering-test">URI rendering test</a>, 2015-07-10</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Auto-Completion-and-Fuzzy-Search">Auto Completion, and Fuzzy Search</a>, 2014-12-28</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Programmer-Developers-Portfolio">Programmer/Developer's Portfolio (개발자/프로그래머의 포트폴리오)</a>, 2015-12-14</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Site-statistics-MAU-DAU">Site statistics (MAU, DAU)</a>, 2015-12-16</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%82%AC%EB%9E%8C%EB%93%A4%EC%9D%98-%ED%8F%89%EA%B7%A0%EC%A0%81%EC%9D%B8-%EC%86%8C%EB%B9%84%EA%B5%AC%EC%A1%B0">사람들의 평균적인 소비구조</a>, 2015-12-15</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Internet-Web-Advertisement">인터넷 광고 시장에 관하여...</a>, 2015-12-15</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Career-Portfolio-%EC%9D%B4%EA%B0%95%EC%88%98">Career Portfolio - 이강수</a>, 2015-12-18</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Web-site-%EB%8B%A4%EA%B5%AD%EC%96%B4-%EC%A7%80%EC%9B%90-multilanguage-support">Web site - 다국어 지원 (multi-language support)</a></li>
 <!-- <li>The rest are hiden for the security reason. And these will be open after 5 years from now. (2020)</li> -->
 </ul>
 
@@ -209,10 +258,12 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 ###[#sec-Physics-Idea] New Ideas in Physics (새로운 시각의 물리개념 및 이론들. 대부분 아이디어 정도만 간략하게 포스팅.)
 
 <ul>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/Another-Universe-inside-Black-Hole">블랙홀 속 또 다른 우주? (Another Universe inside Black Hole?)</a>, 2014-04-08</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Conjecture-about-the-Unification-between-ElectroMagnetic-Lorentz-force-and-Gravity">Conjecture about the Unification between Electro-Magnetic Lorentz force and Gravity</a>, 아이디어 자체는 2005년쯤? 구체화는 2006 졸업논문때.</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Black-Holes-as-Elementary-Particles">Black Holes as Elementary Particles, and Elementary Particles as Mini Black Holes</a>, 2014-03-17</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Another-Universe-inside-Black-Hole">블랙홀 속 또 다른 우주? (Another Universe inside Black Hole?)</a>, 2014-04-08</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Time-as-an-emergent-phenomenon">Time as an emergent phenomenon</a>, 2014-02-14</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Multiverse">다중 우주론 (Multiverse)</a>, 2014-02-10</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%96%91%EC%9E%90%EC%97%AD%ED%95%99-conjecture-%EC%B8%A1%EC%A0%95%EB%AC%B8%EC%A0%9C-%EB%8B%A4%EC%A4%91-%EC%9A%B0%EC%A3%BC%EB%A1%A0%EA%B3%BC-%EC%9E%90%EC%9C%A0%EC%9D%98%EC%A7%80%EC%9D%98-%EC%83%81%EA%B4%80%EA%B4%80%EA%B3%84">양자역학 conjecture :: 측정문제. 다중 우주론과 자유의지의 상관관계?</a>, 2015-12-19</li>
 </ul>
 
 
@@ -299,6 +350,7 @@ Fuzzy search 갤s 에서는 textarea 로 바꿔야 제대로 돌아가는듯?
 #### JAVA and JavaScript
 
 <ul>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/JAVA-SE-8-API-index-with-Fuzzy-Search">JAVA SE 8 - API - index with Fuzzy Search</a>, 2015-12-15</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Regular-Expression-and-match-replace-method-in-javascript-and-java">Regular Expression (정규 표현식), and match/replace method in JavaScript and JAVA</a>, 2014-05-03</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Encode-Unescape-and-Decode-Escape-URI-Component">Encode/Unescape and Decode/Escape URI Component</a>, 2015-01-04</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Number-and-Bit-operations-in-JAVA-and-Javascript">Number and Bit operations in JAVA and Javascript</a>, 2014-12-21</li>
@@ -387,6 +439,7 @@ window.history replaceState() and pushState()</li>
 <ul>
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/%EA%B5%AD%EC%82%AC-%EC%A0%95%EB%A6%AC%ED%95%B4-%EB%86%93%EC%9D%80-%EA%B2%83">국사 정리해 놓은 것</a>, 2014-03-09</li>
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD-%ED%97%8C%EB%B2%95-%EC%A0%84%EB%AC%B8">대한민국 헌법 전문</a>, 2014-03-06</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B2%95%EB%A0%B9-%ED%98%95%EB%B2%95-%EC%A0%84%EB%AC%B8">법령 - 형법 전문 (The whole script of criminal law of Korea)</a>, 2015-12-16</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%A0%95%EB%8F%84%EC%A0%84-%EA%B4%80%EB%A0%A8-%EC%97%AD%EC%82%AC-%EC%A0%95%EB%A6%AC">정도전 관련 역사 정리</a>, 2014-06-14</li>
 </ul>
 
@@ -396,12 +449,15 @@ window.history replaceState() and pushState()</li>
 
 <ul>
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/%EA%B3%B5%EC%A0%95%ED%95%9C-%EA%B2%BD%EC%A0%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B0%80-1-%EB%91%90-%EB%AA%85%EB%A7%8C%EC%9C%BC%EB%A1%9C-%EA%B5%AC%EC%84%B1%EB%90%9C-%EC%82%AC%ED%9A%8C%EC%97%90%EC%84%9C%EC%9D%98-%EA%B2%BD%EC%A0%9C%EC%84%B1%EC%9E%A5">공정한 경제란 무엇일까? - 1. 두 명만으로 구성된 사회에서의 경제성장</a>, 2014-02-15</li>
+<li><a class="emph" target="_blank" href="http://kipid.tistory.com/entry/%EA%B3%B5%EC%A0%95%ED%95%9C-%EA%B2%BD%EC%A0%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-2-%EC%95%85%EB%A7%88%EC%9D%98-%EB%93%B1%EC%9E%A5-%EC%9D%B4%EC%9E%90-interest-%EA%B0%9C%EB%85%90">공정한 경제란 무엇일까? - 2. 악마의 등장 : 이자 (interest) 개념</a></li>
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/how-rich-are-you">당신은 상위 몇 % 입니까? (고위직 재산 통계 2013)</a>, 2014-01-21</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/The-Richest-People-On-The-Planet">세계 최상위 부자들 (The Richest People On The Planet)</a>, 2015-12-15</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/government-officials-property">고위공직자 및 국회의원 정기 재산 신고 사항 (2011~2014)</a>, 2014-03-29</li>
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/%EC%A7%80%EA%B5%AC%EB%8A%94-%EC%96%B4%EB%8A%90%EC%A0%95%EB%8F%84%EC%9D%98-%EC%9D%B8%EA%B5%AC%EC%88%98%EA%B9%8C%EC%A7%80-%EC%88%98%EC%9A%A9%EA%B0%80%EB%8A%A5%ED%95%A0%EA%B9%8C">지구는 어느정도의 인구수까지 수용가능할까?</a>, 2014-04-12</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B6%80%EB%8F%99%EC%82%B0-%EA%B4%80%EB%A0%A8-%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C-%EB%B0%A9%EB%B2%95">부동산 관련 정보조회 방법</a>, 2015-07-12</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B6%80%EB%8F%99%EC%82%B0-%EC%A0%95%EC%B1%85-%EA%B0%80%EA%B2%A9-%EC%96%B4%EB%94%94%EB%A1%9C-%EA%B0%80%EA%B3%A0-%EC%9E%88%EC%9D%84%EA%B9%8C">부동산 정책, 가격 어디로 가고 있을까?</a>, 2015-01-07</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%8B%9C%EB%8C%80%EA%B3%B5%EA%B0%90-%EA%B7%B8%EB%93%A4%EA%B3%BC-%ED%86%B5%ED%95%98%EB%8A%94-%EA%B8%B8-%EC%B2%AD%EB%85%84-%EB%B9%88%EA%B3%A4">시대공감 -  청년 빈곤. 그들과 통하는 길.</a>, 2014-12-29</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B6%80%EC%B1%84%EC%A3%BC%EB%8F%84-%EC%84%B1%EC%9E%A5%EC%97%90%EC%84%9C-%EC%86%8C%EB%93%9D%EC%A3%BC%EB%8F%84-%EC%84%B1%EC%9E%A5%EC%9C%BC%EB%A1%9C">부채주도 성장에서 소득주도 성장으로</a>, 2015-12-18</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%8B%9C%EA%B8%89-%EC%9D%BC%EA%B8%89-%EC%9B%94%EA%B8%89-%EC%97%B0%EB%B4%89-%EC%9E%90%EB%8F%99-%ED%99%98%EC%82%B0%EA%B8%B0%EA%B3%84%EC%82%B0%EA%B8%B0">시급, 일급, 월급, 연봉 자동 환산기/계산기 (최저임금)</a>, 2015-06-28</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%8A%A4%EB%A7%88%ED%8A%B8-%EC%A7%80%EA%B0%91-Smart-wallet-Apple-pay-Google-wallet-%EB%93%B1-%EC%9D%80-%EC%96%B4%EB%8A%90-%EB%B0%A9%ED%96%A5%EC%9C%BC%EB%A1%9C-%EB%B0%9C%EC%A0%84%ED%95%A0%EA%B9%8C">스마트 지갑 (Smart wallet: Apple pay, Google wallet 등) 은 어느 방향으로 발전할까?</a>, 2014-11-11</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%9D%98%EB%A3%8C-%ED%8C%8C%EC%97%85-%EA%B4%80%EB%A0%A8">의료 파업 및 의료 영리화, 원격진료. 외부에서 본 개인의견</a>, 2014-03-22</li>
@@ -412,6 +468,8 @@ window.history replaceState() and pushState()</li>
 ###[#sec-Society] 사회
 
 <ul>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EA%B2%B0%EA%B3%BC-%EC%A7%80%EC%83%81%EC%A3%BC%EC%9D%98%EC%9D%98-%EB%A7%A4%EB%A0%A5-%EA%B3%B5%EB%A6%AC%EC%A3%BC%EC%9D%98">결과 지상주의의 매력 (공리주의?)</a>, 2015-12-19</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/Fragmented-network-communities-Islandization-of-informations">Fragmented network/communities (Islandization of informations) :: 끼리끼리만 소통하는 우리 사회</a>, 2015-12-19</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%A7%80%EC%8B%9D%EC%B1%84%EB%84%90e-%ED%94%84%EB%A1%9C%ED%8C%8C%EA%B0%84%EB%8B%A4-%EC%84%A0%EC%A0%84-%EC%84%A0%EB%8F%99-%EA%B1%B0%EC%A7%93%EB%A7%90-%EC%A7%84%EC%8B%A4-%EA%B7%B8-%EC%82%AC%EC%86%8C%ED%95%A8%EB%93%A4">[지식채널e] 프로파간다 - 선전, 선동, 거짓말, 진실, 그 사소함들...</a>, 2015-06-18</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/what-is-justice">정의란 무엇인가? - 1강 벤담의 공리주의</a>, 2014-01-22</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/Philosophy-of-Success">성공이란 무엇일까? (Philosophy of Success)</a>, 2014-03-23</li>
@@ -425,6 +483,7 @@ window.history replaceState() and pushState()</li>
 ###[#sec-Politics] 정치
 
 <ul>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%85%B8%EB%AC%B4%ED%98%84-%EB%8C%80%ED%86%B5%EB%A0%B9%EC%9D%98-%EC%95%84%EB%A6%84%EB%8B%A4%EC%9A%B4-%EA%B7%B8%EB%A6%BC%EC%9E%90-%EB%AC%B8%EC%9E%AC%EC%9D%B8-%EB%B9%84%EC%84%9C%EC%8B%A4%EC%9E%A5">노무현 대통령의 아름다운 그림자, 문재인 비서실장</a>, 2015-12-14</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%95%88%EC%B2%A0%EC%88%98%EC%94%A8-%EA%B8%B0%EB%B6%80%EA%B3%BC%EC%A0%95%EA%B3%BC-%EC%95%88%EB%9E%A9-%EC%A3%BC%EC%A3%BC%EB%93%A4%EC%9D%98-%EA%B1%B0%EB%9E%98%EB%82%B4%EC%97%AD">안철수씨 기부과정과 안랩 주주들의 거래내역</a>, 2015-12-14</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%ED%95%9C%EA%B5%AD%EC%A0%95%EB%B6%80%EC%9D%98-%EC%97%AD%EC%82%AC%EA%B5%90%EA%B3%BC%EC%84%9C-%EA%B5%AD%EC%A0%95%ED%99%94-%EC%B2%A0%ED%9A%8C%EB%A5%BC-%EC%9C%84%ED%95%9C-%EC%B2%AD%EC%9B%90%EC%84%9C-by-%EA%B5%AD%EC%A0%95%EA%B5%90%EA%B3%BC%EC%84%9C%EB%B0%98%EB%8C%80-%EC%B2%AD%EC%86%8C%EB%85%84%ED%96%89%EB%8F%99">한국정부의 역사교과서 국정화 철회를 위한 청원서 by 국정교과서반대 청소년행동</a>, 2015-12-13</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/2015-%EB%B0%95%EA%B7%BC%ED%98%9C-%EB%8C%80%ED%86%B5%EB%A0%B9-%EC%8B%A0%EB%85%84-%EA%B8%B0%EC%9E%90%ED%9A%8C%EA%B2%AC-%EC%98%81%EC%83%81">2015 박근혜 대통령 신년 기자회견 영상</a>, 2015-01-12</li>
@@ -443,7 +502,7 @@ window.history replaceState() and pushState()</li>
 <ul>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%A9%94%EB%A5%B4%EC%8A%A4-MERS-%EA%B4%80%EB%A0%A8-%EC%A3%BC%EC%9A%94-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%93%A4-%EB%A7%81%ED%81%AC-%EC%A0%95%EB%A6%AC">메르스 (MERS) 관련 주요 페이지들 링크 정리</a>, 2015-06-12</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%9B%90%EC%9E%90%EB%A0%A5-%EB%B0%9C%EC%A0%84%EC%86%8C%EC%99%80-%EB%B0%A9%EC%82%AC%EC%84%A0-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EC%95%88%EC%A0%84%EA%B0%90%EC%8B%9C-%EC%8B%9C%EC%8A%A4%ED%85%9C">원자력 발전소와 방사선, 그리고 안전/감시 시스템</a>, 2014-12-23</li>
-<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%84%B8%EC%9B%94%ED%98%B8-%EC%B9%A8%EB%AA%B0%EC%82%AC%EA%B3%A0">세월호 침몰사고</a>, 2014-04-22; 사고는 2014년 4월 16일 8시 48분 경 대한민국 전라남도 진도군 조도면 부근 황해 상에서 발생.</li>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%84%B8%EC%9B%94%ED%98%B8-%EC%B9%A8%EB%AA%B0%EC%82%AC%EA%B3%A0">세월호 침몰사고. 다이빙벨 논란. 링크 모음.</a>, 2014-04-22; 사고는 2014년 4월 16일 8시 48분 경 대한민국 전라남도 진도군 조도면 부근 황해 상에서 발생.</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EA%B9%80%EC%96%B4%EC%A4%80%EC%9D%98-KFC1-%EC%96%B4%EC%A4%80%EC%9D%98-%EA%B7%80%ED%99%98">[김어준의 KFC#1] 어준의 귀환! "닭을 열심히 튀기겠습니다"</a>, 2014-03-17; 주로 "국정원, 서울시 공무원 간첩 증거조작 사건"과 "월세 과세 정책의 진실?"를 다뤘음.</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/NIS-cheating">2012~2013 대한민국 국가정보원 (국정원, NIS) 여론 조작 사건</a>, 2014-02-11</li>
 <li><a target="_blank" class="emph" href="http://kipid.tistory.com/entry/criminal-investigation-NIS-cheating">국정원 대선개입 수사 - 서울경찰청 사이버 범죄수사대 디지털 증거분석실 CCTV 녹취록</a>, 2014-06-22</li>
@@ -480,6 +539,7 @@ window.history replaceState() and pushState()</li>
 ### Etc.
 
 <ul>
+<li><a target="_blank" href="http://kipid.tistory.com/entry/%EB%B0%94%EB%82%98%EB%82%98-%ED%81%AC%EB%A0%88%EC%9D%B4%EC%A7%80-Popup-Store-with-%ED%95%98%EB%9D%BC%EA%B5%AC">바나나 크레이지 :: Pop-up Store (with 하라구)</a>, 2015-12-19</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/%EC%9D%8C%EC%8B%9D%EC%A0%90-%ED%95%A0%EC%9D%B8%EC%A0%95%EB%B3%B4-%EC%A0%95%EB%A6%AC">음식점 할인정보 정리. (App Surprise)</a>, 2015-05-13</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/KBS2-A-Style-For-You-%EC%96%B4-%EC%8A%A4%ED%83%80%EC%9D%BC-%ED%8F%AC-%EC%9C%A0">KBS2 - A Style For You (어 스타일 포 유)</a>, 2015-06-23</li>
 <li><a target="_blank" href="http://kipid.tistory.com/entry/KARA-HARA-On-and-Off-at-MBC-Music">구하라의 On and Off at MBC Music</a>, 2014-12-30</li>
@@ -552,6 +612,9 @@ eve.splitHangul=function(str) {
 	res.originalStr=str;
 	res.splitted3="";
 	res.splitted="";
+	res.pCho=[]; // position of word-start or 초성
+	var p=0;
+	res.pCho[p]=true;
 	var cho, jung, jong;
 	for (var i=0;i<str.length;i++) {
 		var c=str.charAt(i)
@@ -559,6 +622,7 @@ eve.splitHangul=function(str) {
 		if (n>=0x3131&&n<=0x3163) {
 			n-=0x3131;
 			res[i]={"char":c, "splitted3":c, "splitted":kipid.jamoKE[n]};
+			res.pCho[p]=true;
 		} else if (n>=0xAC00&&n<=0xD7A3) {
 			n-=0xAC00;
 			jong=n%28;
@@ -567,9 +631,14 @@ eve.splitHangul=function(str) {
 			res[i]={"char":c
 				, "splitted3":kipid.rCho[cho]+kipid.rJung[jung]+kipid.rJong[jong]
 				, "splitted":kipid.rChoKE[cho]+kipid.rJungKE[jung]+kipid.rJongKE[jong]};
+			res.pCho[p]=true;
 		} else {
 			res[i]={"char":c, "splitted3":c, "splitted":c};
+			if (i>0&&/[^a-zA-Z]$/.test(res[i-1].splitted&&/[a-zA-Z]/.test(c))) {
+				res.pCho[p]=true;
+			}
 		}
+		p+=res[i].splitted.length;
 		res.splitted3+=res[i].splitted3;
 		res.splitted+=res[i].splitted;
 	}
@@ -579,8 +648,11 @@ eve.splitHangul=function(str) {
 ////////////////////////////////////////////////////
 // Fuzzy search
 ////////////////////////////////////////////////////
+eve.fs=[];
+eve.fs[0]=[];
+eve.fs[0]["ptnSH"]=eve.splitHangul("$!@#");
+eve.fs.fullList=[];
 var $list=$(".docuK li");
-eve.fsFullList=[];
 for (var i=0;i<$list.length;i++) {
 	var $listI=$list.eq(i);
 	var $sec=$listI.parents(".docuK>.sec");
@@ -601,12 +673,13 @@ for (var i=0;i<$list.length;i++) {
 	}
 	txt+="* "+$listI.text();
 	html+='<div class="li">* '+$listI.html()+'</div>';
-	eve.fsFullList[i]={i:i, "txt":eve.splitHangul(txt), "html":html, "$listI":$listI};
+	eve.fs.fullList[i]={i:i, "txt":eve.splitHangul(txt), "html":html, "$listI":$listI};
 }
 RegExp.quote=function(str) {
 	return str.replace(/[.?*+^$[\]\\{}()|-]/g, "\\$&").replace(/\s/g, "[\\s\\S]");
 };
-eve.arrayRegExs=function(str) {
+eve.arrayRegExs=function(ptnSH) {
+	var str=ptnSH.splitted;
 	var res=[];
 	for (var i=0;i<str.length;i++) {
 		var c=str.charAt(i);
@@ -660,88 +733,98 @@ eve.highlightStrFromIndices=function(strSplitted, indices) {
 	}
 	return res;
 };
-eve.matchScoreFromIndices=function(str, pattern, indices) {
+eve.matchScoreFromIndices=function(strSH, ptnSH, indices) {
 	var res=0;
+	for (var i=0;i<indices.length;i++) {
+		if (strSH.pCho[indices[i].start])
+			res+=8;
+	}
 	for (var i=1;i<indices.length;i++) {
 		var diff=indices[i].start-indices[i-1].start;
 		if (diff<5) res+=8*(5-diff);
 	}
 	return res;
 };
-eve.fuzzySearch=function(pattern, subList) {
+eve.fuzzySearch=function(ptnSH, fs) {
 	var list=[];
-	if (subList===null) {
-		list=eve.fsFullList;
-	} else if (pattern.splitted===subList.pattern.splitted) {
-		return subList;
-	} else {
-		var sorted=subList.sorted;
-		for (var i=0;i<sorted.length;i++) {
-			list.push(eve.fsFullList[subList[sorted[i]].i]);
+	if (ptnSH.splitted.indexOf(fs[0].ptnSH.splitted)===0) {
+		fs[1]=fs[0];
+	} else if (fs[1] && ptnSH.splitted.indexOf(fs[1].ptnSH.splitted)===0) {
+		if (ptnSH.splitted===fs[1].ptnSH.splitted) {
+			return fs[1];
 		}
+	} else {
+		fs[1]=null;
 	}
-	var res=[];
-	res.pattern=pattern;
-	var regExs=eve.arrayRegExs(pattern.splitted);
+	if (fs[1]&&fs[1].sorted) {
+		var sorted=fs[1].sorted;
+		for (var i=0;i<sorted.length;i++) {
+			list.push(fs.fullList[fs[1][sorted[i]].i]);
+		}
+	} else {
+		list=fs.fullList;
+	}
+	var res=fs[0]=[];
+	res.ptnSH=ptnSH;
+	var regExs=eve.arrayRegExs(ptnSH);
 	for (var i=0;i<list.length;i++) {
-		if (regExs.length>0) {
-			var txt=list[i].txt;
-			var txtS=txt.splitted;
-			regExs[0].lastIndex=0;
-			var exec=regExs[0].exec(txtS);
-			var matched=(exec!==null);
-			var indices=[];
+	if (regExs.length>0) {
+		var txt=list[i].txt;
+		var txtS=txt.splitted;
+		regExs[0].lastIndex=0;
+		var exec=regExs[0].exec(txtS);
+		var matched=(exec!==null);
+		var indices=[];
+		if (matched) {
+			indices[0]={start:exec.index, end:regExs[0].lastIndex};
+		}
+		for (var j=1;matched&&(j<regExs.length);j++) {
+			regExs[j].lastIndex=regExs[j-1].lastIndex;
+			exec=regExs[j].exec(txtS);
+			matched=(exec!==null);
 			if (matched) {
-				indices[0]={start:exec.index, end:regExs[0].lastIndex};
+				indices[j]={start:exec.index, end:regExs[j].lastIndex};
 			}
-			for (var j=1;matched&&(j<regExs.length);j++) {
-				regExs[j].lastIndex=regExs[j-1].lastIndex;
-				exec=regExs[j].exec(txtS);
+		}
+		if (matched) {
+			var maxMatchScore=eve.matchScoreFromIndices(txt, ptnSH, indices);
+			var indicesMMS=[]; // indices of max match score
+			for (var p=0;p<indices.length;p++) {
+				indicesMMS[p]=indices[p]; // hard copy of indices
+			}
+			for (var k=indices.length-2;k>=0;) {
+				regExs[k].lastIndex=indices[k].start+1;
+				exec=regExs[k].exec(txtS);
 				matched=(exec!==null);
 				if (matched) {
-					indices[j]={start:exec.index, end:regExs[j].lastIndex};
+					indices[k]={start:exec.index, end:regExs[k].lastIndex};
 				}
-			}
-			if (matched) {
-				var maxMatchScore=eve.matchScoreFromIndices(txt, pattern, indices);
-				var indicesMMS=[]; // indices of max match score
-				for (var p=0;p<indices.length;p++) {
-					indicesMMS[p]=indices[p]; // hard copy of indices
-				}
-				for (var k=indices.length-2;k>=0;) {
-					regExs[k].lastIndex=indices[k].start+1;
-					exec=regExs[k].exec(txtS);
+				for (var j=k+1;matched&&(j<regExs.length);j++) {
+					regExs[j].lastIndex=regExs[j-1].lastIndex;
+					exec=regExs[j].exec(txtS);
 					matched=(exec!==null);
 					if (matched) {
-						indices[k]={start:exec.index, end:regExs[k].lastIndex};
-					}
-					for (var j=k+1;matched&&(j<regExs.length);j++) {
-						regExs[j].lastIndex=regExs[j-1].lastIndex;
-						exec=regExs[j].exec(txtS);
-						matched=(exec!==null);
-						if (matched) {
-							indices[j]={start:exec.index, end:regExs[j].lastIndex};
-						}
-					}
-					if (matched) {
-						var matchScore=eve.matchScoreFromIndices(txt, pattern, indices);
-						if (matchScore>maxMatchScore) {
-							maxMatchScore=matchScore;
-							for (var p=0;p<indices.length;p++) {
-								indicesMMS[p]=indices[p]; // hard copy of indices
-							}
-						}
-						k=indices.length-2;
-					} else {
-						k--;
+						indices[j]={start:exec.index, end:regExs[j].lastIndex};
 					}
 				}
-				res.push({i:list[i].i, maxMatchScore:maxMatchScore, highlight:eve.highlightStrFromIndices(txt, indicesMMS)});
+				if (matched) {
+					var matchScore=eve.matchScoreFromIndices(txt, ptnSH, indices);
+					if (matchScore>maxMatchScore) {
+						maxMatchScore=matchScore;
+						for (var p=0;p<indices.length;p++) {
+							indicesMMS[p]=indices[p]; // hard copy of indices
+						}
+					}
+					k=indices.length-2;
+				} else {
+					k--;
+				}
 			}
-		} else {
-			res.push({i:list[i].i, maxMatchScore:0});
+			res.push({i:list[i].i, maxMatchScore:maxMatchScore, highlight:eve.highlightStrFromIndices(txt, indicesMMS)});
 		}
-	}
+	} else {sorted=res.sorted;
+		res.push({i:list[i].i, maxMatchScore:0});
+	}}
 	// sorting...
 	var sorted=res.sorted=[];
 	for (var i=0;i<res.length;i++) {
@@ -754,7 +837,6 @@ eve.fuzzySearch=function(pattern, subList) {
 			sorted[j]=sorted[j-1];
 		sorted[j]=temp;
 	}
-	return res;
 };
 
 $fuzzy_search.on("keydown", function(e) {
@@ -806,45 +888,51 @@ if (e&&e.srcElement&&e.srcElement.nodeName=="A") {
 } else {
 	var $elem=$(elem);
 	if ($elem.hasClass("selected")) {
-		$fuzzy_search.trigger({type:"keydown", keyCode:27});
+		$fuzzy_search.trigger({type:"keydown", keyCode:27}); // keyCode:27=ESC
 	} else {
 		eve.$fsLis.removeClass("selected");
 		$elem.addClass("selected");
 	}
-	var $listI=eve.fsFullList[k]["$listI"];
+	var $listI=eve.fs.fullList[k]["$listI"];
 	$window.scrollTop($listI.offset().top-window.innerHeight/3);
 }};
-eve.fsResult=[];
-eve.fsResult[0]=[];
-eve.fsResult[0]["pattern"]=eve.splitHangul("$!@#");
-$fuzzy_search.on("input keyup cut paste", function(e) {
-	clearTimeout(eve.doFS);
-	eve.doFS=setTimeout(function() {
-		var fsTxt=eve.splitHangul($fuzzy_search.text());
-		if (eve.fsResult[0].pattern.splitted!==fsTxt.splitted) {
-			if (fsTxt.splitted.indexOf(eve.fsResult[0].pattern.splitted)===0) {
-				eve.fsResult[1]=eve.fsResult[0];
-			} else if (eve.fsResult[1] && fsTxt.splitted.indexOf(eve.fsResult[1].pattern.splitted)===0) {
-			} else {
-				eve.fsResult[1]=null;
-			}
-			var res=eve.fsResult[0]=eve.fuzzySearch(fsTxt, eve.fsResult[1]);
-			var sorted=res.sorted;
-			var str="";
-			for (var i=0;i<sorted.length;i++) {
-				var k=res[sorted[i]].i;
-				str+='<div class="list-item" onclick="kipid.gotoLi(event,this,'+k+')">'
-						+eve.fsFullList[k]["html"]
-						+((res[sorted[i]]["highlight"]!==undefined)?
-						'<div class="highlighted">'+'<span class="maxMatchScore">'+res[sorted[i]].maxMatchScore+'</span> :: '+res[sorted[i]]["highlight"]+'</div>':'')
-					+'</div>';
-			}
-			$fuzzy_search_list.html(str);
-			$fuzzy_search_list.scrollTop(0);
-			eve.$fsLis=$fuzzy_search_list.find(".list-item");
+eve.doFS=function() {
+	var fsPtnSH=eve.splitHangul($fuzzy_search.text());
+	if (eve.fs[0].ptnSH.splitted!==fsPtnSH.splitted) {
+		eve.fuzzySearch(fsPtnSH, eve.fs);
+		var res=eve.fs[0];
+		var sorted=res.sorted;
+		var str="";
+		for (var i=0;i<sorted.length;i++) {
+			var k=res[sorted[i]].i;
+			str+='<div class="list-item" onclick="kipid.gotoLi(event,this,'+k+')">'
+					+eve.fs.fullList[k]["html"]
+					+((res[sorted[i]]["highlight"]!==undefined)?
+					'<div class="highlighted">'+'<span class="maxMatchScore">'+res[sorted[i]].maxMatchScore+'</span> :: '+res[sorted[i]]["highlight"]+'</div>':'')
+				+'</div>';
 		}
-	}, 200);
-});
+		$fuzzy_search_list.html(str);
+		$fuzzy_search_list.scrollTop(0);
+		eve.$fsLis=$fuzzy_search_list.find(".list-item");
+	}
+};
+eve.previous=Date.now();
+eve.fsOn=function() {
+	var now=Date.now();
+	var passed=now-eve.previous;
+	if (passed>eve.wait) {
+		eve.doFS();
+		eve.previous=now;
+	} else {
+		$fuzzy_search.off("input.fs keyup.fs cut.fs paste.fs");
+		setTimeout(function() {
+			eve.doFS();
+			eve.previous=Date.now();
+			$fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", eve.fsOn);
+		}, eve.wait*1.1-passed);
+	}
+};
+$fuzzy_search.on("input.fs keyup.fs cut.fs paste.fs", eve.fsOn);
 $fuzzy_search.trigger("keyup");
 $window.on("keydown", function(e) {
 	if (e.keyCode==71) { // G = 71
