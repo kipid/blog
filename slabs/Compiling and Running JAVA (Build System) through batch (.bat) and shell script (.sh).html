@@ -1,0 +1,381 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-style -->
+
+<codeprint class="SEE">
+# Compiling and Running JAVA (Build System) through batch (.bat) and shell script (.sh)
+
+Windows 에서는 batch (.bat) file 로 Mac/Unix/Linux 에서는 shell script (.sh) file 로 JAVA file 을 compile 하고 run/execute 시키는 방법.
+
+특히나 package 가 있고 import 가 있는 java 파일을 자동으로 컴파일하고, class 파일은 따로 클래스 폴더에 넣고 그 클래스 폴더의 class 파일을 자동으로 잘 찾아서 실행시키도록 디자인.
+
+
+
+## TOC
+
+
+
+## Windows
+
+### batch file (runJava.bat)
+
+관리자 권한으로 <code>JAVA\bin</code> 폴더에 <code>runJava.bat</code> 같은 batch 파일을 생성. [예] <code>C:\Program Files\Java\jdk1.8.0_25\bin\runJava.bat</code>.
+
+속성 - 보안 - 사용 권한 병경 [편집] - Users/kipid - 수정 허용 체크.
+
+Text editor 로 아래와 같이 내용을 넣고 저장.
+
+```[.linenums.scrollable.lang-bat]
+@REM encoding must be EUC-KR with Korean folder name.
+@ECHO OFF
+
+:: destination of class to be created
+SET DC=C:\Recoeve\classes
+
+:: The whole CLASSPATH list splited by ";"
+SET CLASSPATH=.;C:\Program Files\Java\jdk1.8.0_25\lib;C:\Recoeve\classes;C:\Recoeve\classes\javax.mail.jar;C:\Program Files (x86)\MySQL\Connector.J 5.1\mysql-connector-java-5.1.33-bin.jar
+@REM mysql-connector.jar;javax.mail.jar
+
+:: %~nx1 expands %1 [arg 1] to "file name + extension". e.g. "HelloWorld.java"
+ECHO Compiling %~nx1
+:: Compile %~nx1 with {filename:%~nx1, encoding:utf8, destination:%DC%, classpath:%CLASSPATH%}
+javac %~nx1 -encoding utf8 -d "%DC%" -classpath "%CLASSPATH%"
+
+IF NOT %ERRORLEVEL%==0 GOTO :EOF
+
+:: source directory
+SET SD=%CD%
+@REM or SET SD=%~dp1
+
+:: %SD%\%~n1 gives [source directory]\file_name. e.g. "C:\Recoeve\sources\kipid\hello\HelloWorld".
+SET packSD=%SD%\%~n1
+@REM or SET packSD=%~dpn1
+
+:: Replace "C:\Recoeve\sources\" to "" [empty] of %packSD%. e.g. "kipid\hello\HelloWorld".
+SET CN=%packSD:C:\Recoeve\sources\=%
+
+:: Replace "\" to "." of %cn%. e.g. "kipid.hello.HelloWorld"
+:: This is a class name with JAVA package included.
+SET CN=%CN:\=.%
+
+ECHO --- OUTPUT: %CN% %2 %3 %4 %5 %6 %7 %8 %9 ---
+:: Change directory to the %DC% [destination of class to be created].
+CD %DC%
+
+:: Run/Execute the class created.
+java -Dfile.encoding=UTF8 -classpath "%CLASSPATH%" %CN% %2 %3 %4 %5 %6 %7 %8 %9
+
+:: Back to source directory
+CD %SD%
+```/
+
+
+
+### Test
+
+파일 <code>C:\Recoeve\sources\kipid\hello\Hello.java</code> 에 다음과 같이 저장.
+
+```[.linenums]
+package kipid.hello;
+
+class Hello{
+  public static void main(String... args){
+    System.out.println("Hello World! 한글!");
+    for (String arg : args) {
+      System.out.println("Hello "+arg);
+    }
+  }
+}
+```/
+
+cmd 프롬프트에서 <code>runJava Hello.java</code> 를 해당파일이 위치한 폴더 <code>C:\Recoeve\sources\kipid\hello</code> 에서 실행하면 다음과 같이 나옴.
+
+```[.linenums]
+C:\Recoeve\sources\kipid\hello> runJava Hello.java arg1 arg2 arg3
+Compiling Hello.java
+--- OUTPUT: kipid.hello.Hello ---
+Hello World! 한글!
+Hello arg1
+Hello arg2
+Hello arg3
+```/
+
+
+
+### Sublime Text 3 - Build System
+
+Sublime Text 3 - Menu 에서 <code>Tools - Build System - New Build System...</code> 클릭. 아래 텍스트 복사해서 저장. 자동으로 <code>Data\Packages\User</code> 폴더에 저장될거임.
+
+직접 Sublime Text 3 가 설치된 폴더에서 <code>Data\Packages\User</code> 에 <code>runJavaC.sublime-build</code> 파일을 만들어서 저장해도 됨. [예] <code>C:\Users\강수\Documents\DaumCloud\Sublime Text Build 3059 x64\Data\Packages\User\runJavaC.sublime-build</code>.
+
+```[.linenums.lang-json]
+{
+  "cmd": ["runJava.bat", "$file_name"]
+  // , "file_regex": "^(...*?):([0-9]*):?([0-9]*)"
+  , "selector": "source.java"
+  , "encoding": "utf-8" // "cp949"
+}
+```/
+
+Press <code>Ctrl+B</code> : Build
+
+파일 <code>C:\Recoeve\sources\kipid\hello\Hello.java</code> 을 Sublime Text 에서 열고, <code>Ctrl+B</code> 를 누르면 자동으로 실행 됨. <code>Tools - Build System - runJavaC</code> 를 선택해야 할지도...
+
+
+
+## Mac OS, and possibly Unix/Linux
+
+우선 JAVA 를 설치. 설치되면 Mac Terminal (or iTerm) 에서 다음과 같이 떠야 함. 설치할때 보통 자동으로 JAVA PATH 를 PATH 에 추가시켜 주기 때문에 어느 폴더에서 <code>java</code>, <code>javac</code> 를 실행해도 동작 하는듯.
+
+```[.linenums.scrollable.lang-sh]
+$ javac -version
+javac 1.8.0_141
+
+$ java -version
+java version "1.8.0_141"
+Java(TM) SE Runtime Environment (build 1.8.0_141-b15)
+Java HotSpot(TM) 64-Bit Server VM (build 25.141-b15, mixed mode)
+
+
+
+// 요 아래는 그냥 참고용으로.
+$ javac
+Usage: javac &lt;options> &lt;source files>
+where possible options include:
+  -g                         Generate all debugging info
+  -g:none                    Generate no debugging info
+  -g:{lines,vars,source}     Generate only some debugging info
+  -nowarn                    Generate no warnings
+  -verbose                   Output messages about what the compiler is doing
+  -deprecation               Output source locations where deprecated APIs are used
+  -classpath &lt;path>          Specify where to find user class files and annotation processors
+  -cp &lt;path>                 Specify where to find user class files and annotation processors
+  -sourcepath &lt;path>         Specify where to find input source files
+  -bootclasspath &lt;path>      Override location of bootstrap class files
+  -extdirs &lt;dirs>            Override location of installed extensions
+  -endorseddirs &lt;dirs>       Override location of endorsed standards path
+  -proc:{none,only}          Control whether annotation processing and/or compilation is done.
+  -processor &lt;class1>[,&lt;class2>,&lt;class3>...] Names of the annotation processors to run; bypasses default discovery process
+  -processorpath &lt;path>      Specify where to find annotation processors
+  -parameters                Generate metadata for reflection on method parameters
+  -d &lt;directory>             Specify where to place generated class files
+  -s &lt;directory>             Specify where to place generated source files
+  -h &lt;directory>             Specify where to place generated native header files
+  -implicit:{none,class}     Specify whether or not to generate class files for implicitly referenced files
+  -encoding &lt;encoding>       Specify character encoding used by source files
+  -source &lt;release>          Provide source compatibility with specified release
+  -target &lt;release>          Generate class files for specific VM version
+  -profile &lt;profile>         Check that API used is available in the specified profile
+  -version                   Version information
+  -help                      Print a synopsis of standard options
+  -Akey[=value]              Options to pass to annotation processors
+  -X                         Print a synopsis of nonstandard options
+  -J&lt;flag>                   Pass &lt;flag> directly to the runtime system
+  -Werror                    Terminate compilation if warnings occur
+  @&lt;filename>                Read options and filenames from file
+
+
+
+$ java
+Usage: java [-options] class [args...]
+           (to execute a class)
+   or  java [-options] -jar jarfile [args...]
+           (to execute a jar file)
+where options include:
+    -d32    use a 32-bit data model if available
+    -d64    use a 64-bit data model if available
+    -server    to select the "server" VM
+                  The default VM is server,
+                  because you are running on a server-class machine.
+
+
+    -cp &lt;class search path of directories and zip/jar files>
+    -classpath &lt;class search path of directories and zip/jar files>
+                  A : separated list of directories, JAR archives,
+                  and ZIP archives to search for class files.
+    -D&lt;name>=&lt;value>
+                  set a system property
+    -verbose:[class|gc|jni]
+                  enable verbose output
+    -version      print product version and exit
+    -version:&lt;value>
+                  Warning: this feature is deprecated and will be removed
+                  in a future release.
+                  require the specified version to run
+    -showversion  print product version and continue
+    -jre-restrict-search | -no-jre-restrict-search
+                  Warning: this feature is deprecated and will be removed
+                  in a future release.
+                  include/exclude user private JREs in the version search
+    -? -help      print this help message
+    -X            print help on non-standard options
+    -ea[:&lt;packagename>...|:&lt;classname>]
+    -enableassertions[:&lt;packagename>...|:&lt;classname>]
+                  enable assertions with specified granularity
+    -da[:&lt;packagename>...|:&lt;classname>]
+    -disableassertions[:&lt;packagename>...|:&lt;classname>]
+                  disable assertions with specified granularity
+    -esa | -enablesystemassertions
+                  enable system assertions
+    -dsa | -disablesystemassertions
+                  disable system assertions
+    -agentlib:&lt;libname>[=&lt;options>]
+                  load native agent library &lt;libname>, e.g. -agentlib:hprof
+                  see also, -agentlib:jdwp=help and -agentlib:hprof=help
+    -agentpath:&lt;pathname>[=&lt;options>]
+                  load native agent library by full pathname
+    -javaagent:&lt;jarpath>[=&lt;options>]
+                  load Java programming language agent, see java.lang.instrument
+    -splash:&lt;imagepath>
+                  show splash screen with specified image
+See <a target="_blank" href="http://www.oracle.com/technetwork/java/javase/documentation/index.html">http://www.oracle.com/technetwork/java/javase/documentation/index.html</a> for more details.
+```/
+
+
+
+### shell script (runJava.sh)
+
+다음과 같은 shell script file 을 만들고 저장.
+
+```[.linenums]
+#!/bin/sh
+# chmod 755 runJava.sh
+# cp runJava.sh /usr/local/bin/
+FILE_BASE_NAME=$1
+if [ -f "${FILE_BASE_NAME}.java" ]; then
+  echo $PWD # Print Working Directory.
+  PACKAGE=$2
+  D=$3
+  CLASSPATH=.:/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home/jre/lib:${D}
+  echo "Compiling ${FILE_BASE_NAME}.java"
+  javac ${FILE_BASE_NAME}.java -encoding utf8 -d ${D} -classpath ${CLASSPATH}
+else
+  echo "File ${FILE_BASE_NAME}.java does not exist."
+fi
+if [ $? == 0 ]; then
+  cd $D
+  CLASSFILE=./${PACKAGE//./\/}/${FILE_BASE_NAME}
+  if [ -f "${CLASSFILE}.class" ]; then
+    echo "--- OUTPUT: ${PACKAGE}.${FILE_BASE_NAME} $4 $5 $6 $7 $8 $9 ---"
+    java -Dfile.encoding=UTF8 -classpath ${CLASSPATH} ${PACKAGE}.${FILE_BASE_NAME} $4 $5 $6 $7 $8 $9
+  else
+    echo "File ${CLASSFILE}.class does not exist."
+  fi
+fi
+```/
+
+Mac Terminal (or iTerm) 에서 <code>runJava.sh</code> 에 실행권한을 주고, <code>/usr/local/bin/</code> 폴더로 복사.
+
+```
+$ chmod 755 runJava.sh
+$ cp runJava.sh /usr/local/bin/
+```/
+
+
+
+### Test
+
+파일 <code>/Users/kipid/Documents/sources/kipid/hello/Hello.java</code> 에 다음과 같이 저장.
+
+```[.linenums]
+package kipid.hello;
+
+import java.lang.Math;
+
+public class Hello {
+  public static void main(String... args) {
+    System.out.println("Hello World! 한글!");
+    for (String arg : args) {
+      System.out.println("Hello "+arg);
+    }
+    System.out.println(System.getProperty("java.class.path"));
+    System.out.println(System.getProperty("java.home"));
+    System.out.println(System.getProperty("user.dir"));
+    System.out.println(System.getProperty("user.name"));
+    System.out.println(System.getProperty("user.home"));
+    System.out.println(Math.abs(-1));
+  }
+}
+```/
+
+다음과 같이 실행하면 됨. (첫번째 argument 로 file_base_name 을, 두번째로 package, 세번째로 class 파일을 저장할 destination, 그 다음부터는 JAVA 파일 실행시 넘겨줄 arguments 를...)
+
+```[.linenums]
+$ runJava.sh Hello kipid.hello /Users/kipid/Documents/classes arg1 arg2 arg3
+/Users/kipid/Documents/sources/kipid/hello
+Compiling Hello.java
+--- OUTPUT: kipid.hello.Hello arg1 arg2 arg3    ---
+Hello World! 한글!
+Hello arg1
+Hello arg2
+Hello arg3
+.:/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home/jre/lib:/Users/kipid/Documents/classes
+/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home/jre
+/Users/kipid/Documents/classes
+kipid
+/Users/kipid
+1
+```/
+
+
+
+### Sublime Text 3 - Build System
+
+```[.linenums]
+{
+  "cmd": ["runJava.sh"
+      , "$file_base_name" // $1 : file_base_name
+      , "kipid.hello" // $2 : package
+      , "/Users/kipid/Documents/classes" // $3 : -d (destination)
+      , "arg1", "arg2", "arg3" // $4 ...
+  ]
+  , "path": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  // , "file_regex": "^(...*?):([0-9]*):?([0-9]*)"
+  , "selector": "source.java"
+  , "encoding": "utf-8"
+}
+```/
+
+Press <code>Command+B</code> : Build
+
+
+
+## RRA
+
+<ol class="refs">
+  <li><a target="_blank" href="http://web.archive.org/web/20130509004854/http://www.compilr.org/compile-and-run-java-programs/">Compile and Run Java programs with Sublime Text 2</a>, 2012-11-24, by Prashant</li>
+  <li><a target="_blank" href="http://docs.sublimetext.info/en/latest/reference/build_systems.html">Sublime Text Unofficial Documentation - en/latest/reference/build_systems.html</a></li>
+<div class="subsec"><h3>Batch and Shell script</h3></div>
+  <li><a target="_blank" href="https://www.shellscript.sh/index.html">https://www.shellscript.sh/index.html</a></li>
+  <li><a target="_blank" href="https://www.tutorialspoint.com/unix/unix-what-is-shell.htm">https://www.tutorialspoint.com/unix/unix-what-is-shell.htm</a></li>
+  <li><a target="_blank" href="https://en.wikipedia.org/wiki/Batch_file">Wiki - Batch file</a> and <a target="_blank" href="https://en.wikibooks.org/wiki/Windows_Batch_Scripting">wikibooks.org - Windows Batch Scripting</a></li>
+</ol>
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=512;
+kipid.delayPad=0;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  skipStartupTypeset: true, // Skip startup typeset.
+  positionToHash: false, // No repositioning to #something anchor.
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+    displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+    processEscapes: true, // Escape \$
+    processEnvironments: false, // Ignore \begin{something} ... \end{something}
+  }
+});
+</script>
+<!-- From kipid.tistory CDN -->
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->

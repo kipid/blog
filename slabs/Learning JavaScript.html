@@ -1,0 +1,357 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-style -->
+
+<codeprint class="SEE">
+# Learning JavaScript
+
+<script></script>
+
+Web browser 에서 쓰이는, "Object-based based on prototypes" 특성을 갖는 client-side 프로그래밍 언어인 JavaScript를 배워 봅시다. 여기는 제가 헷갈렸던 부분만 조금 정리.
+
+
+
+## PH
+
+<ul>
+<li>2017-08-14: 코드 스타일만 좀 정리. To SEE.</li>
+<li>2014-06-13: docuK upgrade.</li>
+<li>2014-05-21: First Posting.</li>
+</ul>
+
+
+
+## TOC
+
+
+
+## Making an instance from a constructor function (class-like)
+
+
+
+<div class="bcf">
+
+Note: The term "instance" has a specific technical meaning in class-based languages (like C++, JAVA). In these languages, an instance is an individual instantiation of a class and is fundamentally different from a class. In JavaScript, "instance" does not have this technical meaning because JavaScript does not have this difference between classes and instances. However, in talking about JavaScript, "instance" can be used informally to mean an object created using a particular constructor function. So you could informally say that jane (=new Engineer) is an instance of Engineer (=function object). Similarly, although the terms parent, child, ancestor, and descendant do not have formal meanings in JavaScript; you can use them informally to refer to objects higher or lower in the prototype chain.
+
+(Quoted from <cite class="ref-MDN"></cite> - <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Details_of_the_Object_Model">11. Details of the object model</a> - <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Details_of_the_Object_Model#Creating_the_hierarchy"># Creating the hierarchy</a>, and slightly edited by kipid.)
+
+</div>
+
+
+
+Code:
+
+<pre id="pre-code-ex0" class="prettyprint linenums lang-js scrollable"></pre>
+
+Result: (Tistory 에서 사용하는 javascript 가 Function.prototype 에 뭔가 덮어씌운듯. 결과가 그냥 실행시킬때랑 다름.)
+
+<pre id="result-ex0" class="prettyprint linenums scrollable"></pre>
+
+
+
+## Property inheritance (Prototype/__proto__ chaining)
+
+<figure><div class="fig">
+  <div style="display:inline-block; padding:15px; background:white">
+    <img src="http://cfile7.uf.tistory.com/image/2272A437537CB9CC043876" alt="An Example of simple object hierarchy.png">
+  </div>
+  <div class="caption">
+    An Example of simple object hierarchy.<br />
+    Copied from: <cite class="ref-MDN"></cite> - <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Details_of_the_Object_Model">11. Details of the object model</a> - <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Details_of_the_Object_Model#The_employee_example"># The employee example</a>.
+  </div>
+</div></figure>
+
+아래 예제를 공부하면서는 각자 object hierarchy를 그려보면서 (property도 표시하면서) 이해하는 것이 도움이 된다. 개인적으로 그려놓긴 했는데, 손으로 그린거라 사진찍어서 올리기 귀찮;;; 계층도를 그릴 때 "a=b;" 명령어에서 b가 primitive type일 경우에만 'return by value'이고 그 외 javascript ojbect 일 때에는 'return by reference'로 이루어진다는 것에 주의하자. 'Return by reference'는 화살표로 원래 object를 가리키는 것이 이해에 좋다. ('a=b;'로 assign 될 때에는 GetValue(b) 가 호출되는 듯한데, b가 primitive type (number, string, boolean literals + undefined, null) 이라면 value를 이 외 object (including Number, String, Boolean objects) 라면 이 object의 address/reference가 return 되어 assigned.)
+
+
+(See <cite class="ref-ecma"></cite> - <a target="_blank" href="http://es5.github.io/#x11.13.1">#11.13.1 Simple Assignment ( = )</a> for the details. <a target="_blank" href="http://es5.github.io/#x4.3.2">#4.3.2 primitive value</a>: member of one of the types Undefined, Null, Boolean, Number, or String as defined in Clause 8. NOTE: A primitive value is a datum that is represented directly at the lowest level of the language implementation.)
+
+
+
+<div class="cmt">
+
+When JavaScript sees a property of an object, in other words, when you access an object property, JavaScript performs these steps.
+<ol>
+<li>Check to see if the value exists locally in that object. If it does, return that value. (This is called 'own property', property that is directly contained by its object. <cite class="ref-ecma"></cite> - 4.3.30 own property.)</li>
+<li>If there is not a local value, check the __proto__ chain (using the __proto__ property). All object have the '__proto__' property by default.</li>
+<li>If the specified property exists in the __proto__ chain, return that value. (This is called 'inherited property', property of an object that is not an own property but is a property (either own or inherited) of the object’s prototype. <cite class="ref-ecma"></cite> - 4.3.31 inherited property.)</li>
+<li>If not, check the successive __proto__ chain until __proto__ return 'null'.</li>
+<li>If no such property is found, the object does not have the property. So return 'undefined'.</li>
+</ol>
+
+(Quoted from <cite class="ref-MDN"></cite> - <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Details_of_the_Object_Model">11. Details of the object model</a> - <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Details_of_the_Object_Model#Property_inheritance_revisited"># Property inheritance revisited</a> - <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Details_of_the_Object_Model#Local_versus_inherited_values"># Local versus inherited values</a>, and slightly edited further by kipid.)
+
+</div>
+
+
+
+Code:
+
+<pre id="pre-code-ex1" class="prettyprint linenums lang-js scrollable"></pre>
+
+Result:
+
+<pre id="result-ex1" class="prettyprint linenums scrollable"></pre>
+
+Property inheritance 특성으로 인해서 html child tag 들이 parent tag 의 attr 를 쉽게 상속받고 parent tag 의 attr 수정이 쉽게 child 쪽에 적용이 되는듯함. OnAttributeChange event 같은것도 있는건가? 인터넷 브라우저가 참 잘만들어진듯 =ㅇ=;;; 신기하당.
+
+
+
+## RRA
+
+<ol class="refs">
+<div class="subsec"><h3>Guides</h3></div>
+  <li id="ref-MDN"><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide">MDN (Mozilla Developer Network) - JavaScript Guide</a>, and <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">JavaScript Reference</a>; 프로그래밍 언어로 깊이있게 배우는 목적이라면 이것을 읽는 것이 좋은듯. Wiki 비슷하게 집단 편집방식으로 작성된 문서인데, 깊이있게 잘 정리되어 있음.</li>
+  <li id="ref-w3"><a target="_blank" href="http://www.w3schools.com/js/default.asp">w3 Schools.com - JavaScript Tutorial</a>, and <a target="_blank" href="http://www.w3schools.com/jsref/default.asp">JavaScript and HTML DOM Reference</a>; 여기를 마음에 안들어하는 사람들도 많은듯. Outdated 된 내용들도 있고 오개념을 심는 경우도 있는듯해서... 뭐 그래도 "Try yourself"가 잘되어 있어서 후딱후딱 배우기 좋음. 단 여기 설명한 방식이 정확하고 최선이다라고는 받아들이지 말아야 할듯.</li>
+  <li id="ref-ot"><a target="_blank" href="http://opentutorials.org/course/1375">Open Tutorials.org - JavaScript</a>; 한글 페이지. Egoing님이 동영상 강의로 쉽게 설명해주심.</li>
+
+<div class="subsec"><h3>General</h3></div>
+  <li id="ref-wiki"><a target="_blank" href="http://en.wikipedia.org/wiki/JavaScript">Wiki - JavaScript</a></li>
+  <li id="ref-ecma"><a target="_blank" href="http://ecma-international.org/ecma-262/5.1/">Ecma International.org - Standard ECMA-262 - 5.1 Edition</a>, 2011-06; and <a target="_blank" href="http://es5.github.io/">es5.github.io - Annotated ECMAScript 5.1 (annotated, hyperlinked, HTML version of Edition 5.1 of the ECMAScript Specification)</a>, Last updated: 2013-08-31; JavaScript was formalized in the ECMAScript language standard. ECMAScript is the scripting language standardized by Ecma International in the ECMA-262 specification and ISO/IEC 16262.<br />
+    // 기본적인 operator들 (+,-,%,/,= 등), function, object들의 Logic이 bottom-up으로 정말 자세히 설명되어 있음.</li>
+
+<div class="subsec"><h3>jQuery</h3></div>
+  <li id="ref-jquery"><a target="_blank" href="http://jquery.com/">jQuery.com</a>; and <a target="_blank" href="http://api.jquery.com/">jQuery API documentation</a>;<br />
+    // Cross-browsing이랑 문법/coding을 매우 간편하게 해주는 jQuery. 특히나 successive calling을 가능하게 해줘서 좋음.</li>
+</ol>
+</codeprint><!-- SEE -->
+
+<codeprint id="code-ex0">
+<script>
+// Anonymous function is used to avoid duplicate definitions of variable in each script. Variables (assigned with 'var') are available only inside braces '{}'.
+// (function() {
+var str=""; // result to be printed.
+function printList(obj) {
+  for (var key in obj) {
+    str+="\t"+key+": "+obj[key]+";\n";
+  }
+  str+="}";
+}
+
+function Employee0(arg1, arg2) {
+  // Implicitly "this.__proto__=Employee0.prototype;"
+  this.name="changed";
+  this.dept="general";
+  this.a="a";
+  this.b=2;
+  this.c=3;
+}
+Employee0.prototype.name="no name";
+Employee0.prototype.name1="name1";
+Employee0.prototype.name2="name2";
+Employee0.prototype.name3="name3";
+
+var amy=new Employee0; // '()' is optional, e.g. "new Employee0()", when no arguments are delivered.
+// 'amy' is an object created by constructor function 'Employee0'.
+// Informally speaking because there is no instance and class concept in JavaScript, 'amy' is an instance of Employee0 class. Everything except 'null' and 'undefined' is object in JavaScript.
+
+str+="* Employee0.toString():\n"+Employee0.toString()
+    +"\n\n* List of Employee0 properties (enumerable only): {\n";
+printList(Employee0);
+// empty.
+// Employee0 is a function object whose default properties are hiden or non-enumerable. (Default non-enumerable properties of 'function' object: {prototype, __proto__, arguments, length}.)
+str+="\nselected non-enumerable properties: {\n"
+  +"\tEmployee0.prototype: "+Employee0.prototype+"\n" // [object Object]
+  +"\tEmployee0.__proto__: "+Employee0.__proto__+" (===Function.prototype: "+(Employee0.__proto__===Function.prototype)+")\n" // function Empty() {}
+  +"\tEmployee0.length: "+Employee0.length+" (Specifies the number of arguments expected by the function.)\n" // 0
+  +"} // See <a target=\"_blank\" href=\"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function\">[MDN - JavaScript Reference - Global Objects - Function]</a> for the details.";
+
+str+="\n\n"+"* List of Employee0.prototype properties: {\n";
+printList(Employee0.prototype);
+// name = no name;  name1 = name1;  name2 = name2;  name3 = name3;
+
+str+="\n\n"+"* List of Employee0 properties after intentionally added ('function' can have additional properties?): {\n";
+Employee0.a="a";
+Employee0.b="b";
+printList(Employee0);
+// a = a;  b = b;
+// Is it a function, or another object variable who has the same name 'Employee0'?
+// I think it is a function object. (not 100% sure.)
+
+str+="\n\n=====================\n=====================\n\n"
+  +"* List of amy (=new Employee0) properties: {\n";
+printList(amy);
+// name = changed;  dept = general;  a = a;  b = 2;  c = 3;  (name1 = name1;  name2 = name2;  name3 = name3;) in __proto__
+// (name = no name;) is also in amy.__proto__ (which is just Employee0.prototype).
+
+str+="\n\n"+"* List of amy.__proto__"
+  +" (===Employee0.prototype: "+(amy.__proto__===Employee0.prototype) // true
+    // This indicates "Employee0.prototype". Not copy of it. Therefore if "Employee0.prototype" is changed after amy is created, the list of "amy.__proto__" are changed also afterwards.
+  +", amy.prototype: "+amy.prototype // undefined.
+    // Instance of constructor function doesn't have 'prototype' property, but '__proto__'.
+    // Only function has 'prototype' property. And all objects including function have '__proto__' property. (need checking.)
+  +"): {\n";
+printList(amy.__proto__);
+// name = no name;  name1 = name1;  name2 = name2;  name3 = name3;
+// cf. amy.name = changed;
+str+="\n"+"amy.name: "+amy.name+"\n"
+  +"amy.__proto__.name: "+amy.__proto__.name;
+
+str+="\n\n"+"* Simple check of Employee0 and Object object properties (__proto__, prototype chain): {\n"
+  +"\t((new Employee0).__proto__===Employee0.prototype): "+((new Employee0).__proto__===Employee0.prototype) // true
+    +"\n"
+  // +"Employee0.prototype.prototype: "+Employee0.prototype.prototype+"\n" // undefined
+  +"\t(Employee0.prototype.__proto__===Object.prototype): "+(Employee0.prototype.__proto__===Object.prototype) // true
+    +"\n"
+  +"\tObject.prototype: "+Object.prototype+"\n" // [object Object]
+  // +"Object.prototype.prototype: "+Object.prototype.prototype+"\n" // undefined
+  +"\tObject.prototype.__proto__ (toppest chain): "+Object.prototype.__proto__+"\n" // null
+  // +"Object.__proto__: "+Object.__proto__+"\n" // function Empty() {}
+  // +"Object.__proto__.__proto__: "+Object.__proto__.__proto__+"\n" // [object Object]
+  // +"Object.__proto__.__proto__.__proto__: "+Object.__proto__.__proto__.__proto__+"\n" // null
+  // +"Object.__proto__.prototype: "+Object.__proto__.prototype+"\n" // undefined
+  +"}";
+
+str+="\n\n"+"* Simple check of Function properties: {\n"
+  +"\tFunction: "+Function+"\n" // function Function() { [native code] }
+  +"\tFunction.prototype: "+Function.prototype+"\n" // function Empty() {}
+  +"\tFunction.__proto__: "+Function.__proto__+"\n" // function Empty() {}
+  +"\tFunction.length: "+Function.length+"\n" // 1
+  +"}";
+
+document.getElementById("result-ex0").innerHTML=str;
+// })();
+</script>
+</codeprint>
+
+<codeprint id="code-ex1">
+<script>
+// Anonymous function is used to avoid duplicate definitions of variable in each script. Variables (assigned with 'var') are available only inside braces '{}'.
+// (function() {
+var str=""; // result to be printed.
+function printList(obj) {
+  for (var key in obj) {
+    str+="\t"+key+": "+obj[key]+";\n";
+  }
+  str+="}";
+}
+
+// 'function' has "prototype" property by default.
+// 'object' including 'function object' has "__proto__" property by default.
+
+function Employee() {
+  // Implicitly "this.__proto__=Employee.prototype;"
+  this.name="empty";
+  this.dept="general";
+}
+// By default, "Employee.prototype={__proto__:Object.prototype}"
+// "(new Employee)={__proto__:Employee.prototype, name:"empty", dept:"general"}"
+Employee.prototype.a="This is 'a' in Employee.prototype"; // Additional prototype 'a'.
+// Then, "Employee.prototype={__proto__:Object.prototype, a:"Employee.prototype.a"}"
+
+
+function Manager() {
+  // Implicitly "this.__proto__=Manager.prototype;"
+  this.reports=[];
+}
+// "(new Manager)={__proto__:Manager.prototype, reports:[]}"
+Manager.prototype=new Employee;
+// Then, "Manager.prototype={__proto__:Employee.prototype, name:"empty", dept:"general"}"
+
+function WorkerBee() {
+  // Implicitly "this.__proto__=WorkerBee.prototype;"
+  this.projects=[];
+}
+// "(new WorkerBee)={__proto__:WorkerBee.prototype, projects:[]}"
+WorkerBee.prototype=new Employee;
+// Then, "WorkerBee.prototype={__proto__:Employee.prototype, name:"empty", dept:"general"}"
+
+
+function SalesPerson() {
+  // Implicitly "this.__proto__=SalesPerson.prototype;"
+  this.dept="sales";
+  this.quota=100;
+}
+// "(new SalesPerson)={__proto__:SalesPerson.prototype, dept:"sales", quota:100}"
+SalesPerson.prototype=new WorkerBee;
+// Then, "SalesPerson.prototype={__proto__:WorkerBee.prototype, projects:[]}"
+
+function Engineer() {
+  // Implicitly "this.__proto__=Engineer.prototype;"
+  this.dept="engineering";
+  this.machine="machine";
+}
+// "(new Engineer)={__proto__:Engineer.prototype, dept:"engineering", machine:""}"
+Engineer.prototype=new WorkerBee;
+// Then, "Engineer.prototype={__proto__:WorkerBee.prototype, projects:[]}"
+
+var chris=new Engineer;
+str+="var chris=new Engineer;\n\n";
+str+="(chris.__proto__===Engineer.prototype): "
+    +(chris.__proto__===Engineer.prototype)+"\n"
+  +"(chris.__proto__.__proto__===WorkerBee.prototype): "
+    +(chris.__proto__.__proto__===WorkerBee.prototype)+"\n"
+  +"(chris.__proto__.__proto__.__proto__===Employee.prototype): "
+    +(chris.__proto__.__proto__.__proto__===Employee.prototype)+"\n"
+  +"(chris.__proto__.__proto__.__proto__.__proto__===Object.prototype): "
+    +(chris.__proto__.__proto__.__proto__.__proto__===Object.prototype)+"\n"
+  +"(chris.__proto__.__proto__.__proto__.__proto__.__proto__===null): "
+    +(chris.__proto__.__proto__.__proto__.__proto__.__proto__===null)+"\n";
+
+str+="\n\n"+"List of chris (=new Engineer): {\n";
+printList(chris);
+// dept = engineering; machine = ; projects = ; name = empty; a = This is 'a' in Employee.prototype;
+
+str+="\n\n"+"You can access all kind of 'a's through\n"
+  +"\tchris.a: "+chris.a+"\n"
+  +"\tchris.__proto__.a: "+chris.__proto__.a+"\n"
+  +"\tchris.__proto__.__proto__.a: "+chris.__proto__.__proto__.a+"\n"
+  +"\tchris.__proto__.__proto__.__proto__.a: "+chris.__proto__.__proto__.__proto__.a+"\n"
+  +"\tchris.__proto__.__proto__.__proto__.__proto__.a: "+chris.__proto__.__proto__.__proto__.__proto__.a+"\n";
+str+="// You can figure it out how JavaScript find a property in an object through the '__proto__' chain.\n"
+
+WorkerBee.prototype.a="This is 'a' in WorkerBee.prototype";
+str+="\n\n"+"After WorkerBee.prototype.a=\"This is 'a' in WorkerBee.prototype\";\n"
+str+="List of chris (the previous object, NOT asigned again): {\n";
+printList(chris);
+
+Engineer.prototype.a="This is 'a' in Engineer.prototype";
+str+="\n\n"+"After Engineer.prototype.a=\"This is 'a' in Engineer.prototype\";\n"
+str+="List of chris (the previous object, NOT asigned again): {\n";
+printList(chris);
+
+chris.a="This is 'a' in chris";
+str+="\n\n"+"After chris.a=\"This is 'a' in chris\";\n"
+str+="List of chris (the previous object, NOT asigned again): {\n";
+printList(chris);
+
+str+="\n\n"+"You can access all kind of 'a's through\n"
+  +"\tchris.a: "+chris.a+"\n"
+  +"\tchris.__proto__.a: "+chris.__proto__.a+"\n"
+  +"\tchris.__proto__.__proto__.a: "+chris.__proto__.__proto__.a+"\n"
+  +"\tchris.__proto__.__proto__.__proto__.a: "+chris.__proto__.__proto__.__proto__.a+"\n"
+  +"\tchris.__proto__.__proto__.__proto__.__proto__.a: "+chris.__proto__.__proto__.__proto__.__proto__.a+"\n";
+str+="// You can figure it out how JavaScript find a property in an object through the '__proto__' chain.\n"
+
+document.getElementById("result-ex1").innerHTML=str;
+// })();
+</script>
+</codeprint>
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=512;
+kipid.delayPad=0;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  skipStartupTypeset: true, // Skip startup typeset.
+  positionToHash: false, // No repositioning to #something anchor.
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+    displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+    processEscapes: true, // Escape \$
+    processEnvironments: false, // Ignore \begin{something} ... \end{something}
+  }
+});
+</script>
+<!-- From kipid.tistory CDN -->
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->

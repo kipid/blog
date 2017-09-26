@@ -1,0 +1,253 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js" charset="utf-8"></script>
+<style>
+span.emphCode {border:1px solid rgb(200,150,150)}
+</style>
+</codeprint><!-- docuK-style -->
+
+<codeprint class="SEE">
+# IRIS tutorial
+
+
+
+## TOC
+
+
+
+## Shell script - gradlew in any sub-directory
+
+다음과 같은 명령어로 <code>vi ~/.bashrc</code> 파일을 만들고 아래와 같은 text 를 넣는다.
+
+```[.linenums]
+function gw() {
+  local curr_dir="${PWD}"
+  while true; do
+    if [[ -f "${curr_dir}/gradlew" ]]; then
+      "${curr_dir}/gradlew" $@
+      break
+    fi
+    if [[ "${curr_dir}" == "/" ]]; then
+      echo "gradlew not found" >&2
+      return 1
+    fi
+    curr_dir="$(dirname "${curr_dir}")"
+  done
+}
+```/
+
+다음으로 <code>source ~/.bashrc</code> 명령을 내리면, 어디에서는 <code>gw</code> 함수를 호출할 수 있는듯. (Terminal 을 열때마다 해야하나?? =ㅇ=;;;;)
+
+Shell script 의 간단한 설명 : 현재 directory 에서부터 한단계씩 상위 directory 로 옮겨가면서 <code>gradlew</code> 를 찾음. 찾았으면 <code>${dir}/gradlew --parallel --daemon $@</code> 를 실행.
+
+
+
+## To test codes and build.
+
+At the folder <code>w4/cabinet/iris/</code>, run
+
+```
+$ ./gradlew check jacocoTestReport --parallel --daemon
+// 잘 안될때는...
+$ gw clean
+// 하고 나서 다시
+$ gw check jacocoTestReport --parallel --daemon
+
+// 일부만 check 하고 싶을때는
+$ gw :gateway:check --parallel --daemon
+
+// 결과는 아래와 같이 뜸.
+// iTerm 에서만 동작하는건지는 모르겠지만, /Users/kipid/w4/cabinet/iris/gateway/src/test/java/com/wisefour/iris/gateway/eval/VisitEvaluatorTest.java:50: 같은걸 <code>Command+click</code> 하면 자동으로 text/code editor (내 경우엔 Sublime Text 3) 에서 해당 파일 및 해당 라인으로 이동함. (해당 column 까지는 안가는듯.)
+
+/Users/kipid/w4/cabinet/iris/gateway/src/test/java/com/wisefour/iris/gateway/eval/VisitEvaluatorTest.java:50: error: method does not override or implement a method from a supertype
+  @Override
+  ^
+/Users/kipid/w4/cabinet/iris/gateway/src/test/java/com/wisefour/iris/gateway/eval/VisitEvaluatorTest.java:52: error: cannot find symbol
+    super.setup();
+         ^
+  symbol: method setup()
+/Users/kipid/w4/cabinet/iris/gateway/src/test/java/com/wisefour/iris/gateway/eval/VisitEvaluatorTest.java:56: error: method does not override or implement a method from a supertype
+  @Override
+  ^
+/Users/kipid/w4/cabinet/iris/gateway/src/test/java/com/wisefour/iris/gateway/eval/VisitEvaluatorTest.java:58: error: cannot find symbol
+    super.tearDown();
+         ^
+  symbol: method tearDown()
+4 errors
+```/
+
+To go to the position of the file and the indicated line/column, <code>Command+click</code> it.
+
+To clear the iTerm (Terminal), press <code>Command+K</code>. (<code>clear</code>+enter does not block ths scroll.)
+
+아래와 같이 해도 되나? (세 명령어의 차이를 모르겠네 ㅡ..ㅡ)
+
+```
+$ gw build --parallel --daemon
+// ...
+Tests run: 48, Failures: 0, Skipped: 0
+:pipeline:main:check
+:pipeline:main:build
+
+BUILD SUCCESSFUL
+
+Total time: 1 mins 41.751 secs
+
+
+
+$ gw check --parallel --daemon
+// ...
+Tests run: 48, Failures: 0, Skipped: 0
+:pipeline:main:check
+
+BUILD SUCCESSFUL
+
+Total time: 1 mins 44.272 secs
+
+
+
+$ gw test --parallel --daemon
+// ...
+Tests run: 48, Failures: 0, Skipped: 0
+
+BUILD SUCCESSFUL
+
+Total time: 1 mins 34.891 secs
+```/
+
+
+
+### Single test
+
+하나 (<code>VisitEvaluatorTest.java</code>) 만 test 하려면, (이건 <code>--parallel --daemon</code> option 이 안먹히는듯.)
+
+```
+$ ./gradlew test -Dtest.single=*/VisitEvaluator
+:gateway:test
+// ...
+Tests run: 3, Failures: 0, Skipped: 0
+
+// 뭔가 아래와 같이 fail 하는것도 있긴 한데... 되긴 되는듯. (:lemon:test 에서는 VisitEvaluatorTest 를 못찾았다는 뜻인듯.)
+:lemon:test
+Tests run: 0, Failures: 0, Skipped: 0
+:lemon:test FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':lemon:test'.
+> Could not find matching test for pattern: */VisitEvaluatorTest
+
+// 실패하면 다음과 같은 report.html 도 뜸.
+* What went wrong:
+Execution failed for task ':gateway:test'.
+> There were failing tests. See the report at: <a target="_blank" href="file:///Users/kipid/w4/cabinet/iris/gateway/build/reports/tests/test/index.html">file:///Users/kipid/w4/cabinet/iris/gateway/build/reports/tests/test/index.html</a>
+```/
+
+
+
+## To run IRIS gateway
+
+Run Apache Kafka 0.10.2.0 first <cite class="ref-kafka-docu"></cite>.
+
+Start a quick-and-dirty single-node ZooKeeper server.
+
+```
+$ Downloads/kafka_2.11-0.10.2.0/bin/<span class="emphCode">zookeeper-server-start.sh</span> Downloads/kafka_2.11-0.10.2.0/config/zookeeper.properties
+
+// or at <code>Downloads/kafka_2.11-0.10.2.0/</code>
+$ bin/zookeeper-server-start.sh config/zookeeper.properties
+```/
+
+And start a Kafka server.
+
+```
+$ Downloads/kafka_2.11-0.10.2.0/bin/<span class="emphCode">kafka-server-start.sh</span> Downloads/kafka_2.11-0.10.2.0/config/server.properties
+
+// or at <code>Downloads/kafka_2.11-0.10.2.0/</code>
+$ bin/kafka-server-start.sh config/server.properties
+```/
+
+And run MongoDB.
+
+```
+$ mongod
+(한번 mongod 돌리고나면 Terminal 을 꺼도 계속 돌아가는듯.)
+```/
+
+And at the folder <code>w4/cabinet/iris/</code>, run
+
+```
+$ ./gradlew :gateway:appRun
+// Server 가 이미 돌아가고 있으면, Mac (Control + space) - Activity Monitor 에서 java 로 돌아가는 애들을 끄면 됨?
+// 아니면 아래 dock 쪽에 java 돌아가고 있는걸 quit 시키면 됨.
+```/
+
+
+
+## To run IRIS pipeline
+
+In the same way, run Apache Kafka 0.10.2.0 and MongoDB first.
+
+And at the folder <code>w4/cabinet/iris/</code>, run
+
+```
+$ ./gradlew :pipeline:run
+```/
+
+
+
+## Test
+
+Through the command <code>ifconfig</code>, find out your local ip address.
+
+```
+$ ifconfig
+...
+en0: ...
+	...
+	inet <span class="emphCode">192.168.111.52</span> netmask 0xffffff00 broadcast 192.168.111.255
+```/
+
+위 ip 로 접속해서 뭔가 하는거였는데...
+
+Browser 로 <a target="_blank" href="http://localhost:8080/dashboard/visits.html">http://localhost:8080/dashboard/visits.html</a> 같은 곳에 접속하면 됨.
+
+IP 를 알아냈다면, <a target="_blank" href="http://192.168.111.52:8080/dashboard/visits.html">http://192.168.111.52:8080/dashboard/visits.html</a> 와 같이 접속해도 됨.
+
+
+
+## RRA
+
+<ol class="refs">
+<li id="ref-kafka-docu"><a target="_blank" href="https://kafka.apache.org/documentation/#quickstart">https://kafka.apache.org/documentation/#quickstart</a></li>
+<li id="ref-gradle"><a target="_blank" href="https://docs.gradle.org/current/userguide/userguide.html">https://docs.gradle.org/current/userguide/userguide.html</a></li>
+</ol>
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=512;
+kipid.delayPad=0;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  skipStartupTypeset: true, // Skip startup typeset.
+  positionToHash: false, // No repositioning to #something anchor.
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+    displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+    processEscapes: true, // Escape \$
+    processEnvironments: false, // Ignore \begin{something} ... \end{something}
+  }
+});
+</script>
+<!-- From kipid.tistory CDN -->
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.3.css">
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+</codeprint><!-- docuK-style -->
+
+<codeprint class="SEE">
+# Guessing a distance from wifi with signal strength (rssi)
+
+<script></script>
+
+## TOC
+
+
+
+## Sum
+
+<figure><div class="fig">
+  <div class="caption">RSSI to distances. Eq. <refer class="eq-1"></refer>, Eq. <refer class="eq-2"></refer>.</div>
+  <div class="rC"><div class="rSC">
+    <div id="chart-rssi-to-distances"></div>
+  </div></div>
+</div></figure>
+
+
+
+### Power law 1
+
+Here $d$ is distance in meters, $s$ is signal strength (rssi) in dBm, and $P$ is TxPower in dBm (the power received at a 1 meter distance).
+
+The below formula is from <cite class="ref-rssi-to-distance-1"></cite>.
+
+그런데 이 식 틀린것도 같은데... 밑하고 지수하고 바뀐거 아닌가? 그래프는 얼추 비슷하긴 하지만...
+
+<eqq id="eq-1">
+d =
+\begin{cases}
+  (\frac{s}{P})^{10} & \text{ if } \frac{s}{P} < 1 \\
+  0.89976 (\frac{s}{P})^{7.7095} + 0.111 & \text{ if } \frac{s}{P} \geq 1
+\end{cases} \\
+s = P (\frac{d - 0.111}{0.89976})^{1/7.7095}
+</eqq>
+
+
+
+### Power law 2
+
+Here $d$ is distance in meters, $s$ is signal strength (rssi) in dBm, and $P$ is TxPower in dBm (the power received at a 1 meter distance).
+
+The below formula is from <cite class="ref-rssi-to-distance-2"></cite>.
+
+<eqq id="eq-2">
+s = -N \log d + P \\
+d = 10^{\frac{P - s}{N}} \text{ where } 20 \leq N \leq 40
+</eqq>
+
+
+
+## Wifi infos
+
+From <code>db.visit</code>
+
+```
+{ uid: "UymiceTtPkQxjQc1EOXkEDBUBwB3", "wifi.scanned_infos": { $elemMatch: { ssid: { $regex: "slab" } } } }
+```/
+
+From <code>db.wifi</code>
+
+```
+{ scanned_infos: { $elemMatch: { ssid: { $regex: "slab" } } } }
+```/
+
+
+
+## RRA
+
+<ol class="refs">
+  <li id="ref-rssi-to-distance-1"><a target="_blank" href="https://gist.github.com/eklimcz/446b56c0cb9cfe61d575">gist.github.com/eklimcz - RSSI to Distance Conversion</a><br>
+    <a target="_blank" href="https://stackoverflow.com/questions/20416218/understanding-ibeacon-distancing/20434019#20434019">stackoverflow.com - Understanding ibeacon distancing</a></li>
+  <li id="ref-rssi-to-distance-2"><a target="_blank" href="https://forums.estimote.com/t/determine-accurate-distance-of-signal/2858">forums.estimote.com - Determine accurate distance of signal</a><br>
+    <a target="_blank" href="https://forums.estimote.com/t/use-rssi-measure-the-distance/3665">forums.estimote.com - Use rssi measure the distance</a><br>
+    <a target="_blank" href="http://www.academia.edu/6895582/Wi-Fi_Indoor_Positioning_System_Based_on_RSSI_Measurements_from_Wi-Fi_Access_Points_A_Tri-lateration_Approach">www.academia.edu - Wi-Fi Indoor Positioning System Based on RSSI Measurements from Wi-Fi Access Points –A Tri-lateration Approach</a></li>
+</ol>
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=512;
+kipid.delayPad=0;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  skipStartupTypeset: true, // Skip startup typeset.
+  positionToHash: false, // No repositioning to #something anchor.
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+    displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+    processEscapes: true, // Escape \$
+    processEnvironments: false, // Ignore \begin{something} ... \end{something}
+  }
+});
+</script>
+<!-- From kipid.tistory CDN -->
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script>
+const rssiMin = -119;
+const rssiMax = -39;
+const chartOptions = {
+  chart: {
+    type: 'spline'
+  },
+  title: {
+    text: 'RSSI to distances'
+  },
+  xAxis: {
+    title: {
+      text: 'RSSI (dBm)'
+    },
+    reversed: true,
+    min: rssiMin,
+    max: rssiMax
+  },
+  yAxis: {
+    title: {
+      text: 'Distance (meter)'
+    },
+    min: 0,
+    max: 200
+  },
+  tooltip: {
+    formatter: function () {
+      return `<span style="color:${this.point.color}">\u25CF</span>  <b>${this.series.name}</b><br>`
+          + `${this.x} dBm: ${this.y.toFixed(1)} m`;
+    }
+  },
+  series: null,
+};
+
+const series = [];
+
+const distance1 = function (rssi, txPower = -59) {
+  // const txPower = -59  // Hard coded power value. Usually ranges between -59 to -65.
+  if (rssi == 0) {
+    return -1.0;
+  }
+
+  const ratio = rssi * 1.0 / txPower;
+  if (ratio < 1.0) {
+    return Math.pow(ratio, 10);
+  }
+  return 0.89976 * Math.pow(ratio, 7.7095) + 0.111;
+};
+
+const dataOfDistance1_59 = [];
+const dataOfDistance1_61 = [];
+const dataOfDistance1_63 = [];
+const dataOfDistance1_65 = [];
+
+for (let rssi = rssiMin; rssi < rssiMax ; rssi++) {
+  dataOfDistance1_59.push([rssi, distance1(rssi)]);
+  dataOfDistance1_61.push([rssi, distance1(rssi, -61)]);
+  dataOfDistance1_63.push([rssi, distance1(rssi, -63)]);
+  dataOfDistance1_65.push([rssi, distance1(rssi, -65)]);
+}
+
+series.push({
+    name: `Eq. ${$('#eq-1 .number').text()} with P=-59`,
+    data: dataOfDistance1_59
+  }, {
+    name: `Eq. ${$('#eq-1 .number').text()} with P=-61`,
+    data: dataOfDistance1_61,
+    visible: false
+  }, {
+    name: `Eq. ${$('#eq-1 .number').text()} with P=-63`,
+    data: dataOfDistance1_63,
+    visible: false
+  }, {
+    name: `Eq. ${$('#eq-1 .number').text()} with P=-65`,
+    data: dataOfDistance1_65,
+    visible: false
+  });
+
+const distance2 = function (rssi, P = -59, N = 20.0) {
+  return Math.pow(10, (P - rssi) / N);
+}
+
+const dataOfDistance2_40 = [];
+const dataOfDistance2_40_25 = [];
+const dataOfDistance2_50 = [];
+const dataOfDistance2_59 = [];
+const dataOfDistance2_61 = [];
+const dataOfDistance2_63 = [];
+const dataOfDistance2_65 = [];
+
+const dataOfDistance2_59_25 = [];
+const dataOfDistance2_59_30 = [];
+const dataOfDistance2_59_40 = [];
+
+for (let rssi = rssiMin; rssi < rssiMax ; rssi++) {
+	dataOfDistance2_40.push([rssi, distance2(rssi, -40)]);
+	dataOfDistance2_40_25.push([rssi, distance2(rssi, -40, 25)]);
+	dataOfDistance2_50.push([rssi, distance2(rssi, -50)]);
+  dataOfDistance2_59.push([rssi, distance2(rssi)]);
+  dataOfDistance2_61.push([rssi, distance2(rssi, -61)]);
+  dataOfDistance2_63.push([rssi, distance2(rssi, -63)]);
+  dataOfDistance2_65.push([rssi, distance2(rssi, -65)]);
+  dataOfDistance2_59_25.push([rssi, distance2(rssi, -59, 25)]);
+  dataOfDistance2_59_30.push([rssi, distance2(rssi, -59, 30)]);
+  dataOfDistance2_59_40.push([rssi, distance2(rssi, -59, 40)]);
+}
+
+series.push({
+		name: `Eq. ${$('#eq-2 .number').text()} with P=-40`,
+		data: dataOfDistance2_40
+	}, {
+		name: `Eq. ${$('#eq-2 .number').text()} with P=-40, N=25`,
+		data: dataOfDistance2_40_25
+	}, {
+		name: `Eq. ${$('#eq-2 .number').text()} with P=-50`,
+		data: dataOfDistance2_50
+	}, {
+    name: `Eq. ${$('#eq-2 .number').text()} with P=-59`,
+    data: dataOfDistance2_59,
+    visible: false
+  }, {
+    name: `Eq. ${$('#eq-2 .number').text()} with P=-61`,
+    data: dataOfDistance2_61,
+    visible: false
+  }, {
+    name: `Eq. ${$('#eq-2 .number').text()} with P=-63`,
+    data: dataOfDistance2_63,
+    visible: false
+  }, {
+    name: `Eq. ${$('#eq-2 .number').text()} with P=-65`,
+    data: dataOfDistance2_65,
+    visible: false
+  }, {
+    name: `Eq. ${$('#eq-2 .number').text()} with P=-59, N=25`,
+    data: dataOfDistance2_59_25
+  }, {
+    name: `Eq. ${$('#eq-2 .number').text()} with P=-59, N=30`,
+    data: dataOfDistance2_59_30,
+    visible: false
+  }, {
+    name: `Eq. ${$('#eq-2 .number').text()} with P=-59, N=40`,
+    data: dataOfDistance2_59_40,
+    visible: false
+  });
+
+chartOptions.series = series;
+Highcharts.chart('chart-rssi-to-distances', chartOptions);
+</script>

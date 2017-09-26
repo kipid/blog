@@ -1,0 +1,305 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-style -->
+
+<codeprint class="SEE">
+# VisitEvaluator
+
+
+
+## PH
+
+
+
+## TOC
+
+
+
+## Error
+
+### timestamp (ClassCastException : Integer to Long casting)
+
+```[.linenums]
+// timestamp 에 max-integer 보다 작은 long 값을 넣으면 자동으로 integer 로 저장되는듯?
+// 읽어들일때, getLong 쓰면 다음과 같은 에러가 남.
+eval.getLong("timestamp");
+java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.Long
+
+org.bson.Document.getLong()
+public Long getLong(Object key)
+  Gets the value of the given key as a Long.
+Parameters:
+  key - the key
+Returns:
+  the value as a long, which may be null
+Throws:
+  ClassCastException - if the value is not an long
+
+// Number 써서 해결.
+@Test
+public void testLongIntClassCastException() throws GeneralSecurityException {
+  insertVisit(Visit.newBuilder()
+      .setUid("user0").setIid("user0-iid0")
+      .setStartTimestamp(2147483647L) // max integer
+      .setEndTimestamp(2147483648L) // max integer + 1 (long)
+      .build()
+  );
+  for (Document visit : visitCollection.find()) {
+    assertEquals(visit.getLong("end_timestamp").longValue(), 2147483648L);
+    Number number = (Number) visit.get("start_timestamp");
+    Number nullNumber = (Number) null;
+    assertEquals(number.longValue(), 2147483647L);
+    visit.getLong("start_timestamp"); // throws java.lang.ClassCastException
+  }
+}
+```/
+
+
+
+### org.bson.Document - proto3 with MongoDB - Saving a default value to null
+
+```[.linenums]
+private void insertVisit(Visit visit) throws GeneralSecurityException {
+  visitCollection.insertOne(Document.parse(ProtoUtil.toJson(visit)));
+}
+
+// Test 다 통과됨. 즉, proto3 에서 default value 값은 MongoDB 에 아예 저장이 안됨.
+// 아마도 insertVisit() 에서 Document.parse() 할때 없애는듯?
+@Test
+public void test() throws GeneralSecurityException {
+  insertVisit(Visit.newBuilder()
+      .setUid("user2").setIid("user2-iid0")
+      .setStartTimestamp(209L)
+      .setEndTimestamp(210L)
+      .setEval(Visit.Eval.newBuilder()
+          .setTimestamp(0L) // Saved to null?
+          .setFoursquareVenueId("") // Saved to null?
+          .setFoursquareVenueIndex(0) // Saved to null?
+          .setNotFound(false) // Saved to null?
+          .build()
+      )
+      .build()
+  ); // Visit6-4 : Incorrect. Unknown place.
+  for (Document visit : visitCollection.find()) {
+    Document eval = (Document) visit.get("eval");
+    assertTrue(eval.getLong("timestamp") == null);
+    assertTrue(eval.getString("foursquare_venue_id") == null);
+    // assertTrue(eval.getInteger("foursquare_venue_index") == 0); // throws java.lang.NullPointerException
+    assertTrue(eval.getInteger("foursquare_venue_index") == null);
+    assertTrue(eval.getBoolean("not_found") == null);
+  }
+}
+```/
+
+
+
+## 삭제된 codes
+
+### find()
+
+MongoDB Console 명령어.
+
+```[.linenums]
+db.visit
+  .find({start_timestamp: {$gte:10000L, $lt:10000L}}) // The Unix epoch timestamp in milliseconds.
+  .find({uid: {$in:["user_id_1", "user_id_2", "user_id_3", "and so on"]}}); // By default, all user data is used.
+```/
+
+
+
+### getScoreOfGuessPlaceType()
+
+```[.linenums]
+// When the total square norm of scores of guessing [0.0 ~ 1.0] (home/work) is less than
+// GUESS_OTHERS_THRESHOLD, we consider that we guessed others than (home/work).
+// E.g. boolean othersB = (home * home + work * work < GUESS_OTHERS_THRESHOLD) ? true : false;
+private static final double GUESS_OTHERS_THRESHOLD = 0.3 * 0.3;
+
+/**
+ * Gives score of guessing a place-type. [0.0 ~ 1.0]
+ * Score 는 place-type guess 와 eval 의 내적값으로부터 구해짐. Eval 과 Guess vector 의 cos 값 평균.
+ * Default as -1.0 when the number of guesses is zero.
+ */
+public double getScoreOfGuessPlaceType() {
+  int numberOfGuesses = 0;
+  double sumOfScoreOfGuesses = 0;
+  for (Document visit : visitsList) {
+    Document eval = (Document) visit.get("eval");
+    if (eval == null // Exclude unevaluated visits.
+        || eval.getBoolean("not_found", false) // Exclude not_found visits.
+        || eval.getBoolean("not_visited", false)) { // Exclude not_visited.
+      continue;
+    }
+    Document guess = (Document) visit.get("guess");
+    if (guess != null) { // Exclude unguessed.
+      double home = (Double) guess.getOrDefault("home", 0.0);
+      double work = (Double) guess.getOrDefault("work", 0.0);
+      boolean othersB = (home * home + work * work < GUESS_OTHERS_THRESHOLD) ? true : false;
+      String evalHome = eval.getString("home");
+      String evalWork = eval.getString("work");
+      if (!(isNullOrDefault(evalHome) && isNullOrDefault(evalWork))) { // Exclude unevaluated.
+        boolean evalHomeB = isNullOrDefault(evalHome) ? false : Boolean.parseBoolean(evalHome);
+        boolean evalWorkB = isNullOrDefault(evalWork) ? false : Boolean.parseBoolean(evalWork);
+        boolean evalOthers = (evalHomeB || evalWorkB) ? false : true;
+        if (!(othersB && evalOthers)) {
+          numberOfGuesses++;
+          double others = othersB ? 1.0 : 0.0;
+          double evalHomeD = evalHomeB ? 1.0 : 0.0;
+          double evalWorkD = evalWorkB ? 1.0 : 0.0;
+          double evalOthersD = evalOthers ? 1.0 : 0.0;
+          sumOfScoreOfGuesses += (home * evalHomeD + work * evalWorkD + others * evalOthersD)
+              / Math.sqrt(
+                  (home * home + work * work + others * others)
+                  * (evalHomeD * evalHomeD + evalWorkD * evalWorkD + evalOthersD * evalOthersD)
+              );
+        }
+      }
+    }
+  }
+
+  double scoreOfGuessPlaceType = -1.0;
+  if (numberOfGuesses != 0) {
+    scoreOfGuessPlaceType = sumOfScoreOfGuesses / numberOfGuesses;
+  }
+  return scoreOfGuessPlaceType;
+}
+```/
+
+
+
+Test 부분은
+
+```[.linenums]
+@Test
+public void testPrecisionAndRecallOfGuessPlaceType() throws GeneralSecurityException {
+  // ...
+
+  visitEvaluator.findVisits(100L, 300L);
+  // ...
+  assertEquals(visitEvaluator.getScoreOfGuessVisitKind(), 4. / 8, EPSILON);
+
+  visitEvaluator.findVisits(100L, 200L);
+  // ...
+  assertEquals(visitEvaluator.getScoreOfGuessVisitKind(), 2. / 6, EPSILON);
+
+  visitEvaluator.findVisits(200L, 300L);
+  // ...
+  assertEquals(visitEvaluator.getScoreOfGuessVisitKind(), 2. / 2, EPSILON);
+}
+```/
+
+
+
+## To study
+
+### JAVA stream
+
+JAVA stream package : <cite class="java-package-stream"><a target="_blank" href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html">https://docs.oracle.com/javase/8/docs/api/java/util/stream/package-summary.html</a></cite>.
+
+```
+stream(), filter(), mapToDouble(), average()
+```/
+
+
+
+### JAVAdoc
+
+Comment 를 format 맞춰서 잘 만들어 놓으면 자동으로 JAVA documentation 이 만들어 지는듯?
+
+```
+/**
+ * @Author   Kangsoo &lt;kangsoo @ wisefour.com>
+ * @version  0.0
+ * @since    2017-07-31
+ */
+public class VisitEvaluator {
+  // codes ...
+
+  /**
+   * Constructor : From visitCollection, find visits of start_timestamp from fromTime (inclusive) to toTime (exclusive).
+   * @param MongoCollection&lt;Document&gt; visitCollection
+   * @param String fromTime [format] "2017-07-31 00:00:00.000 KST"
+   * @param String toTime [format] "2017-08-01 00:00:00.000 KST"
+   */
+  public VisitEvaluator(final MongoCollection&lt;Document&gt; visitCollection
+    , String fromTime, String toTime) {
+    // codes ...
+  }
+
+  /**
+   * Gives "approximated precision" when NOT_EVALUATED is excluded. [0.0 ~ 1.0]
+   */
+  public double getPrecisionOfFindVisit() {
+    // codes ...
+  }
+}
+```/
+
+
+
+### MongoDB aggregate
+
+MongoDB java driver tutorial - aggregation : <cite class="mongodb-aggregate">
+<a target="_blank" href="https://docs.mongodb.com/manual/aggregation/">https://docs.mongodb.com/manual/aggregation/</a><br>
+<a target="_blank" href="https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/">https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/</a><br>
+<a target="_blank" href="http://mongodb.github.io/mongo-java-driver/3.4/driver/tutorials/aggregation/">http://mongodb.github.io/mongo-java-driver/3.4/driver/tutorials/aggregation/</a></cite>.
+
+```[.linenums]
+db.visit.aggregate([
+  {$match: {
+    $or: [{ "eval.foursquare_venue_id": { $exists: true } }, { "eval.foursquare_venue_index": { $exists: true } }],
+    start_timestamp: { $gte: 1501000000000 }
+  }},
+  {$project: {
+    _id: "$_id",
+    pos: { $indexOfArray: [ "$foursquare_venues.id", "$eval.foursquare_venue_id" ] }
+  }},
+  {$group: {
+    "_id": null,
+    "correct": {
+      $sum: {
+        $cond: [ {$eq: ["$pos", 0]}, 1, 0 ]
+      }
+    },
+    "total": {
+      $sum: 1
+    }
+  }}
+]);
+```/
+
+
+
+## RRA
+
+<ol class="refs">
+</ol>
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=512;
+kipid.delayPad=0;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  skipStartupTypeset: true, // Skip startup typeset.
+  positionToHash: false, // No repositioning to #something anchor.
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+    displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+    processEscapes: true, // Escape \$
+    processEnvironments: false, // Ignore \begin{something} ... \end{something}
+  }
+});
+</script>
+<!-- From kipid.tistory CDN -->
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->

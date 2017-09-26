@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.3.css">
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+</codeprint><!-- docuK-style -->
+
+<style>
+.docuK table {
+	font:inherit;
+	color:inherit;
+	border:1px solid #CCC;
+}
+.docuK table td {
+	padding:4px;
+	margin:3px;
+	border:1px solid #ccc;
+}
+</style>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<codeprint class="SEE">
+# Precision and Recall - Visit Detection, Guess Place, Guess Place-type
+
+Local 에서 돌린땐 <a target="_blank" href="http://localhost:8080/dashboard/visits.html?secret=PFMjiX8d5slgVVrk0eGmE447qMvtmWd9&from=2017-07-13&to=2017-09-01&step=1w">http://localhost:8080/dashboard/visits.html</a> 로 접속.
+
+Server 에서 돌릴땐 <a target="_blank" href="https://iris.wisefour.com/dashboard/visits.html?secret=PFMjiX8d5slgVVrk0eGmE447qMvtmWd9&from=2017-07-13&to=2017-09-01&step=1w">https://iris.wisefour.com/dashboard/visits.html</a> 로 접속.
+
+<div class="rC"><div class="rSC">
+  <iframe delayed-src="https://docs.google.com/spreadsheets/d/1u9hFuSE2XOkSPhKwBk6SzVfBNla-lnZ2gF3PwErTYfo/edit#gid=0" frameborder="0"></iframe>
+</div></div>
+
+<script></script>
+
+
+
+## TOC
+
+
+
+## To do
+
+Chart pop-up 에 날짜 "2017-08-30" + 요일 "월/화/수/목/금/토/일" 표시되게 만들기.
+
+Chart x-axis 를 (from, to) 중간으로? 날짜 + "T00:00:00+09:00" (KST) 기준으로 (from, to) 가 계산되기 때문에, Millis 를 다시 KST 으로 변환해서 from 의 날짜 부분을 쏴주도록 해야할거 같은데...
+
+휴일을 골라내서 표시해줄 수 있나???
+
+Loading 이 좀 느린것도 같은데... 빠르게 만들 수 있나???
+
+
+
+## javascript Date
+
+<pre id="pre-date-datas" class="prettyprint scrollable"></pre>
+
+<script>
+(function() {
+	const date = new Date(2017, 7, 1, 1, 23, 45, 678);
+	let dateDatasStr = '';
+	for (const prop of Object.getOwnPropertyNames(Date.prototype)) {
+	  if (prop.startsWith('set')) {
+	    dateDatasStr += `${prop}\n`;
+	  } else {
+	    dateDatasStr += `${prop}: ${date[prop]()}\n`;
+	  }
+	}
+
+  const toKoreanStyleDate = function (date) {
+    const dayToKorean = ['일', '월', '화', '수', '목', '금', '토'];
+    function pad(x) {
+      return `${x}`.padStart(2, '0');
+    }
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${dayToKorean[date.getDay()]}`;
+  };
+
+  dateDatasStr += `toKoreanStyleDate (personal method): ${toKoreanStyleDate(date)}\n`;
+
+	$('#pre-date-datas').html(dateDatasStr);
+})();
+</script>
+
+
+
+## Disabled codes
+
+
+
+### (from, to, step) to (times)
+
+```[.scrollable]
+const parseTimeStr = function (timeStr) {
+  const timePattern = /^(\d{4})-(\d{2})-(\d{2})$/;
+  const result = {timeStr, valid: false};
+  const exec = timePattern.exec(timeStr);
+  if (exec !== null) {
+    result.year = Number(exec[1]);
+    result.month = Number(exec[2]);
+    result.day = Number(exec[3]);
+    result.UTC = Date.UTC(result.year, result.month - 1, result.day);
+    result.date = new Date(result.UTC);
+    result.valid = true;
+  }
+  return result;
+};
+
+const dateStr = function (v) {
+  const date = (v instanceof Date) ? v : new Date(v);
+  return date.toISOString().split('T')[0];
+};
+
+const parseStep = function (step) {
+  stepPattern = /(\d+)([dwm])/i;
+  const result = {step, valid: false};
+  const exec = stepPattern.exec(step);
+  if (exec !== null) {
+    result.valid = true;
+    result.number = Number(exec[1]);
+    switch (exec[2].toLowerCase()) {
+      case 'w':
+        result.number *= 7;
+      case 'd':
+        result.unit = 'day';
+        break;
+      case 'm':
+        result.unit = 'month'
+        break;
+    }
+  }
+  return result;
+};
+
+const currentParams = new URL(window.location).searchParams;
+const secret = currentParams.get('secret');
+let times = currentParams.get('times');
+if (!times) {
+  const timesArray = [];
+  const from = parseTimeStr(currentParams.get('from'));
+  const to = parseTimeStr(currentParams.get('to'));
+  const step = parseStep(currentParams.get('step'));
+  if (from.valid && to.valid && step.valid) {
+    const time = from.date;
+    while (time.getTime() < to.UTC) {
+      timesArray.push(dateStr(time));
+      switch (step.unit) {
+        case 'day':
+          time.setDate(time.getDate() + step.number);
+          break;
+        case 'month':
+          time.setMonth(time.getMonth() + step.number);
+          break;
+        default:
+          time.setTime(to.UTC);
+      }
+    }
+    timesArray.push(dateStr(to.date));
+    times = timesArray.join(',');
+  }
+}
+```/
+
+
+### escapeHTML, jsonToTableHTML
+
+```[.scrollable.lang-js]
+const escapeHTML = function (v) {
+  let str = v.toString();
+  if (v.constructor === Object) {
+    const lists = [];
+    for (const prop in v) {
+      lists.push(`${prop}: ${v[prop]}`);
+    }
+    str = lists.join(',\n');
+  }
+  return str
+      .replace(/&amp;/g, '&amp;amp;')
+      .replace(/&lt;/g, '&amp;lt;')
+      .replace(/&gt;/g, '&amp;gt;')
+      .replace(/\n/g, '&lt;br&gt;');
+};
+
+const jsonToTableHTML = function (json) {
+  let tableStr = '&lt;table&gt;';
+  const props = [];
+  tableStr += '&lt;tr&gt;';
+  for (const prop in json[0]) {
+    props.push(prop);
+    tableStr += '&lt;th&gt;' + escapeHTML(prop) + '&lt;/th&gt;';
+  }
+  tableStr += '&lt;/tr&gt;';
+  for (const oneRow of json) {
+    tableStr += '&lt;tr&gt;';
+    for (const prop of props) {
+      tableStr += '&lt;td&gt;' + escapeHTML(oneRow[prop]) + '&lt;/td&gt;';
+    }
+    tableStr += '&lt;/tr&gt;';
+  }
+  tableStr += '&lt;/table&gt;';
+  return tableStr;
+};
+```/
+
+
+
+## Server error: Thread-unsafe (resolved)
+
+Thread-unsafe 해서 생긴 문제.
+
+```[.scrollable]
+2017-08-25 15:43:20.222 +0900 INFO [qtp929066990-183] app: gateway LogFilter:30 - Req: GET /dashboard/visits.html?secret=PFMjiX8d5slgVVrk0eGmE447qMvtmWd9&times=2017-04-01,2017-05-01,2017-06-01,2017-07-01,2017-08-01,2017-09-01,2017-10-01
+2017-08-25 15:43:20.464 +0900 INFO [qtp929066990-283] app: gateway LogFilter:30 - Req: GET /iris/v1/eval/visit?secret=PFMjiX8d5slgVVrk0eGmE447qMvtmWd9&kind=visit-detection&times=2017-04-01,2017-05-01,2017-06-01,2017-07-01,2017-08-01,2017-09-01,2017-10-01
+2017-08-25 15:43:20.464 +0900 INFO [qtp929066990-217] app: gateway LogFilter:30 - Req: GET /iris/v1/eval/visit?secret=PFMjiX8d5slgVVrk0eGmE447qMvtmWd9&kind=guess-place&times=2017-04-01,2017-05-01,2017-06-01,2017-07-01,2017-08-01,2017-09-01,2017-10-01
+2017-08-25 15:43:20.465 +0900 INFO [qtp929066990-216] app: gateway LogFilter:30 - Req: GET /iris/v1/eval/visit?secret=PFMjiX8d5slgVVrk0eGmE447qMvtmWd9&kind=guess-place-type&times=2017-04-01,2017-05-01,2017-06-01,2017-07-01,2017-08-01,2017-09-01,2017-10-01
+2017-08-25 15:43:20.468 +0900 WARN [qtp929066990-217] app: gateway HttpChannel:517 - /iris/v1/eval/visit
+java.lang.NumberFormatException: For input string: "2017."
+        at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65) ~[na:1.8.0_141]
+        at java.lang.Long.parseLong(Long.java:589) ~[na:1.8.0_141]
+        at java.lang.Long.parseLong(Long.java:631) ~[na:1.8.0_141]
+        at java.text.DigitList.getLong(DigitList.java:195) ~[na:1.8.0_141]
+        at java.text.DecimalFormat.parse(DecimalFormat.java:2051) ~[na:1.8.0_141]
+        at java.text.SimpleDateFormat.subParse(SimpleDateFormat.java:1869) ~[na:1.8.0_141]
+        at java.text.SimpleDateFormat.parse(SimpleDateFormat.java:1514) ~[na:1.8.0_141]
+        at java.text.DateFormat.parse(DateFormat.java:364) ~[na:1.8.0_141]
+        at com.wisefour.iris.gateway.eval.VisitEvaluator.unixEpochInMillis(VisitEvaluator.java:34) ~[na:na]
+        at com.wisefour.iris.gateway.servlet.EvalVisitServlet.lambda$doGet$0(EvalVisitServlet.java:146) ~[na:na]
+        at java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:193) ~[na:1.8.0_141]
+        at java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:948) ~[na:1.8.0_141]
+        at java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:481) ~[na:1.8.0_141]
+        at java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:471) ~[na:1.8.0_141]
+        at java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:708) ~[na:1.8.0_141]
+        at java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:1.8.0_141]
+        at java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:499) ~[na:1.8.0_141]
+        at com.wisefour.iris.gateway.servlet.EvalVisitServlet.doGet(EvalVisitServlet.java:147) ~[na:na]
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:687) ~[javax.servlet-api-3.1.0.jar:3.1.0]
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:790) ~[javax.servlet-api-3.1.0.jar:3.1.0]
+        at com.google.inject.servlet.ServletDefinition.doServiceImpl(ServletDefinition.java:286) ~[na:na]
+        at com.google.inject.servlet.ServletDefinition.doService(ServletDefinition.java:276) ~[na:na]
+        at com.google.inject.servlet.ServletDefinition.service(ServletDefinition.java:181) ~[na:na]
+        at com.google.inject.servlet.ManagedServletPipeline.service(ManagedServletPipeline.java:91) ~[na:na]
+        at com.wisefour.iris.gateway.filter.AuthFilter.doFilter(AuthFilter.java:73) ~[na:na]
+        at com.wisefour.iris.gateway.filter.LogFilter.doFilter(LogFilter.java:34) ~[na:na]
+        at com.wisefour.iris.gateway.filter.RequestBodyFilter.doFilter(RequestBodyFilter.java:36) ~[na:na]
+        at com.google.inject.servlet.ManagedFilterPipeline.dispatch(ManagedFilterPipeline.java:120) ~[na:na]
+        at com.google.inject.servlet.GuiceFilter.doFilter(GuiceFilter.java:135) ~[na:na]
+        at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1629) ~[jetty-servlet-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:533) ~[jetty-servlet-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:143) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:548) ~[jetty-security-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:190) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:1595) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:188) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1253) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:168) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:473) ~[jetty-servlet-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1564) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:166) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1155) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:141) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.ContextHandlerCollection.handle(ContextHandlerCollection.java:219) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.Server.handle(Server.java:564) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:317) ~[jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:251) [jetty-server-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:279) [jetty-io-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:110) [jetty-io-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:124) [jetty-io-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.util.thread.Invocable.invokePreferred(Invocable.java:128) [jetty-util-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.util.thread.Invocable$InvocableExecutor.invoke(Invocable.java:222) [jetty-util-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:294) [jetty-util-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:199) [jetty-util-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:673) [jetty-util-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:591) [jetty-util-9.4.6.v20170531.jar:9.4.6.v20170531]
+        at java.lang.Thread.run(Thread.java:748) [na:1.8.0_141]
+```/
+
+
+
+## Testing results
+
+### Visit Detection
+
+<figure id="fig-visit-detection"><div class="fig">
+	<div class="caption">Visit detection</div>
+	<div class="rC"><div class="rSC">
+		<div id="chart-visit-detection"></div>
+	</div></div>
+</div></figure>
+
+<data id="data-visit-detection">
+Category	fromTime	toTime	precision	recall	Description
+visitDetection	2017-06-01 00:00:00 KST	2017-08-01 00:00:00 KST	0.563	0.893	version 0 (첫번째 implementation : 이 이후부터만 visit 데이터들이 있음.)
+visitDetection	2017-08-01 00:00:00 KST	2017-08-09 00:00:00 KST	0.732	0.799	version 1 (중요하게 무언가를 바꾸었음.)
+visitDetection	2017-08-09 00:00:00 KST	2017-08-31 00:00:00 KST	0.701	0.907	version 2 (어떤 것을 바꾸었음.)
+</data>
+
+
+
+### Guess Place
+
+<figure id="fig-guess-place-top-x"><div class="fig">
+	<div class="caption">Guess Place (Top X precisions)</div>
+	<div class="rC"><div class="rSC">
+		<div id="chart-guess-place-top-x"></div>
+	</div></div>
+</div></figure>
+
+<figure id="fig-guess-place-at-x"><div class="fig">
+	<div class="caption">Guess Place (At X precisions)</div>
+	<div class="rC"><div class="rSC">
+		<div id="chart-guess-place-at-x"></div>
+	</div></div>
+</div></figure>
+
+<data id="data-guess-place">
+fromTime	toTime	precisions	Description
+2017-06-01 00:00:00 KST	2017-08-01 00:00:00 KST	"at	precision
+-1	0.1428571429
+1	0.2857142857
+2	0.2857142857
+3	0.2857142857"	version 0
+2017-08-01 00:00:00 KST	2017-08-09 00:00:00 KST	"at	precision
+-1	0.3
+1	0.2
+2	0.2
+3	0.1
+5	0.2"	version 1
+2017-08-09 00:00:00 KST	2017-08-31 00:00:00 KST	"at	precision
+-1	0.2
+1	0.3
+2	0.2
+3	0.1
+5	0.2"	version 2
+</data>
+
+
+
+### Guess Place-type
+
+<figure id="fig-guess-place-type"><div class="fig">
+	<div class="caption">Guess Place-type</div>
+	<div class="rC"><div class="rSC">
+		<div id="chart-guess-place-type"></div>
+	</div></div>
+</div></figure>
+
+<data id="data-guess-place-type">
+type	fromTime	toTime	precision	recall	Description
+home	2017-06-01 00:00:00 KST	2017-08-01 00:00:00 KST	0.754	0.885	version 0
+home	2017-08-01 00:00:00 KST	2017-08-09 00:00:00 KST	0.389	0.483	version 1
+home	2017-08-09 00:00:00 KST	2017-08-31 00:00:00 KST	0.937	0.883	version 2
+work	2017-06-01 00:00:00 KST	2017-08-01 00:00:00 KST	0.938	0.958	version 0
+work	2017-08-01 00:00:00 KST	2017-08-09 00:00:00 KST	0.742	0.563	version 1
+work	2017-08-09 00:00:00 KST	2017-08-31 00:00:00 KST	0.995	0.987	version 2
+</data>
+
+
+
+## RRA
+
+<ol class="refs">
+<li id="ref-doc"><a target="_blank" href="https://docs.google.com/spreadsheets/d/1u9hFuSE2XOkSPhKwBk6SzVfBNla-lnZ2gF3PwErTYfo/edit#gid=0">Google docs - History of visitDetection, guessPlace, guessPlaceType</a></li>
+<li id="ref-chart-datetime"><a target="_blank" href="http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats">http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats</a><br>
+<a target="_blank" href="http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats/Highcharts.dateFormat">http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats/Highcharts.dateFormat</a><br>
+<a target="_blank" href="http://php.net/manual/en/function.strftime.php">http://php.net/manual/en/function.strftime.php</a></li>
+</ol>
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=512;
+kipid.delayPad=0;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  skipStartupTypeset: true, // Skip startup typeset.
+  positionToHash: false, // No repositioning to #something anchor.
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+    displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+    processEscapes: true, // Escape \$
+    processEnvironments: false, // Ignore \begin{something} ... \end{something}
+  }
+});
+</script>
+<!-- From kipid.tistory CDN -->
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->
+
+<!-- This is testing codes. -->
+<script>
+iris = {};
+const chartOptions = {
+	chart: {
+			type: 'line'
+	},
+	title: {
+			text: 'Title'
+	},
+	xAxis: {
+		type: 'datetime',
+		dateTimeLabelFormats: { // don't display the dummy year
+			month: '%m-%d',
+			year: '%Y'
+		},
+		title: {
+			text: 'Date'
+		}
+	},
+	yAxis: {
+		title: {
+			text: 'Y axis'
+		},
+		min: 0,
+		max: 100
+	},
+	tooltip: {
+    formatter: function () {
+      return `<b>${this.series.name}</b><br>${dateStr(this.x)}: ${this.y.toFixed(1)}`;
+    }
+	},
+	series: []
+};
+
+const dateStr = function (v) {
+  const date = (v instanceof Date) ? v : new Date(v);
+  return date.toDateString();
+};
+
+/* Visit Detection */
+iris.visitDetection = {};
+var data = iris.visitDetection.data = kipid.strToJSON($("#data-visit-detection").html().trim(), true, false);
+$("#data-visit-detection").after(
+	kipid.arrayToTableHTML(data)
+);
+iris.visitDetection.precision = [];
+iris.visitDetection.recall = [];
+for (var i=1;i<data.length;i++) {
+	var from = Date.parse(data[i].fromTime.substring(0,10));
+	var to = Date.parse(data[i].toTime.substring(0,10));
+	var datetime = (from+to)/2;
+	var precision = Number(data[i].precision)*100;
+	var recall = Number(data[i].recall)*100;
+	iris.visitDetection.precision.push([from, precision]);
+	iris.visitDetection.precision.push([to-1, precision]);
+	iris.visitDetection.recall.push([datetime, recall]);
+}
+
+var series = iris.visitDetection.series = [{
+		name: 'Precision',
+		data: iris.visitDetection.precision
+	}, {
+		name: 'Recall',
+		data: iris.visitDetection.recall
+}];
+var chartElemId = "chart-visit-detection";
+chartOptions.title.text = $("#fig-visit-detection .caption").text();
+chartOptions.yAxis.title.text = "Precision and Recall (%)";
+chartOptions.series = series;
+Highcharts.chart(chartElemId, chartOptions);
+
+/* Guess Place */
+iris.guessPlace = {};
+var data = iris.guessPlace.data = kipid.strToJSON($("#data-guess-place").html().trim(), true, false);
+$("#data-guess-place").after(
+	kipid.arrayToTableHTML(data)
+);
+iris.guessPlace.precisions = {};
+var pAt = iris.guessPlace.precisions.at = [];
+var pTop = iris.guessPlace.precisions.top = [];
+for (var i=1;i<data.length;i++) {
+	var from = data[i].from = Date.parse(data[i].fromTime.substring(0,10));
+	var to = data[i].to = Date.parse(data[i].toTime.substring(0,10));
+	var datetime = data[i].datetime = (from+to)/2;
+	var precisions = data[i].precisionsParsed = kipid.strToJSON(data[i].precisions, true, false);
+	for (var j=1;j<precisions.length;j++) {
+		var at = precisions[j].at; // -1, 1, 2, 5, ...
+		var precision = precisions[j].precisionN = Number(precisions[j].precision);
+		if (pAt[at] === undefined) {
+			pAt[at] = {};
+		}
+		pAt[at][from] = precision*100;
+	}
+}
+// pAt = [
+// 	"-1": {from1: precision1, from2: precision2, ...},
+// 	"1": {from1: precision1, from3: precision3, ...}, // no from2
+// 	// no "2"
+// 	"3": {from1: precision1},
+// 	...
+// ];
+
+pAt.plotData = [];
+pTop[0] = [];
+for (var i=1;i<data.length;i++) {
+	var from = data[i].from;
+	pTop[0].push([from, 0]);
+}
+for (var j=1;j<pAt.length;j++) {
+	pAt.plotData[j] = [];
+	pTop[j] = [];
+	if (pAt[j] === undefined) {
+		pAt[j] = {};
+	}
+	for (var i=1;i<data.length;i++) {
+		var from = data[i].from;
+		var atJ_precision = 0;
+		if (pAt[j][from] !== undefined) {
+			atJ_precision = pAt[j][from];
+		}
+		pAt.plotData[j].push([from, atJ_precision]);
+		var topJ_precision = pTop[j-1][i-1][1] + atJ_precision;
+		pTop[j].push([from, topJ_precision]);
+	}
+}
+var j = "-1";
+pAt.plotData[j] = [];
+pTop[j] = [];
+if (pAt[j] === undefined) {
+	pAt[j] = {};
+}
+for (var i=1;i<data.length;i++) {
+	var from = data[i].from;
+	var atJ_precision = 0;
+	if (pAt[j][from] !== undefined) {
+		atJ_precision = pAt[j][from];
+	}
+	pAt.plotData[j].push([from, atJ_precision]);
+	pTop[j].push([from, 100 - atJ_precision]);
+}
+// pAt.plotData and pTop = [
+// 	[ // "0"
+// 		[datetime1, 0],
+// 		[datetime2, 0],
+// 		...
+// 	],
+// 	[ // "1"
+// 		[datetime1, top1_precision1],
+// 		[datetime2, top1_precision2],
+// 		...
+// 	],
+// 	[ // "2"
+// 		[datetime1, top2_precision1],
+// 		[datetime2, top2_precision2],
+// 		...
+// 	],
+// 	...
+// 	"-1": [
+// 		[datetime1, 100 - precision1],
+// 		[datetime2, 100 - precision2],
+// 		...
+// 	]
+// ];
+
+var series = iris.guessPlace.seriesTop = [];
+series.push({
+	name: 'Top max',
+	data: pTop["-1"]
+});
+for (var j=1;j<pTop.length;j++) {
+	series.push({
+		name: 'Top '+j,
+		data: pTop[j]
+	});
+}
+var chartElemId = "chart-guess-place-top-x";
+chartOptions.title.text = $("#fig-guess-place-top-x .caption").text();
+chartOptions.yAxis.title.text = "Precision (%)";
+chartOptions.series = series;
+Highcharts.chart(chartElemId, chartOptions);
+
+var series = iris.guessPlace.seriesAt = [];
+series.push({
+	name: 'At -1',
+	data: pAt.plotData["-1"]
+});
+for (var j=1;j<pAt.plotData.length;j++) {
+	series.push({
+		name: 'At '+j,
+		data: pAt.plotData[j]
+	});
+}
+var chartElemId = "chart-guess-place-at-x";
+chartOptions.title.text = $("#fig-guess-place-at-x .caption").text();
+chartOptions.series = series;
+Highcharts.chart(chartElemId, chartOptions);
+
+/* Guess Place-type */
+iris.guessPlaceType = {types: ["home", "work"]};
+var types = iris.guessPlaceType.types;
+var data = iris.guessPlaceType.data = kipid.strToJSON($("#data-guess-place-type").html().trim(), true, true);
+$("#data-guess-place-type").after(
+	kipid.arrayToTableHTML(data)
+);
+iris.guessPlaceType.precisions = {};
+iris.guessPlaceType.recalls = {};
+for (var i=0;i<types.length;i++) {
+	iris.guessPlaceType.precisions[types[i]] = [];
+	iris.guessPlaceType.recalls[types[i]] = [];
+}
+for (var i=1;i<data.length;i++) {
+	var type = data[i].type;
+	var from = Date.parse(data[i].fromTime.substring(0,10));
+	var to = Date.parse(data[i].toTime.substring(0,10));
+	var precision = Number(data[i].precision)*100;
+	var recall = Number(data[i].recall)*100;
+	iris.guessPlaceType.precisions[type].push([from, precision]);
+	iris.guessPlaceType.recalls[type].push([from, recall]);
+}
+
+var series = iris.guessPlaceType.series = [];
+for (var i=0;i<types.length;i++) {
+	var type = types[i];
+	series.push({
+		name: 'Precision of '+type,
+		data: iris.guessPlaceType.precisions[type]
+	});
+	series.push({
+		name: 'Recall of '+type,
+		data: iris.guessPlaceType.recalls[type]
+	});
+}
+var chartElemId = "chart-guess-place-type";
+chartOptions.title.text = $("#fig-guess-place-type .caption").text();
+chartOptions.yAxis.title.text = "Precision and Recall (%)";
+chartOptions.series = series;
+Highcharts.chart(chartElemId, chartOptions);
+</script>

@@ -1,0 +1,138 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-style -->
+
+<codeprint class="SEE">
+# Git and Gerrit tutorial
+
+Math test : $\alpha\beta\gamma$, <eq>\alpha\beta\gamma</eq>.
+
+## TOC
+
+
+
+## Remembering ssh passphrase
+
+```
+$ ssh-add
+Enter passphrase for /Users/kipid/.ssh/id_rsa:
+
+// After you entered passphrase
+Identity added: /Users/kipid/.ssh/id_rsa (/Users/kipid/.ssh/id_rsa)
+```/
+
+This stores passphrases in your keychain. But 컴퓨터를 껐다가 키면 다시 입력해야 하는듯?
+
+
+
+## Initializing repository : ./init-repo.sh
+
+```
+$ ./init-repo.sh
+============================================================
+This script initializes your w4 repository.
+
+It is safe to run this script multiple times, so run this
+script frequently to make sure your environment is up-to-date.
+============================================================
+
+Init done.
+```/
+
+
+
+## git pull --rebase
+
+Commit 할거 다 하고, origin/master 의 변화들을 rebase 하는 방법.
+
+```
+$ git pull --rebase
+```/
+
+
+
+## git commit
+
+첫 commit (File 을 새로 생성했을때는 그 file 을 stage 하고 commit 해야 하는듯. Terminal 에서 하는법은 모르겠고, App SourceTree 에서 버튼 눌러서 unstaged files -&gt; staged files 로 만들고, commit with description.)
+
+```
+// 기존 파일을 고치기만 했을때.
+$ git commit
+```/
+
+Commit 수정하기. (App SourceTree 에서 unstaged files -&gt; staged files 로 만들고, <code>Commit options</code> - <code>Amend last commit</code> check 후 commit.)
+
+```
+// Unpushed 된 이전 commit 이 있을때.
+$ git commit --amend
+
+// Description 부분. <code>i</code> 눌러서 편집하고.
+// <code>esc</code> 후, <code>:wq</code> 눌러서 저장 and 종료하면.
+[master 79fb7c1856] Precision and Recall of guessing a place and finding visits.
+ Date: Tue Jul 25 16:23:12 2017 +0900
+ 1 file changed, 137 insertions(+)
+ create mode 100644 cabinet/iris/gateway/src/main/java/com/wisefour/iris/gateway/servlet/EvalUtil.java
+```/
+
+
+
+### 2개 이상의 commit
+
+SourceTree App 에서 origin/master 부분의 최상위 commit 을 오른클릭하고 <code>Rebase children of xxxxxx interactively...</code> 를 누른뒤 화살표로 children commit 들 순서 조정하고 OK 누르면 됨.
+
+
+
+## git review
+
+```
+$ git review
+
+remote: Processing changes: new: 1, refs: 1, done
+remote: (W) 429b334: commit subject >50 characters; use shorter first paragraph
+remote:
+remote: New Changes:
+remote:   <a target="_blank" href="https://gerrit.wisefour.com/10010">https://gerrit.wisefour.com/10010</a> Precision and Recall of guessing a place and finding visits.
+remote:
+To ssh://gerrit.wisefour.com:29418/w4
+ * [new branch]            HEAD -> refs/publish/master
+```/
+
+URL <a target="_blank" href="https://gerrit.wisefour.com/10010">https://gerrit.wisefour.com/10010</a> 에 들어가서, <code>Reviewers</code> 에 jungyeol 님 <code>add</code>. <code>Assignee</code> 에 본인 <code>set</code>.
+
+
+
+## RRA
+
+<ol class="refs">
+<li><a target="_blank" href="https://github.com/WiseFour/w4/wiki/Gerrit-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC">WiseFour/w4/wiki - Gerrit 튜토리얼</a></li>
+<li><a target="_blank" href="https://gerrit-review.googlesource.com/Documentation/#_tutorial">gerrit-review.googlesource.com - Documentation - tutorial</a></li>
+</ol>
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=512;
+kipid.delayPad=0;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+	skipStartupTypeset: true, // Skip startup typeset.
+	positionToHash: false, // No repositioning to #something anchor.
+	tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+		displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+		processEscapes: true, // Escape \$
+		processEnvironments: false, // Ignore \begin{something} ... \end{something}
+	}
+});
+</script>
+<!-- From kipid.tistory CDN -->
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->

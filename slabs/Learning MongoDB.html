@@ -1,0 +1,289 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/>
+
+<codeprint id="docuK-style">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" media="all" type="text/css" href="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-2.2.css">
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-prepare-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-style -->
+
+<codeprint class="SEE">
+# Learning MongoDB
+
+
+
+## TOC
+
+
+
+## Local MongoDB
+
+### Server - mongod
+
+Mac Terminal 에서
+
+```[.linenums]
+$ mongod
+```/
+
+한번 돌리면 Terminal 을 꺼도 계속 돌아가는듯.
+
+
+
+### Shell - mongo
+
+Local MongoDB Server 에 접속. Shell command 는 <cite class="ref-mongodb-shell-refs"></cite> 참고.
+
+```[.linenums.scrollable]
+$ mongo
+...
+
+> db;
+test
+> use iris;
+switched to db iris
+> db;
+iris
+> db.visit.insertOne({
+		start_timestamp: 1494806400000, // "2017-05-15"
+		guess: {
+			home: 1.0,
+			work: 0.0
+		},
+		eval: {
+			home: "true",
+			work: "false",
+			foursquare_venue_index: 1
+		}
+});
+
+{
+	"acknowledged" : true,
+	"insertedId" : ObjectId("598afd9174cc9a7e97d727c1")
+}
+
+> db.visit.find();
+{ "_id" : ObjectId("598afd9174cc9a7e97d727c1"), "start_timestamp" : 1494806400000, "guess" : { "home" : 1, "work" : 0 }, "eval" : { "home" : "true", "work" : "false", "foursquare_venue_index" : 1 } }
+
+
+> db.visit.insertOne({
+		start_timestamp: 1497484800000, // "2017-06-15"
+		guess: {
+			home: 1.0,
+			work: 0.0
+		},
+		eval: {
+			home: "true",
+			work: "false",
+			foursquare_venue_index: 1
+		}
+});
+
+> db.visit.insertOne({
+		start_timestamp: 1497484800000, // "2017-06-15"
+		guess: {
+			home: 0.0,
+			work: 1.0
+		},
+		eval: {
+			home: "true",
+			work: "false",
+			foursquare_venue_index: 1
+		}
+});
+
+> db.visit.update({}, {'$set': {'eval.foursquare_venue_index': NumberInt(1)}}, {multi: true});
+
+> db.visit.find().forEach(function(x) {
+	x.start_timestamp = NumberLong(x.start_timestamp);
+	db.visit.save(x);
+});
+
+> db.visit.find().forEach(function(x) {
+	x.eval.foursquare_venue_index = NumberInt(x.eval.foursquare_venue_index);
+	db.visit.save(x);
+});
+
+> db.visit.insertOne({
+		start_timestamp: NumberLong(1502755200000),
+		guess: {
+			home: 1.0,
+			work: 0.0
+		},
+		eval: {
+			not_found: true,
+			home: "true",
+			work: "false",
+			foursquare_venue_index: NumberInt(1)
+		}
+});
+
+db.visit.insertOne({
+		start_timestamp: NumberLong(1502755200000),
+		guess: {
+			home: 1.0,
+			work: 0.0
+		},
+		eval: {
+			not_visited: true,
+			home: "true",
+			work: "false",
+			foursquare_venue_index: NumberInt(1)
+		}
+});
+
+db.visit.insertOne({
+		start_timestamp: NumberLong(1502755200000),
+		guess: {
+			home: 1.0,
+			work: 0.0
+		},
+		eval: {
+			home: "true",
+			work: "false",
+			foursquare_venue_index: NumberInt(2)
+		}
+});
+
+db.visit.insertOne({
+		start_timestamp: NumberLong(1502755200000),
+		guess: {
+			home: 1.0,
+			work: 0.0
+		},
+		eval: {
+			home: "true",
+			work: "false",
+			foursquare_venue_index: NumberInt(3)
+		}
+});
+
+db.visit.insertOne({
+		start_timestamp: NumberLong(1502755200000),
+		guess: {
+			home: 1.0,
+			work: 0.0
+		},
+		eval: {
+			home: "true",
+			work: "false",
+			foursquare_venue_index: NumberInt(4)
+		}
+});
+
+db.visit.insertOne({
+		start_timestamp: NumberLong(1502755200000),
+		guess: {
+			home: 1.0,
+			work: 0.0
+		},
+		eval: {
+			home: "true",
+			work: "false",
+			foursquare_venue_index: NumberInt(5)
+		}
+});
+
+db.visit.insertOne({
+		start_timestamp: NumberLong(1502755200000),
+		guess: {
+			home: 1.0,
+			work: 0.0
+		},
+		eval: {
+			home: "true",
+			work: "false",
+			foursquare_venue_index: NumberInt(6)
+		}
+});
+
+db.visit.insertOne({
+		start_timestamp: NumberLong(1502755200000),
+		guess: {
+			home: 1.0,
+			work: 0.0
+		},
+		eval: {
+			home: "true",
+			work: "false",
+			foursquare_venue_index: NumberInt(7)
+		}
+});
+```/
+
+
+
+### Indexes
+
+```[.linenums]
+> db.visit.createIndex( { start_timestamp: 1 } );
+
+```/
+
+
+
+## Client URI
+
+```[.linenums.lang-java]
+// MongoDbUtil.java
+public static String getClientUri(String username, String password, String address,
+    boolean sslEnabled, String replicaSet, String authSource) {
+  String auth = "";
+  if (!Strings.isNullOrEmpty(username) || !Strings.isNullOrEmpty(password)) {
+    auth = String.format("%s:%s@", Strings.nullToEmpty(username), Strings.nullToEmpty(password));
+  }
+  return String.format("mongodb://%s%s?%s%s%s", auth, address, "ssl=" + sslEnabled,
+      Strings.isNullOrEmpty(replicaSet) ? "" : "&replicaSet=" + replicaSet,
+      Strings.isNullOrEmpty(authSource) ? "" : "&authSource=" + authSource);
+}
+
+// 아래와 같이 접속하는듯.
+mongodb://[username]:[password]@[address]?ssl=[true,false,prefer]&replicaSet=[replicaSet]&authSource=[authSource]
+```/
+
+The following is the standard URI connection scheme:
+
+```
+mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]
+```/
+
+
+
+## IRIS MongoDB
+
+```
+mongo "mongodb://cluster0-shard-00-00-evm5s.mongodb.net:27017,cluster0-shard-00-01-evm5s.mongodb.net:27017,cluster0-shard-00-02-evm5s.mongodb.net:27017/test?replicaSet=Cluster0-shard-0" --authenticationDatabase admin --ssl --username eng --password Z7SRXpa6CQgQ7EEZ
+```/
+
+
+
+## RRA
+
+<ol class="refs">
+<li><a target="_blank" href="https://docs.mongodb.com/manual/">https://docs.mongodb.com/manual/</a></li>
+<li id="ref-mongodb-shell-refs"><a target="_blank" href="https://docs.mongodb.com/manual/reference/mongo-shell/">https://docs.mongodb.com/manual/reference/mongo-shell/</a></li>
+</ol>
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=512;
+kipid.delayPad=0;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+	skipStartupTypeset: true, // Skip startup typeset.
+	positionToHash: false, // No repositioning to #something anchor.
+	tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+		displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+		processEscapes: true, // Escape \$
+		processEnvironments: false, // Ignore \begin{something} ... \end{something}
+	}
+});
+</script>
+<!-- From kipid.tistory CDN -->
+<script src="http://cfs.tistory.com/custom/blog/146/1468360/skin/images/docuK-postProcess-2.2.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->
