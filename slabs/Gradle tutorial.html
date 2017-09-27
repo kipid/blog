@@ -38,9 +38,77 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.141-b15, mixed mode)
 In MacOS, (using brew) <cite class="ref-gradle-install"></cite>
 
 ```
-$ brew update && brew install gradle
+$ brew update &amp;&amp; brew install gradle
 ```/
 
+
+
+## build.gradle (JAVA)
+
+file: <code>build.gradle</code>
+
+```
+group 'test'
+version '0.0.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+gradle.projectsEvaluated {
+  tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+  }
+}
+
+apply plugin: 'checkstyle'
+checkstyle {
+  configFile = new File("${rootProject.projectDir}/checkstyle.xml")
+  configProperties = [
+    "suppressionFile": new File("${rootProject.projectDir}/checkstyle-suppressions.xml")
+  ]
+  toolVersion = '7.8.2'
+}
+
+afterEvaluate {
+  tasks.withType(Checkstyle) {
+    // Don't check style for generated files.
+    source = source.minus project.fileTree(dir: "${project.projectDir}/build/gen")
+  }
+}
+
+apply plugin: 'jacoco'
+
+test {
+  testLogging {
+    events 'failed', 'passed', 'skipped', 'standardOut'
+    exceptionFormat 'short'
+    afterSuite { desc, result ->
+      if (!desc.parent) {
+        print "Tests run: ${result.testCount}"
+        println ", Failures: ${result.failedTestCount}, Skipped: ${result.skippedTestCount}"
+      }
+    }
+  }
+}
+```/
+
+file: <code>settings.gradle</code>
+
+```
+rootProject.name = 'testing-again'
+```/
+
+check style : <a target="_blank" href="https://google.github.io/styleguide/javaguide.html">https://google.github.io/styleguide/javaguide.html</a> and <a target="_blank" href="http://checkstyle.sf.net">http://checkstyle.sf.net</a>
 
 
 ## RRA
