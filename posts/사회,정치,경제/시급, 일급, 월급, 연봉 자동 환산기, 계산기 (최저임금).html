@@ -1,0 +1,291 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes">
+
+<codeprint id="docuK-style">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+</codeprint><!-- docuK-style -->
+
+<style>
+#calculator {border:2px solid rgb(200,255,200); padding:.5em}
+#calculator label {}
+#calculator input {margin:0 .3em .2em .2em; padding:0 .2em; width:7em; font:inherit; background:black; color:white; text-align:right}
+</style>
+
+<codeprint class="SEE">
+# 시급, 일급, 월급, 연봉 자동 환산기/계산기 (최저임금)
+
+시급, 일급, 월급, 연봉 등 환산하는게 간단하지가 않은거 같아서 만들어보려고 함.
+
+<!-- <div class="cmt">
+
+계속 조금씩 업데이트 할 예정. (그런데 이것도 비공개 글로 바꿀지도 ㅡㅡ. 요즘 대한민국 너무 그지 같아서 이런 무료봉사(?) 하는거 짜증남ㅋ. 뭐 대단한것도 아니니까 알아서 베껴서 만드시면 될듯? 그지같은 사회에서는 지식 공유들 하지 맙시다. 그지같은 세상에서는 나만 잘살면 돼 정신으로 살아야지ㅋㅋㅋ.)
+
+내 의견이 다수의견에 반대될때만 내가 더 떠들어서 더 거지같이 느끼는지도ㅋ. 조리돌림들이 아주 그냥. 지네랑 조금만 의견이 갈려도 다 적이여ㅋ. 우리나라 수준에 소통은 개똥. 소똥이다. (이 코멘트는 나중엔 지워야지ㅋㅋ. 요새 키워짓을 좀 했더니 짱나서;;; 맘놓고 떠들데가 여기뿐이니?ㅋ)
+
+최저임금 관련해서도 난 둘 다 까고 싶은데ㅋㅋㅋ. 하는일도 없으면서 노예 최저임금으로 부려먹으면서 대부분 수익 챙겨가는 사장이나, 하는일은 엄청 쉽고 힘들지도 않은건데 어떻게든 최저임금 왕창 올려서 편히 돈 챙기려는 사람이나... 뭐 이번에도 적당히 5~10% 정도 오를듯. 내가 찾는 해결책 (공정한 게임/경제에 관한) 은 이런게 아니라 최저임금이 이번에 어떻게 결정되든 크게 상관안함.
+
+문제는 이런 최저임금 같은게 아니라, 수익의 분배가 얼마나 공정하고 투명하게 이루어지느냐라고 봄. 최저임금 올라가면 당연히 물가도 올라가겠지. 사장쪽이 본인 수익을 줄이지 않는 한... 가게를 소유하고 투자를 했다는 이유로 챙겨가는 수익비율이 불투명 (직원이나 손님에게 이걸 알려주지 않으니) 하니 본인 맘대로 책정. 아주 바쁜 매장에서 일을해도 최저시급을 받고, 한산한 매장에서 일해도 최저시급을 받는 구조인데... 이게 공정한 게임인가? ㅡㅡ. 어차피 이런식으로는 경제 불균형은 해결되지도 않을듯. 의도치 않게 물가만 올라가고, 의도치 않게 일 열심히해서 돈벌던 사람만 피해보고 이러겄지 뭐. 항상 그렇듯. 항상 숫자 장난에만 다들 꽂혀서는... 깊게들 생각을 안하는듯.
+
+UI 도 조금씩 업그레이드 하고, 세부적인 것들 (하루 근무시간, 한달 근무일 등) 도 수정해서 볼 수 있도록. 거의 내가 잘 써먹으려고 만드는중.
+
+</div> -->
+
+<script></script>
+
+
+
+## TOC
+
+
+
+## 환산기/계산기
+
+보통 숫자 3개마다 "," 를 찍긴 하지만, 요건 killo (천), million (백만), trillion (십억) 등 외국 숫자 개념에 맞춘 "," 찍기 같아서, 전 숫자 4개마다 "," 를 찍었음. 우리의 숫자 읽기는 만, 억 등으로 갈리니까.
+
+일급은 하루 8시간 근무기준으로 우선 잡았고, 주급은 일주일 5일 근무기준, 월급은 한달 5/7*30.5 = 21.8일 근무기준. 연봉은 월급*12개월 로 계산. 숫자를 바꾸면 바뀐 부분 기준으로 나머지가 계산됨.
+
+<div id="calculator">
+<label for="hour">시급 :</label>
+<input id="input-hour" name="hour" value="8720" type="text" tabindex="1">원/1시간<br />
+<label for="day">일급 :</label>
+<input id="input-day" name="day" type="text" tabindex="2">원/1일 8시간 근무<br />
+<label for="week">주급 :</label>
+<input id="input-week" name="week" type="text" tabindex="3">원/1주 5일 근무<br />
+<label for="month">월급 :</label>
+<input id="input-month" name="month" type="text" tabindex="4">원/1달 21.8일 근무<br />
+<label for="year">연봉 :</label>
+<input id="input-year" name="year" type="text" tabindex="5">원/1년 12개월 근무<br />
+</div>
+
+<div id="result-test" class="p emph"></div>
+
+<div class="cmt">
+
+화살표 위아래 키로도 숫자가 조정되도록 만들 예정. (어려운 코딩은 아닌데, 살짝쿵 귀찮아서 몇일 걸릴지도...)
+
+1일 24시간 근무, 1주일 7일 근무, 한달 30일 근무, 1년 365일 근무 기준으로 계산하는 것도 따로 만들어볼까나? =ㅂ=;;; 이런 숫자는 그닥 의미가 없는것도 같고... 소비 개념으로 보면 내 월급/연봉이 얼마일때 하루에 얼마를 쓰면 적자인지 아는데에는 도움이 될거 같긴? 이건 그닥 중요한 계산 같지는 않아서 일단 보류.
+
+</div>
+
+
+
+## 대한민국 최저임금 변화
+
+<figure><div class="fig">
+	<div class="caption">최저임금 변화 <cite class="ref-mw"></cite></div>
+	<img delayed-src="http://cfile1.uf.tistory.com/image/99C0E9415FEC3DFF25BF04">
+</div></figure>
+
+
+
+## RRA
+
+<ol class="refs">
+	<li id="ref-mw"><a target="_blank" href="http://www.minimumwage.go.kr/stat/statMiniStat.jsp">minimumwage.go.kr - 최저임금 위원회</a><br />
+		<!-- // 2015년 대한민국 최저시급은 5580원.<br />
+		// 2016년 대한민국 최저시급은 6030원.<br />
+		// 2017년 대한민국 최저시급은 6470원.<br /> -->
+		// 2018년 대한민국 최저시급은 7530원.<br />
+		// 2019년 대한민국 최저시급은 8350원.<br>
+		// 2020년 대한민국 최저시급은 8590원.<br>
+		// 2021년 대한민국 최저시급은 8720원.</li>
+	<li id="ref-wiki"><a target="_blank" href="https://ko.wikipedia.org/wiki/%EC%B5%9C%EC%A0%80%EC%9E%84%EA%B8%88">Wiki - 최저임금</a></li>
+	<li><a target="_blank" href="http://www.5580.sisa.in/">시사 IN - 최저임금으로 한달 살기 (당신의 한 시간은 얼마입니까?)</a></li>
+</ol>
+</codeprint><!-- SEE -->
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=512;
+kipid.delayPad=0;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+	skipStartupTypeset: true, // Skip startup typeset.
+	positionToHash: false, // No repositioning to #something anchor.
+	tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+		displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+		processEscapes: true, // Escape \$
+		processEnvironments: false, // Ignore \begin{something} ... \end{something}
+	}
+});
+</script>
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+</codeprint><!-- docuK-script -->
+
+<script>
+(function(kipid, $, undefined){
+$hour=$("#input-hour");
+$day=$("#input-day");
+$week=$("#input-week");
+$month=$("#input-month");
+$year=$("#input-year");
+$result=$("#result-test");
+
+// 키보드 윗부분
+// 0 = 48
+// 9 = 57
+// Num Lock on
+// 0 = 96
+// 9 = 105
+// . = 110
+// Others
+// , = 188
+// . = 190
+// up = 38
+// down = 40
+// left = 37
+// right = 39
+
+numberPtn=/^-?[0-9,]+(\.[0-9,]*)?$/;
+toDo=null;
+delay=1000;
+// e.preventDefault();
+
+kipid.lastHourP="";
+kipid.lastDayP="";
+kipid.lastWeekP="";
+kipid.lastMonthP="";
+kipid.lastYearP="";
+kipid.numberToString=function(n) {
+	var str=n.toFixed(0);
+	var res=str.charAt(str.length-1);
+	for (var i=1;i<str.length;i++) {
+		if (i%4==0) {
+			res=str.charAt(str.length-1-i)+","+res;
+		} else {
+			res=str.charAt(str.length-1-i)+res;
+		}
+	}
+	return res;
+};
+
+$hour.on("keyup", function(e) {
+	var hourP=$hour[0].value;
+	if (hourP!==kipid.lastHourP) {
+		kipid.lastHourP=hourP;
+		clearTimeout(toDo);
+		toDo=setTimeout(function() {
+			var p=numberPtn.exec(hourP);
+			if (p!==null) {
+				var hour=Number(p[0].replace(/,/g,""));
+				var day=hour*8;
+				$day[0].value=kipid.numberToString(day);
+				var week=day*5;
+				$week[0].value=kipid.numberToString(week);
+				var month=day*21.8;
+				$month[0].value=kipid.numberToString(month);
+				var year=month*12;
+				$year[0].value=kipid.numberToString(year);
+				$result.html("시급 "+hourP+" 기준으로 나머지가 계산됨.");
+			} else {
+				$result.html("시급 "+hourP+" 가 적절한 숫자형태가 아닙니다.");
+			}
+		}, delay);
+	}
+});
+$hour.trigger("keyup");
+$day.on("keyup", function(e) {
+	var dayP=$day[0].value;
+	if (dayP!==kipid.lastDayP) {
+		kipid.lastDayP=dayP;
+		clearTimeout(toDo);
+		toDo=setTimeout(function() {
+			var p=numberPtn.exec(dayP);
+			if (p!==null) {
+				var day=Number(p[0].replace(/,/g,""));
+				var hour=day/8;
+				$hour[0].value=kipid.numberToString(hour);
+				var week=day*5;
+				$week[0].value=kipid.numberToString(week);
+				var month=day*21.8;
+				$month[0].value=kipid.numberToString(month);
+				var year=month*12;
+				$year[0].value=kipid.numberToString(year);
+				$result.html("일급 "+dayP+" 기준으로 나머지가 계산됨.");
+			} else {
+				$result.html("일급 "+dayP+" 가 적절한 숫자형태가 아닙니다.");
+			}
+		}, delay);
+	}
+});
+$week.on("keyup", function(e) {
+	var weekP=$week[0].value;
+	if (weekP!==kipid.lastWeekP) {
+		kipid.lastWeekP=weekP;
+		clearTimeout(toDo);
+		toDo=setTimeout(function() {
+			var p=numberPtn.exec(weekP);
+			if (p!==null) {
+				var week=Number(p[0].replace(/,/g,""));
+				var day=week/5;
+				$day[0].value=kipid.numberToString(day);
+				var hour=day/8;
+				$hour[0].value=kipid.numberToString(hour);
+				var month=day*21.8;
+				$month[0].value=kipid.numberToString(month);
+				var year=month*12;
+				$year[0].value=kipid.numberToString(year);
+				$result.html("주급 "+weekP+" 기준으로 나머지가 계산됨.");
+			} else {
+				$result.html("주급 "+weekP+" 가 적절한 숫자형태가 아닙니다.");
+			}
+		}, delay);
+	}
+});
+$month.on("keyup", function(e) {
+	var monthP=$month[0].value;
+	if (monthP!==kipid.lastMonthP) {
+		kipid.lastMonthP=monthP;
+		clearTimeout(toDo);
+		toDo=setTimeout(function() {
+			var p=numberPtn.exec(monthP);
+			if (p!==null) {
+				var month=Number(p[0].replace(/,/g,""));
+				var day=month/21.8;
+				$day[0].value=kipid.numberToString(day);
+				var hour=day/8;
+				$hour[0].value=kipid.numberToString(hour);
+				var week=day*5;
+				$week[0].value=kipid.numberToString(week);
+				var year=month*12;
+				$year[0].value=kipid.numberToString(year);
+				$result.html("월급 "+monthP+" 기준으로 나머지가 계산됨.");
+			} else {
+				$result.html("월급 "+monthP+" 가 적절한 숫자형태가 아닙니다.");
+			}
+		}, delay);
+	}
+});
+$year.on("keyup", function(e) {
+	var yearP=$year[0].value;
+	if (yearP!==kipid.lastYearP) {
+		kipid.lastYearP=yearP;
+		clearTimeout(toDo);
+		toDo=setTimeout(function() {
+			var p=numberPtn.exec(yearP);
+			if (p!==null) {
+				var year=Number(p[0].replace(/,/g,""));
+				var month=year/12;
+				$month[0].value=kipid.numberToString(month);
+				var day=month/21.8;
+				$day[0].value=kipid.numberToString(day);
+				var hour=day/8;
+				$hour[0].value=kipid.numberToString(hour);
+				var week=day*5;
+				$week[0].value=kipid.numberToString(week);
+				$result.html("연봉 "+yearP+" 기준으로 나머지가 계산됨.");
+			} else {
+				$result.html("연봉 "+yearP+" 가 적절한 숫자형태가 아닙니다.");
+			}
+		}, delay);
+	}
+});
+})(window.kipid, jQuery);
+</script>
