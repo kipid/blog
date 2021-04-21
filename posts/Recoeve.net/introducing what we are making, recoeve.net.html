@@ -1,0 +1,392 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes">
+
+<codeprint id="docuK-style">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<div class="docuK rendered"><div class="sec" id="docuK-log"></div></div>
+<!-- From kipid.tistory CDN -->
+<link rel="stylesheet" href="https://tistory1.daumcdn.net/tistory/1468360/skin/images/docuK-2.3.css">
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-prepare-2.3.js" charset="utf-8"></script>
+</codeprint>
+
+<style>
+.reco {color:rgb(200,130,130)}
+.eve {color:rgb(130,130,200)}
+</style>
+
+<codeprint class="SEE">
+# Introducing what we are making : <a href="http://recoeve.net/" class="replace-reco-eve">Recoeve.net</a>
+
+<div class="p replace-reco-eve">
+Recoeve in one setence : Self-customizing + Multi-Categorized Records or Scrapbook for Everything, and Personalized Recommendation for Everything at each Category, which can be called Computer-Assisted Cloud/Crowd Curating.
+</div>
+
+
+
+## PH
+
+<ul>
+	<li>2016-02-10 : Some features 추가.</li>
+	<li>2015-12-22 : Salary 관련 수정. Local specialities 랑 그 지역 물가 수준 따라서... 그리고 실력도 중요하지만, 우리의 개발 철학에 맞는 사람의 영입이 더 중요할지도...</li>
+	<li>2015-12-18 : 조금 더 추가. iframe 삽입.</li>
+	<li>2015-05-07 : reco/eve 색 입히는 js 수정. investers 오타 수정. 내용 약간씩 더 업데이트. recoeve.net 링크 연결. docuK js charset 설정.</li>
+	<li>2015-05-04 : 초반 설명 약간 수정.</li>
+	<li>2014-12-02 : Screenshot 추가. 약간 더 수정.</li>
+	<li>2014-11-24 : Code snippet 좀 넣고. <code class="prettyprint">&lt;refer class="refering-id"&gt;&lt;/refer&gt;</code> 도 사용.</li>
+	<li>2014-11-23 : investors 부분 약간 더 수정.</li>
+	<li>2014-11-22 : The first posting. (It has been continuously updated.)</li>
+</ul>
+
+
+
+## TOC
+
+
+## Record everything and Get recommendations for everything.
+
+<div class="p replace-reco-eve">
+Record everything that you are interested in and wanna value in a multi-categorized manner. Then get connected to the people of your kind based on your evaluations, and get personalized recommendations for everything from them.
+</div>
+
+Be free from abusing or contamination, and agenda setting from mass-media which is inevitably to be done by a few editors. Even if they are good at all, some of them might be not of your interest and not be ordered by your importance. Make your important sorts be important. And meet the minority reports of your kinds also.
+
+<div class="p replace-reco-eve">
+Things that worth spreading, but so specialized especially to a few experts, will be propagated through your neighbors of that particular fields/categories in Recoeve. (You do not have to send messages to them. Just reco it, then the recos will spread out, finding automatically which users might be interested in this.)
+</div>
+
+
+
+### Late followers, and Old but good fogotten contents.
+
+Generally current many SNS and internet services are focused on the newest things. Therefore old but good contents and their writings are easily forgotten and ignored soon.
+
+There are too many informations in the internet and books. We cannot afford everything. And also we are not interested in the same things. We are so different from each others. Mass-media curating is focused only on the majority of our interest sums.
+
+And the individuals are not interacting closely enough. Only a few celebrities and already famous people are exposed to the public. They and we do not know each others deeply. And in some categories they are similar, and in other categories they are quite different.
+
+Late followers are easily isolated and ignored in SNS communities. And disabled or unawakened users does not interact with other users. Only recentest writings are exposed. There is no importance orderings. Therefore so easy and provocative writings and postings are mainly published.
+
+Our service is designed to resolve these problems. Your old recos with high points will be delivered to your neighbors who haven't recoed it yet, but expected to like and value it. How old it is is not important in our system. How it is valuable, interesting, well-written, the quality become important. Your points will matter all over the time without you.
+
+So carefully giving the points of yours on the recos, you are going to collect your neighbors....
+
+
+
+### Gamification or Next-generation economy of knowledges, internet contents, and possibly money itself.
+
+Our promoting point which let users use our service and reco their own for the first time is that (1) if you reco more, you will get more accurate recommendations. (2) if you reco something on a URI for the first time, we will give him/her some points
+
+<div class="cmt">
+I am editting this section.
+</div>
+
+
+
+### Blog with Super Easy Edit
+
+We will also provide a blogging service with <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">docuK</a> and <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE</a> (Super Easy Edit : like LaTeX / Wiki / MarkUp / MarkDown edit, but more flexible and easier than them.). This will be highly connected to <span class="replace-reco-eve">recoeve.net</span> service. This document is also written in docuK+SEE format.
+
+
+
+### Knowledge should be stacked within our brains, not in the books or the internet.
+
+Our brain is limited. We are not a machine which can be upgraded annually. We cannot remember everything. We cannot know about everything.
+
+Knowledge out there in the internet is quite useless unless we do not know and use them. To remember these abundant informations, structured categorization of knowledges is inevitable.
+
+Editting...
+
+
+
+## Currrent status
+
+I made a server using vert.x JAVA <refer class="code-server"></refer> with MySQL database <refer class="code-db"></refer>. It has been a one-man-development until now. I had a plan to open a alpha (test service with core stuff) service in the next spring (2015-03-24 maybe...). And I have finally openned the alpha test service at 2015-05-01.
+
+We will open <a class="replace-reco-eve" href="http://recoeve.net/">recoeve.net</a> with several languages from the biginning. (But the languages which I don't know or I am poor at are translated by machine, the google translator, from English or Korean writing. I will revise them continuously.)
+
+For a demonstrative example, if you <span class="reco">reco</span> some musics you like with video URI (youtube, Daum-tvpot, vimeo, dailymotion), you will see something like this <cite class="ref-music"></cite> in <a href="http://recoeve.net/" class="replace-reco-eve">Recoeve.net</a>.
+
+<figure><div class="fig">
+	<div class="caption">iframe of <cite class="ref-music"></cite></div>
+	<div class="rC"><div class="rSC">
+		<iframe delayed-src="http://recoeve.net/user/kipid?cat=[Music/Break]--Now" frameborder="0"></iframe>
+	</div></div>
+</div></figure>
+
+<figure><div class="fig">
+	<div class="caption">iframe of <a href="http://recoeve.net/account/log-in">Log-in/Sign-up page</a> (If you are already logged-in, your recoeve page will be returned. Currently 4 languages, which are Korean, English, Chinese, Japanes, are supported.)</div>
+	<div class="rC"><div class="rSC">
+		<iframe delayed-src="http://recoeve.net/" frameborder="0"></iframe>
+	</div></div>
+	<!-- <span class="imageblock" style="display:inline-block;padding:5px; background:white;height:auto;max-width:100%"><span data-url="https://t1.daumcdn.net/cfile/tistory/2562AC3E547D929C28?download" data-lightbox="lightbox"><img src="https://t1.daumcdn.net/cfile/tistory/2562AC3E547D929C28" style="cursor: pointer;max-width:100%;height:auto" filename="welcome.png" filemime="image/jpeg" style="padding:5px; background:white" /></span></span> -->
+</div></figure>
+
+<figure><div class="fig">
+	<div class="caption">Screenshot of Reco.html page</div>
+	<span class="imageblock" style="display:inline-block;padding:5px; background:white;height:auto;max-width:100%"><span data-url="https://t1.daumcdn.net/cfile/tistory/25645E3E547D929B23?download" data-lightbox="lightbox"><img src="https://t1.daumcdn.net/cfile/tistory/25645E3E547D929B23" style="cursor: pointer;max-width:100%;height:auto" filename="reco-test.png" filemime="image/jpeg"></span></span>
+</div></figure>
+
+
+
+### Document : Recoeve progress
+
+The current progress is described in here <cite class="ref-progress"><a target="_blank" href="http://kipid.tistory.com/entry/Recoeve-progress">Recoeve progress</a></cite>
+
+
+
+### Finding super developers / programmers / designers
+
+I am finding some super developers/programmers/designers who share our vision and philosophy. We will share the profit fairly and transparently according to what each have done and their difficulties.
+
+The beginning salary will be determined considering international salary statistics and local specialities <cite class="ref-rra-salary"></cite>. I am currently head-hunting good programmers. (Until now 2016-02-22, I am still doing one-person-development.)
+
+
+
+### Please invest us
+
+We are currently finding some investors. We have to buy some server computers (or pay for using a cloud server), and need to hire some super engineers/programmers who are really good at both programmings and personalities.
+
+The making-money plan is to give a user categorized and user-personalized ads. And selling good e-books written by users, we can share the profit appropriatly. (We will be very transparent on the flow of money and arguings about it, always trying to find which share ratio is fair enough.)
+
+We will definitly share our profits with investors too. Finding a good company and supporting a good company is valuable and necessary things. And I understand that their risk is quite high, and so without a good profit at proper time it will not be sustainable. We hope that we would grow fast and return the biginning investments back quite quickly with good exits. We can discuss in which ratio we will make a deal. (But I just insist that the contract and agreement can be opened at least after some years to be checked if it was fair enough or not by public.)
+
+You can see me through my blog. I am a Physicist, and a Programmer. I believe that what I eat, how I think, and most importantly what I have done become who I am. I will prove myself by providing really good services and achieving the big success of mine.
+
+Here I am trying to change the world in my own way. I am quite confident of almost everything (not design skills included maybe...), which will launch our company to another world wide billionare value one. You can also change the world, or the world can change you. I hope that you would change the world in a good way with us.
+
+Contact us, then I will show you more details. (Reply here. Or I will send an e-mail/mention(twitter), you can answer it.)
+
+ps. Inevitably some big dicisions which has no consensus with hired people will be made by me. But always I will try to listen many voices and be trasparent on almost everything. At least every informations about our company will be opened within 5 years to be watched by public.
+
+
+
+### Code snippets
+
+#### Server
+
+<div id="code-server"><div class="number none">Server</div>
+
+```[.linenums.scrollable.lang-java]
+/////////////////////////////////////////////
+// Server is coded by vert.x JAVA
+/////////////////////////////////////////////
+import org.vertx.java.platform.Verticle;
+
+public class Recoeve extends Verticle {
+	@Override
+	public void start() {
+		RecoeveDB db=new RecoeveDB();
+		/////////////////////////////////////////////
+		// Lambda exp with chaining.
+		/////////////////////////////////////////////
+		vertx.createHttpServer().requestHandler( (HttpServerRequest req) -&gt; {
+			req.response().end("Hello Recoeve!");
+		}).listen(1000);
+	}
+}
+```/
+
+</div>
+
+
+#### DataBase using MySQL
+
+<div id="code-db"><div class="number none">DB</div>
+
+```[.linenums.scrollable.lang-sql]
+################################
+# DataBase using MySQL
+################################
+CREATE TABLE `Users` (
+	`i` int unsigned NOT NULL UNIQUE AUTO_INCREMENT
+	, `id` char(21) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL UNIQUE
+	, `pwd_salt` binary(64) NOT NULL #DEFAULT random_bytes(64)
+	....
+	, PRIMARY KEY (`i`)
+);
+```/
+
+</div>
+
+
+
+#### Front-end web using html+js
+
+```[.linenums.scrollable.lang-html]
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;script&gt;
+(function(eve, undefined) {
+	eve.myIndex="{--myIndex--}";
+	eve.myId="{--myId--}";
+	eve.pathName=window.location.pathname;
+	if (eve.pathName.substring(0,6)!=="/user/") {
+		eve.pathName="/user/"+eve.myId;
+		window.history.replaceState(null, null, eve.pathName+window.location.search+window.location.hash);
+	}
+	eve.userId=eve.pathName.substring(6);
+	var k=eve.userId.indexOf("/");
+	if (k!==-1) {
+		eve.userId=eve.userId.substring(0,k);
+		eve.pathName="/user/"+eve.userId;
+	}
+	eve.myPage=(eve.myId===eve.userId);
+})(window.eve=window.eve||{});
+&lt;/script&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8"/&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=3, user-scalable=yes"/&gt;
+	&lt;link rel="icon" href="data:;base64,iVBORw0KGgo="&gt;
+	&lt;title&gt;Recoeve.net&lt;/title&gt;
+&lt;!-- and so on..... --&gt;
+```/
+
+
+
+## Some features
+
+### Multiple categorizations (like tag, but more structured)
+
+You can reco something with multiple categorizations simply. Put ; in the middle.
+
+
+
+### Fuzzy search (Go to anything)
+
+You can find your recos with fuzzy search. 초성검색처럼.
+
+<!-- <span class="imageblock" style="display:inline-block;;height:auto;max-width:100%"><span data-url="https://t1.daumcdn.net/cfile/tistory/271D673C56F23A1035?download" data-lightbox="lightbox"><img src="https://t1.daumcdn.net/cfile/tistory/271D673C56F23A1035" style="cursor: pointer;max-width:100%;height:auto" filename="Fuzzy search.gif" filemime="image/gif" /></span></span> -->
+
+<div class="center">
+<img delayed-src="https://t1.daumcdn.net/cfile/tistory/271D673C56F23A1035">
+</div>
+
+
+
+### Automatically connecting people of your kinds.
+
+You can find your neighbors simply by recoing something. You can see the list of your neighbors with specific category which recoed the same URIs with similar points in order of similarity.
+
+You don't have to follow someone whom you would like. And you don't have to ask the others to follow you. Our 3SNS (Sincere, Slow, but Sexy Network Service) will connect you based on your recos. Just reco it in a self-customized manner. <span class="red">If you categorize better and give points to recos sincerely, you will get more accurate recommendations and be connected to the kinds of yours well enough.</span>
+
+
+
+### Recommendations for you, and your recommendations to the others.
+
+From those similarities, you get new recommendations and also you give new recommendations to your neighbors.
+
+
+
+### Simplest and sophysticated reco steps.
+
+#### Click and draw
+
+From the multireco mode, you can reco lots of URIs sequentially by click and draw. From the list of chosen category of chosen user, we provides list of star bars in which you can give a point to the URI.
+
+
+
+#### Self-customization for yourselves.
+
+With multi-categorization, you can organize recos in self-customized manner. One reco in multiple categories.
+
+
+
+### Connected occationally to the opposite side of yours.
+
+You can get recommendations of the opposite side of yours. Showing the lowest expectations, we provides the opposite opinions.
+
+
+
+### Communications as equally as one of N.
+
+We have no followers. Everyone in recoeve.net have equal position.
+
+
+
+### Filter by points and auto playing
+
+You listen musics with high points more. Simply filtering the recos by points, you can listen musics with high points collectively. And automatically recos are played sequentially.
+
+
+
+## Good articles must be paid to be sustainable
+
+I also have a plan of letting many people use this SEE (Super Easy Edit of docuK I made) to share their knowledge and to make some money for a living from it. See some examples in my blog <cite class="ref-tensor"></cite><cite class="ref-lagrange"></cite>.
+
+You can see the description about <a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">DocuK</a> and <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">SEE</a> <cite class="ref-docuK"></cite>.
+
+And also good articles must be paid properly to be sustainable. We will share the profit to support their reportings/articles. We will trasparently report how your/user's payment is distributed. Developing some good systems to make these happen and sustain long enough, we will always find some fantastic ways so that good company and good people can make their own money and can improve their lives.
+
+
+
+## How to earn a profit?
+
+<ul class="replace-reco-eve">
+	<li>Categorized and user-personalized ads. : Based on user's evaluations on contents, we can promote a paid-ads to users. As the ads can be targeted, companys promoting their products in Recoeve would be satisfied enough to pay a bill.</li>
+	<li>Selling a Plug-in or Widget to e-market. : There are several e-markets which sell various things (book, e-book, webtoon, cartoon, music, and so on). If the users can value something in that site, and can get personalized recommendations for the next puchase, I think that the e-market can get more profit. So selling our systems (not code itself, but as a javascript or iframe plug-in) to these sites, we can earn some from them.</li>
+	<li>Selling good articles or e-books : Good but difficult or serious articles are usually less spreadable than easy and short one. We would like to change this system. Letting good and valuable articles be propagated and be paid properly, we might get some fair share of their profit, charged on the help of ours to the system.</li>
+</ul>
+
+
+
+## Warnings for the copycats
+
+I am very confident of my programming skills and my philosophy. Copycats can copy our service. But we will make a better service than you. And also we will sue you if you copy us too much apparently without any doubts.
+
+
+
+## RRA
+
+<ol class="refs">
+<div class="subsec"><h3>Good E-books or E-articles</h3></div>
+	<li id="ref-docuK"><a href="http://kipid.tistory.com/entry/HTML-docuK-format-ver-20">kipid's blog - HTML docuK format ver. 2.3</a>, and <a href="https://github.com/kipid/docuK">github.com - kipid - docuK</a>, and <a href="http://kipid.tistory.com/entry/Super-Easy-Edit-SEE-of-docuK">kipid's blog - Super Easy Edit (SEE) of docuK</a></li>
+	<li id="ref-tensor"><a href="http://kipid.tistory.com/entry/Tensor">kipid's blog - 텐서란 무엇인가? (What is tensor?, The explanation for the tensor in physics, written in Korean.)</a></li>
+	<li id="ref-lagrange"><a href="http://kipid.tistory.com/entry/Method-of-Lagrange-multipliers">Method of Lagrange multipliers (English)</a>, 2014-03-21; and <a href="http://kipid.tistory.com/entry/Optimization-with-the-Method-of-Lagrange-multipliers">최적화, 라그랑지 승수법 (Optimization with the Method of Lagrange multipliers)</a>, 2014-03-18; 앞쪽의 영어버전이 더 자세히 작성되어 있음.</li>
+
+<div class="subsec" id="ref-rra-salary"><h3>연봉 정보 (Salary Statistics)</h3></div>
+	<li><a href="http://devpay.org/home/bbs/new.php">devpay.org - 개발자 연봉 공유 사이트</a><br>
+		// 연봉 정보 공유하는 사이트인듯. 통계를 내주지는 않아서 대충 글들 읽으면서 직접 파악해야 하는듯.</li>
+	<li><a href="https://kldp.org/node/121122">요즘 서울의 프로그래머 신입 연봉</a><br>
+		// 대충 2000~3500 만원 연봉이라는데... 너무 싸다 ㅡ..ㅡ;;; 우리는 세계 시장으로 갈테니 국제기준에 맞추겠음?? 지역별로 생활물가나 이런것도 고민이 필요하긴 할듯.</li>
+	<li><a href="http://techneedle.com/archives/18905">techneedle.com - 미국 프로그래머들의 연봉 수준 (언어별, 지역별)</a><br>
+		// 좋은 프로그래머는 대략 $125,000/year 인듯. 대충 여기 맞춰서 super programmer 를 구하겠음.</li>
+	<li><a href="http://techneedle.com/archives/19283">techneedle.com - 미국서 연봉이 가장 높은 프로그래밍 언어는?</a><br>
+		// 여기서 통계낸것도 비슷. 대충 $100,000/year.</li>
+	<li><a href="http://techneedle.com/archives/14082">techneedle.com - 스타트업 창업자는 얼마의 연봉을 받아야 할까?</a><br>
+		// 어차피 난 회사 지분을 많이 가져갈테니. 당장 월급이 적어도 괜찮음. 월급 100만원 정도만 생활비로 받고. 나머진 대부분 채용에 써야지. (뭐 여유 되면 받을만큼 받는거고...)</li>
+	<li><a href="http://techneedle.com/archives/17475">techneedle.com - 실리콘 밸리 회사 인턴들의 놀라운 급여 수준</a><br>
+		// 인턴 채용할 여유는 없을지도...</li>
+
+<div class="subsec"><h3>Etc.</h3></div>
+	<li id="ref-music"><a href="http://recoeve.net/user/kipid?cat=[Music/Break]--Now">kipid on Recoeve.net - Category :: [Music/Break]--Now</a></li>
+</ol>
+</codeprint>
+
+<script>
+$("codeprint.SEE .replace-reco-eve").html(function(i, orgHtml){
+	return orgHtml
+		.replace(/reco/ig,'<span class="reco bold">$&</span>')
+		.replace(/eve/ig,'<span class="eve bold">$&</span>');
+});
+</script>
+
+<codeprint id="docuK-script">
+<script>
+kipid.wait=512;
+kipid.delayPad=0;
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+	skipStartupTypeset: true, // Skip startup typeset.
+	positionToHash: false, // No repositioning to #something anchor.
+	tex2jax: {
+		inlineMath: [['$','$'], ['\\(','\\)']], // Using $ for inline math.
+		displayMath: [['$$','$$'], ['\\[','\\]']], // Using $$ for outline math.
+		processEscapes: true, // Escape \$
+		processEnvironments: false, // Ignore \begin{something} ... \end{something}
+	}
+});
+</script>
+<!-- From kipid.tistory CDN -->
+<script src="https://tistory3.daumcdn.net/tistory/1468360/skin/images/docuK-postProcess-2.3.js" charset="utf-8"></script>
+</codeprint>
