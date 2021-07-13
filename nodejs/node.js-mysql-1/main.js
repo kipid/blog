@@ -1,46 +1,69 @@
-const http = require('http');
-const url = require('url');
-// const qs = require('querystring');
-const template = require('./lib/template.js');
-// const path = require('path');
-// const sanitizeHtml = require('sanitize-html');
+const express = require('express');
 const db = require('./lib/db.js');
-const topic = require('./lib/topic.js');
-const author = require('./lib/author.js');
+const compression = require('compression');
+const helmet = require('helmet');
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session')(session);
+const bcrypt = require('bcrypt');
+const flash = require('connect-flash');
 
-var app = http.createServer(function(request,response){
-    var parsedUrl = url.parse(request.url, true);
-    var queryData = parsedUrl.query;
-    var pathname = parsedUrl.pathname;
-    if (pathname === '/'){
-      if (queryData.id === undefined){
-        topic.home(request, response);
-      } else {
-        topic.page(request, response);
-      }
-    } else if (pathname === '/create'){
-      topic.create(request, response);
-    } else if (pathname === '/create_process'){
-      topic.create_process(request, response);
-    } else if (pathname === '/update'){
-      topic.update(request, response);
-    } else if (pathname === '/update_process'){
-      topic.update_process(request, response);
-    } else if (pathname === '/delete_process'){
-      topic.delete_process(request, response);
-    } else if (pathname === '/author'){
-      author.home(request, response);
-    } else if (pathname === '/author/create_process'){
-      author.create_process(request, response);
-    } else if (pathname === '/author/update'){
-      author.update(request, response);
-    } else if (pathname === '/author/update_process'){
-      author.update_process(request, response);
-    } else if (pathname === '/author/delete_process'){
-      author.delete_process(request, response);
-    } else {
-      response.writeHead(404);
-      response.end('Not found');
-    }
+const sessionStore = new MySQLStore({}, db);
+const app = express();
+
+app.use(session({
+  key: 'session_cookie_name',
+  secret: 'session_cookie_secret',
+  store: sessionStore,
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(helmet());
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false }));
+app.use(compression());
+app.use(flash());
+
+const passport = require('./lib/passport.js')(app);
+
+app.get('*', (request, response, next) => {
+  db.query(`SELECT * FROM topic;`, (err, topics) => {
+    if (err){ throw err; }
+    request.topics = topics;
+    db.query(`SELECT * FROM author;`, (err2, authors) => {
+      if (err2){ throw err2; }
+      request.authors = authors;
+      next();
+    });
+  });
 });
-app.listen(3000);
+
+const indexRouter = require('./routes/index');
+const topicRouter = require('./routes/topic');
+const authorRouter = require('./routes/author');
+const authRouter = require('./routes/auth')(passport);
+
+app.use('/', indexRouter);
+app.use('/topic', topicRouter);
+app.use('/author', authorRouter);
+app.use('/auth', authRouter);
+
+app.use(function(req, res, next) {
+  res.status(404).send("Sorry can't find that!");
+});
+
+app.use(function (err, req, res, next) {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+});
+
+const https = require('https');
+const fs = require('fs');
+
+const options = {
+  key: fs.readFileSync('./config/key.pem'),
+  cert: fs.readFileSync('./config/cert.pem')
+};
+
+https.createServer(options, app).listen(3000,
+  () => console.log('Example app listening on port 3000!'));

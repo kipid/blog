@@ -20,7 +20,17 @@
   },
   "homepage": "https://github.com/web-n/Nodejs#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "express": "^4.17.1",
+    "express-mysql-session": "^2.1.6",
+    "helmet": "^4.6.0",
     "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth": "^2.0.0",
+    "passport-local": "^1.0.0",
     "sanitize-html": "^1.18.2"
   }
 }

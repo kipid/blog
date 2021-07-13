@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
-const qs = require('querystring');
-const template = require('./lib/template.js');
-const path = require('path');
+// const qs = require('querystring');
+// const template = require('./lib/template.js');
+// const path = require('path');
 const compression = require('compression');
 const helmet = require('helmet')
-const sanitizeHtml = require('sanitize-html');
+// const sanitizeHtml = require('sanitize-html');
 const indexRouter = require('./routes/index');
 const topicRouter = require('./routes/topic');
 
