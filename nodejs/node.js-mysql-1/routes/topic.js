@@ -85,7 +85,12 @@ router.get("/:topicId", (request, response) => {
   db.query(`SELECT * FROM topic LEFT JOIN author ON topic.author_id=author.id WHERE topic.id=?;`, [id], (err, topic) => {
     if (err){ throw err; }
     var title = sanitizeHtml(topic[0].title);
-    var description = sanitizeHtml(topic[0].description);
+    var description = sanitizeHtml(topic[0].description, {
+        allowedTags: sanitizeHtml.defaults.allowedTags.concat([ 'img', 'iframe' ]),
+        allowedAttributes: {
+          'iframe': ["src", "width", "height"],
+        }
+      });
     var list = template.list(request.topics);
     var html = template.HTML(title, list,
       `<h2>${title}</h2>${description}
